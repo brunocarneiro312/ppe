@@ -13,11 +13,6 @@ module.exports = function(module) {
             buscar:  buscar
         }
 
-        function init() {
-            console.log("[INFO] PagamentosService.init()");
-        }
-        init();
-
         /**
          * Solicita recurso para salvar pagamento
          */

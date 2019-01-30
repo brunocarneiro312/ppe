@@ -5,15 +5,10 @@ module.exports = function(module) {
 
     'use strict';
 
-    module.factory('PagamentoResources', PagamentoResources);
+    module.factory('PagamentosResources', PagamentosResources);
 
     /*@ngInject*/
-    function PagamentoResources(Restangular){
-
-        function init() {
-            console.log("[INFO] PagamentoResource.init()");
-        }
-        init();
+    function PagamentosResources(Restangular){
 
         var resource = '/pagamentos';
 

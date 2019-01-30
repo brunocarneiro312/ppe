@@ -537,7 +537,7 @@ U.capitalize = function(valor) {
 
 })();
 
-},{"../../.tmp/modulos":1,"../../.tmp/scripts/config":2,"../../.tmp/scripts/templates":3,"../../package.json":29,"./Util":7}],9:[function(require,module,exports){
+},{"../../.tmp/modulos":1,"../../.tmp/scripts/config":2,"../../.tmp/scripts/templates":3,"../../package.json":30,"./Util":7}],9:[function(require,module,exports){
 (function(){
     
     'use strict';
@@ -549,11 +549,12 @@ U.capitalize = function(valor) {
 
     require('./pedidos')(ppe);
 
+    // Pagamentos
     require('./pagamentos')(ppe);
 
 })();
 
-},{"./pagamentos":11,"./pedidos":20,"./ppe.menu.js":27,"./ppe.routes.js":28}],10:[function(require,module,exports){
+},{"./pagamentos":11,"./pedidos":22,"./ppe.menu.js":28,"./ppe.routes.js":29}],10:[function(require,module,exports){
 module.exports = function(module) {
 
     'use strict';
@@ -574,9 +575,104 @@ module.exports = function(module) {
 module.exports = function(module) {
     'use strict';
 
+    // Resource
+    require('./resource/pagamentos.resource.js')(module);
+
+    // Service
+    require('./service/pagamentos.services.js')(module);
+
+    // Controller
     require('./controller/pagamentos.controller.js')(module);
+
 }
-},{"./controller/pagamentos.controller.js":10}],12:[function(require,module,exports){
+},{"./controller/pagamentos.controller.js":10,"./resource/pagamentos.resource.js":12,"./service/pagamentos.services.js":13}],12:[function(require,module,exports){
+/**
+ * PagamentoResource
+ */
+module.exports = function(module) {
+
+    'use strict';
+
+    module.factory('PagamentosResources', PagamentosResources);
+
+    /*@ngInject*/
+    function PagamentosResources(Restangular){
+
+        var resource = '/pagamentos';
+
+        return {
+            listarPagamentos:                     listarPagamentos,
+            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
+            removerPagamento:                     removerPagamento
+        }
+
+        function getResource() {
+            return resource;
+        }
+
+        function listarPagamentos() {
+            return Restangular.all(getResource());
+        }
+
+        function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
+            return Restangular.all(getResource() + '/' + pedidoHabilitacao);
+        }
+
+        function removerPagamento(sqPagamento) {
+            return Restangular.one(getResource() + '/pagamento', sqPagamento).remove();
+        }
+    }
+}
+
+},{}],13:[function(require,module,exports){
+module.exports = function(module) {
+
+    'use strict';
+
+    module.service('PagamentosService', PagamentosService);
+
+    function PagamentosService() {
+
+        return {
+            salvar:  salvar,
+            remover: remover,
+            listar:  listar,
+            buscar:  buscar
+        }
+
+        /**
+         * Solicita recurso para salvar pagamento
+         */
+        function salvar(pagamento) {
+            console.log("salvando pagamento...");
+            console.log(pagamento);
+        }
+
+        /**
+         * Solicita recurso para remover pagamento
+         */
+        function remover(pagamento) {
+            console.log("removendo pagamento...");
+            console.log(pagamento)
+        }
+
+        /**
+         * Solicita recurso para listar pagamento
+         */
+        function listar() {
+            console.log("listando pagamento...");
+        }
+
+        /**
+         * Solicita recurso para buscar pagamento
+         */
+        function buscar(codigoDoPagamento) {
+            console.log("buscando pagamento...");
+            console.log(codigoDoPagamento);
+        }
+    }
+}
+},{}],14:[function(require,module,exports){
 /**
  * ========================
  * AcordoResource
@@ -649,7 +745,7 @@ module.exports = function(module) {
     }
 }
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /**
  * ===================================
  * AprovarPedidosComRessalvaController
@@ -682,13 +778,13 @@ module.exports = function(module) {
         init();
     }
 }
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./aprovar-pedidos-com-ressalva.ctrl.js')(module);
 
 }
-},{"./aprovar-pedidos-com-ressalva.ctrl.js":13}],15:[function(require,module,exports){
+},{"./aprovar-pedidos-com-ressalva.ctrl.js":15}],17:[function(require,module,exports){
 /**
  * ========================
  * AprovarPedidosController
@@ -712,7 +808,7 @@ module.exports = function (module) {
         'growl',
         'PedidosResource',
         'AcordoResource',
-        'PagamentoResource',
+        'PagamentosResources',
         'mask',
         '$http',
         '$stateParams',
@@ -727,7 +823,7 @@ module.exports = function (module) {
                                       growl,
                                       PedidosResource,
                                       AcordoResource,
-                                      PagamentoResource,
+                                      PagamentosResources,
                                       mask,
                                       $http,
                                       $stateParams,
@@ -959,16 +1055,13 @@ module.exports = function (module) {
                             growl.error(response.statusText);
                         }
                     }
+
+                    _listarPagamentos(vm.resultadoAnalisePedido.guidPedido);
                 })
                 .catch(function (erro)
                 {
                     console.log(erro);
                 });
-
-            console.log('----------------------');
-            console.log('listando pag...');
-            console.log('----------------------');
-            _listarPagamentos('b6e31307-4011-44b1-9404-10d2e8ab5731');
         }
 
         /**
@@ -1352,7 +1445,7 @@ module.exports = function (module) {
          * ================
          */
         function removerPagamento(idPagamento) {
-            PagamentoResource.removerPagamento(idPagamento)
+            PagamentosResources.removerPagamento(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
                         atualizarDadosPagamento();
@@ -1402,11 +1495,12 @@ module.exports = function (module) {
          */
         function _listarPagamentos(guidPedido) {
 
-            console.log(PagamentoResource.listarPagamentosPorPedidoHabilitacao);
-
-            PagamentoResource.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
                 .then(function(response) {
                     vm.pagamentos = response.data.plain();
+                    console.log('===========');
+                    console.log(vm.pagamentos);
+                    console.log('===========');
                 })
                 .catch(function(err) {
                     console.log(err);
@@ -1414,7 +1508,7 @@ module.exports = function (module) {
         }
     }
 }
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./aprovar-pedidos.ctrl.js')(module);
@@ -1422,7 +1516,7 @@ module.exports = function(module) {
     require('./pagamento.ctrl.js')(module);
 
 }
-},{"./aprovar-pedidos.ctrl.js":15,"./pagamento.ctrl.js":17}],17:[function(require,module,exports){
+},{"./aprovar-pedidos.ctrl.js":17,"./pagamento.ctrl.js":19}],19:[function(require,module,exports){
 module.exports = function(module) {
 
     'use strict';
@@ -1548,7 +1642,7 @@ module.exports = function(module) {
 
     }
 }
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /**
  * ==========================
  * ConsultarPedidosController
@@ -1736,19 +1830,18 @@ module.exports = function(module) {
         }
     }
 }
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./consultar-pedidos.ctrl.js')(module);
         
 }
-},{"./consultar-pedidos.ctrl.js":18}],20:[function(require,module,exports){
+},{"./consultar-pedidos.ctrl.js":20}],22:[function(require,module,exports){
 module.exports = function(module) {
 
     //require('./pedidos.routes.js')(module);
     require('./pedidos.resource.js')(module);
     require('./acordo.resource.js')(module);
-    require('./pagamento.resource')(module);
 
     require('./consultar-pedidos')(module);
     require('./aprovar-pedidos')(module);
@@ -1756,14 +1849,15 @@ module.exports = function(module) {
     require('./aprovar-pedidos-com-ressalva')(module);
     require('./negar-pedido')(module);
 
+
 }
-},{"./acordo.resource.js":12,"./aprovar-pedidos":16,"./aprovar-pedidos-com-ressalva":14,"./consultar-pedidos":19,"./negar-pedido":21,"./obter-pedidos":23,"./pagamento.resource":25,"./pedidos.resource.js":26}],21:[function(require,module,exports){
+},{"./acordo.resource.js":14,"./aprovar-pedidos":18,"./aprovar-pedidos-com-ressalva":16,"./consultar-pedidos":21,"./negar-pedido":23,"./obter-pedidos":25,"./pedidos.resource.js":27}],23:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./negar-pedido.ctrl.js')(module);
     
 }
-},{"./negar-pedido.ctrl.js":22}],22:[function(require,module,exports){
+},{"./negar-pedido.ctrl.js":24}],24:[function(require,module,exports){
 /**
  * =====================
  * NegarPedidoController
@@ -1923,13 +2017,13 @@ module.exports = function(module) {
         }
     }
 }
-},{}],23:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./obter-pedidos.ctrl')(module);
 
 }
-},{"./obter-pedidos.ctrl":24}],24:[function(require,module,exports){
+},{"./obter-pedidos.ctrl":26}],26:[function(require,module,exports){
 /**
  * =======================
  * ObterPedidosControllers
@@ -2012,53 +2106,7 @@ module.exports = function(module) {
         }
     }
 }
-},{}],25:[function(require,module,exports){
-/**
- * PagamentoResource
- */
-module.exports = function(module) {
-
-    'use strict';
-
-    module.factory('PagamentoResource', PagamentoResource);
-
-    PagamentoResource.$inject = ['Restangular'];
-
-    /*@ngInject*/
-    function PagamentoResource(Restangular){
-
-        function init() {
-
-        }
-        init();
-
-        var resource = '/pag';
-
-        return {
-            listarPagamentos:                     listarPagamentos,
-            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
-            removerPagamento:                     removerPagamento
-        }
-
-        function getResource() {
-            return resource;
-        }
-
-        function listarPagamentos() {
-            return Restangular.all(getResource());
-        }
-
-        function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
-            return Restangular.all(getResource() + '/' + pedidoHabilitacao);
-        }
-
-        function removerPagamento(sqPagamento) {
-            return Restangular.one(getResource() + '/pagamento', sqPagamento).remove();
-        }
-    }
-}
-
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /**
  * ========================
  * ConsultarPedidosResource
@@ -2141,7 +2189,7 @@ module.exports = function(module) {
     }
 }
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /**
  * =======
  * PPEMenu
@@ -2170,7 +2218,7 @@ module.exports = function (module) {
     }
 
 };
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 /**
  * ======================
  * ConsultarPedidosRoutes
@@ -2247,7 +2295,7 @@ module.exports = function(module){
             })*/
     }
 }
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 module.exports={
   "private": true,
   "version": "1.0.0",

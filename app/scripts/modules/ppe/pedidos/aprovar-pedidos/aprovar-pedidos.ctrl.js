@@ -21,7 +21,7 @@ module.exports = function (module) {
         'growl',
         'PedidosResource',
         'AcordoResource',
-        'PagamentoResource',
+        'PagamentosResources',
         'mask',
         '$http',
         '$stateParams',
@@ -36,7 +36,7 @@ module.exports = function (module) {
                                       growl,
                                       PedidosResource,
                                       AcordoResource,
-                                      PagamentoResource,
+                                      PagamentosResources,
                                       mask,
                                       $http,
                                       $stateParams,
@@ -268,16 +268,13 @@ module.exports = function (module) {
                             growl.error(response.statusText);
                         }
                     }
+
+                    _listarPagamentos(vm.resultadoAnalisePedido.guidPedido);
                 })
                 .catch(function (erro)
                 {
                     console.log(erro);
                 });
-
-            console.log('----------------------');
-            console.log('listando pag...');
-            console.log('----------------------');
-            _listarPagamentos('b6e31307-4011-44b1-9404-10d2e8ab5731');
         }
 
         /**
@@ -661,7 +658,7 @@ module.exports = function (module) {
          * ================
          */
         function removerPagamento(idPagamento) {
-            PagamentoResource.removerPagamento(idPagamento)
+            PagamentosResources.removerPagamento(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
                         atualizarDadosPagamento();
@@ -711,11 +708,12 @@ module.exports = function (module) {
          */
         function _listarPagamentos(guidPedido) {
 
-            console.log(PagamentoResource.listarPagamentosPorPedidoHabilitacao);
-
-            PagamentoResource.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
                 .then(function(response) {
                     vm.pagamentos = response.data.plain();
+                    console.log('===========');
+                    console.log(vm.pagamentos);
+                    console.log('===========');
                 })
                 .catch(function(err) {
                     console.log(err);

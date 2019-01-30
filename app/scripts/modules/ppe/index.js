@@ -9,6 +9,7 @@
 
     require('./pedidos')(ppe);
 
+    // Pagamentos
     require('./pagamentos')(ppe);
 
 })();
