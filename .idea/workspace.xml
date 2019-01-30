@@ -33,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/controller/pagamento.controller.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -125,9 +125,9 @@
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pedido.resource.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/index.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamento.resource.js" />
-        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/controller/pagamento.controller.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/index.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/index.js" />
+        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/controller/pagamento.controller.js" />
       </list>
     </option>
   </component>
@@ -253,12 +253,12 @@
       <updated>1547748760489</updated>
       <workItem from="1547748764997" duration="28260000" />
       <workItem from="1548155249250" duration="60509000" />
-      <workItem from="1548850172282" duration="7714000" />
+      <workItem from="1548850172282" duration="7843000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96483000" />
+    <option name="totallyTimeSpent" value="96612000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -516,13 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/controller/pagamento.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -534,6 +527,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/controller/pagamento.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
         </state>
       </provider>
     </entry>

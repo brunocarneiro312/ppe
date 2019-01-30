@@ -537,7 +537,7 @@ U.capitalize = function(valor) {
 
 })();
 
-},{"../../.tmp/modulos":1,"../../.tmp/scripts/config":2,"../../.tmp/scripts/templates":3,"../../package.json":28,"./Util":7}],9:[function(require,module,exports){
+},{"../../.tmp/modulos":1,"../../.tmp/scripts/config":2,"../../.tmp/scripts/templates":3,"../../package.json":29,"./Util":7}],9:[function(require,module,exports){
 (function(){
     
     'use strict';
@@ -553,13 +553,29 @@ U.capitalize = function(valor) {
     require('./pagamentos')(ppe);
 })();
 
-},{"./pagamentos":10,"./pedidos":19,"./ppe.menu.js":26,"./ppe.routes.js":27}],10:[function(require,module,exports){
+},{"./pagamentos":11,"./pedidos":20,"./ppe.menu.js":27,"./ppe.routes.js":28}],10:[function(require,module,exports){
+exports.module = function(module) {
+
+    'use strict';
+
+    module.controller('PagamentoController2', PagamentoController2);
+
+    function PagamentoController2() {
+
+        var vm = this;
+
+        function init() {
+            console.log('[INFO] PagamentoController.init()');
+        }
+        init();
+
+    }
+}
+},{}],11:[function(require,module,exports){
 module.exports = function(module) {
 
-    console.log(module);
-
     // Controller
-    // require('./controller/pagamento.controller.js')(module);
+    require('./controller/pagamento.controller')(module);
 
     // Resource
     // require('./resource/pagamento.resource')(module);
@@ -568,7 +584,7 @@ module.exports = function(module) {
     // require('./service/pagamento.service')(module);
 
 }
-},{}],11:[function(require,module,exports){
+},{"./controller/pagamento.controller":10}],12:[function(require,module,exports){
 /**
  * ========================
  * AcordoResource
@@ -641,7 +657,7 @@ module.exports = function(module) {
     }
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /**
  * ===================================
  * AprovarPedidosComRessalvaController
@@ -674,13 +690,13 @@ module.exports = function(module) {
         init();
     }
 }
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./aprovar-pedidos-com-ressalva.ctrl.js')(module);
 
 }
-},{"./aprovar-pedidos-com-ressalva.ctrl.js":12}],14:[function(require,module,exports){
+},{"./aprovar-pedidos-com-ressalva.ctrl.js":13}],15:[function(require,module,exports){
 /**
  * ========================
  * AprovarPedidosController
@@ -1406,7 +1422,7 @@ module.exports = function (module) {
         }
     }
 }
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./aprovar-pedidos.ctrl.js')(module);
@@ -1414,7 +1430,7 @@ module.exports = function(module) {
     require('./pagamento.ctrl.js')(module);
 
 }
-},{"./aprovar-pedidos.ctrl.js":14,"./pagamento.ctrl.js":16}],16:[function(require,module,exports){
+},{"./aprovar-pedidos.ctrl.js":15,"./pagamento.ctrl.js":17}],17:[function(require,module,exports){
 module.exports = function(module) {
 
     'use strict';
@@ -1540,7 +1556,7 @@ module.exports = function(module) {
 
     }
 }
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /**
  * ==========================
  * ConsultarPedidosController
@@ -1728,13 +1744,13 @@ module.exports = function(module) {
         }
     }
 }
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./consultar-pedidos.ctrl.js')(module);
         
 }
-},{"./consultar-pedidos.ctrl.js":17}],19:[function(require,module,exports){
+},{"./consultar-pedidos.ctrl.js":18}],20:[function(require,module,exports){
 module.exports = function(module) {
 
     //require('./pedidos.routes.js')(module);
@@ -1749,13 +1765,13 @@ module.exports = function(module) {
     require('./negar-pedido')(module);
 
 }
-},{"./acordo.resource.js":11,"./aprovar-pedidos":15,"./aprovar-pedidos-com-ressalva":13,"./consultar-pedidos":18,"./negar-pedido":20,"./obter-pedidos":22,"./pagamento.resource":24,"./pedidos.resource.js":25}],20:[function(require,module,exports){
+},{"./acordo.resource.js":12,"./aprovar-pedidos":16,"./aprovar-pedidos-com-ressalva":14,"./consultar-pedidos":19,"./negar-pedido":21,"./obter-pedidos":23,"./pagamento.resource":25,"./pedidos.resource.js":26}],21:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./negar-pedido.ctrl.js')(module);
     
 }
-},{"./negar-pedido.ctrl.js":21}],21:[function(require,module,exports){
+},{"./negar-pedido.ctrl.js":22}],22:[function(require,module,exports){
 /**
  * =====================
  * NegarPedidoController
@@ -1915,13 +1931,13 @@ module.exports = function(module) {
         }
     }
 }
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = function(module) {
 
     require('./obter-pedidos.ctrl')(module);
 
 }
-},{"./obter-pedidos.ctrl":23}],23:[function(require,module,exports){
+},{"./obter-pedidos.ctrl":24}],24:[function(require,module,exports){
 /**
  * =======================
  * ObterPedidosControllers
@@ -2004,7 +2020,7 @@ module.exports = function(module) {
         }
     }
 }
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 /**
  * PagamentoResource
  */
@@ -2050,7 +2066,7 @@ module.exports = function(module) {
     }
 }
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /**
  * ========================
  * ConsultarPedidosResource
@@ -2133,7 +2149,7 @@ module.exports = function(module) {
     }
 }
 
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 /**
  * =======
  * PPEMenu
@@ -2162,7 +2178,7 @@ module.exports = function (module) {
     }
 
 };
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 /**
  * ======================
  * ConsultarPedidosRoutes
@@ -2239,7 +2255,7 @@ module.exports = function(module){
             })*/
     }
 }
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports={
   "private": true,
   "version": "1.0.0",

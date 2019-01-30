@@ -2,9 +2,9 @@ exports.module = function(module) {
 
     'use strict';
 
-    module.controller('PagamentoController', PagamentoController);
+    module.controller('PagamentoController2', PagamentoController2);
 
-    function PagamentoController() {
+    function PagamentoController2() {
 
         var vm = this;
 

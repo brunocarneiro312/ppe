@@ -1,7 +1,7 @@
 module.exports = function(module) {
 
     // Controller
-    require('./controller/pagamento.controller')(module);
+    require('./controller/pagamentos.controller')(module);
 
     // Resource
     // require('./resource/pagamento.resource')(module);
