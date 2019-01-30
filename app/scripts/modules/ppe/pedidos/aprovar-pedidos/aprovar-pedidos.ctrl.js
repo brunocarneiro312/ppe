@@ -708,12 +708,9 @@ module.exports = function (module) {
          */
         function _listarPagamentos(guidPedido) {
 
-            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido)
                 .then(function(response) {
                     vm.pagamentos = response.data.plain();
-                    console.log('===========');
-                    console.log(vm.pagamentos);
-                    console.log('===========');
                 })
                 .catch(function(err) {
                     console.log(err);

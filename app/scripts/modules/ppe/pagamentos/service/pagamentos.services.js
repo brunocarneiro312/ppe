@@ -1,3 +1,10 @@
+/**
+ * ---------------------
+ * Serviço de pagamentos
+ * ---------------------
+ * @author COINT
+ * @since 01/2019
+ */
 module.exports = function(module) {
 
     "use strict";
@@ -7,10 +14,11 @@ module.exports = function(module) {
     function PagamentosService(PagamentosResources) {
 
         return {
-            salvar:  salvar,
-            remover: remover,
-            listar:  listar,
-            buscar:  buscar
+            salvar:                               salvar,
+            remover:                              remover,
+            listar:                               listar,
+            buscar:                               buscar,
+            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao
         }
 
         /**
@@ -70,8 +78,21 @@ module.exports = function(module) {
                 .catch(function(e) {
                     console.log(e);
                     console.log("[ERRO] Erro ao buscar pagamento com o código " + codigoDoPagamento);
-                })
+                });
+        }
 
+        /**
+         * Lista todos os pagamentos de determinado pedido de habilitação
+         */
+        function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao)
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao listar pagamentos do pedido de habilitação " + pedidoHabilitacao);
+                })
         }
     }
 }

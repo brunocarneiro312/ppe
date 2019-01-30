@@ -65,7 +65,7 @@ module.exports = function(module) {
          * ------------------------------------
          */
         function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
-            return Restangular.all(_getResource() + "/" + pedidoHabilitacao);
+            return Restangular.all(_getResource() + "/" + pedidoHabilitacao).getList();
         }
 
         /**
