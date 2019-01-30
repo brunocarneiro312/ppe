@@ -4,9 +4,9 @@ module.exports = function(module) {
     require('./controller/pagamento.controller')(module);
 
     // Resource
-    require('./resource/pagamento.resource')(module);
+    // require('./resource/pagamento.resource')(module);
 
     // Service
-    require('./service/pagamento.service')(module);
+    // require('./service/pagamento.service')(module);
 
 }

@@ -10,5 +10,5 @@
     require('./pedidos')(ppe);
 
     // pagamentos
-    require('./pagamentos');
+    require('./pagamentos')(ppe);
 })();
