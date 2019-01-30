@@ -1,5 +1,9 @@
 /**
- * PagamentoResource
+ * ---------------------
+ * Recurso de pagamentos
+ * ---------------------
+ * @author COINT
+ * @since 01/2019
  */
 module.exports = function(module) {
 
@@ -13,25 +17,65 @@ module.exports = function(module) {
         var resource = '/pagamentos';
 
         return {
-            listarPagamentos:                     listarPagamentos,
+            salvar:                               salvar,
+            remover:                              remover,
+            listar:                               listar,
+            buscar:                               buscar,
             listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
-            removerPagamento:                     removerPagamento
         }
 
-        function getResource() {
-            return resource;
+        /**
+         * ------
+         * salvar
+         * ------
+         */
+        function salvar(pagamento) {
+            return Restangular.one(_getResource() + "/")
         }
 
-        function listarPagamentos() {
-            return Restangular.all(getResource());
+        /**
+         * -------
+         * remover
+         * -------
+         */
+        function remover(pagamento) {
+            return Restangular.one(_getResource() + '/pagamento', pagamento.sqPagamento).remove();
         }
 
+        /**
+         * ------
+         * listar
+         * ------
+         */
+        function listar() {
+            return Restangular.all(_getResource());
+        }
+
+        /**
+         * ------
+         * buscar
+         * ------
+         */
+        function buscar(codigoDoPagamento) {
+
+        }
+
+        /**
+         * ------------------------------------
+         * listarPagamentosPorPedidoHabilitacao
+         * ------------------------------------
+         */
         function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
-            return Restangular.all(getResource() + '/' + pedidoHabilitacao);
+            return Restangular.all(_getResource() + '/' + pedidoHabilitacao);
         }
 
-        function removerPagamento(sqPagamento) {
-            return Restangular.one(getResource() + '/pagamento', sqPagamento).remove();
+        /**
+         * ------------
+         * _getResource
+         * ------------
+         */
+        function _getResource() {
+            return resource;
         }
     }
 }

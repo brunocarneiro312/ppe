@@ -4,7 +4,7 @@ module.exports = function(module) {
 
     module.service('PagamentosService', PagamentosService);
 
-    function PagamentosService() {
+    function PagamentosService(PagamentosResources) {
 
         return {
             salvar:  salvar,
@@ -17,8 +17,7 @@ module.exports = function(module) {
          * Solicita recurso para salvar pagamento
          */
         function salvar(pagamento) {
-            console.log("salvando pagamento...");
-            console.log(pagamento);
+            PagamentosResources.salvar(pagamento);
         }
 
         /**
