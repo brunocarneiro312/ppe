@@ -1,8 +1,8 @@
 module.exports = function(module) {
 
-    'use strict';
+    "use strict";
 
-    module.service('PagamentosService', PagamentosService);
+    module.service("PagamentosService", PagamentosService);
 
     function PagamentosService(PagamentosResources) {
 

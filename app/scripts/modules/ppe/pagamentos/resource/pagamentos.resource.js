@@ -7,9 +7,9 @@
  */
 module.exports = function(module) {
 
-    'use strict';
+    "use strict";
 
-    module.factory('PagamentosResources', PagamentosResources);
+    module.factory("PagamentosResources", PagamentosResources);
 
     function PagamentosResources(Restangular){
 
@@ -38,7 +38,7 @@ module.exports = function(module) {
          * -------
          */
         function remover(pagamento) {
-            return Restangular.one(_getResource() + '/pagamento', pagamento.sqPagamento).remove();
+            return Restangular.one(_getResource() + "/pagamento", pagamento.sqPagamento).remove();
         }
 
         /**
@@ -65,7 +65,7 @@ module.exports = function(module) {
          * ------------------------------------
          */
         function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
-            return Restangular.all(_getResource() + '/' + pedidoHabilitacao);
+            return Restangular.all(_getResource() + "/" + pedidoHabilitacao);
         }
 
         /**
