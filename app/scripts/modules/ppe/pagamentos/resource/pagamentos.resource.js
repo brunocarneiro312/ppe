@@ -37,8 +37,8 @@ module.exports = function(module) {
          * remover
          * -------
          */
-        function remover(pagamento) {
-            return Restangular.one(_getResource() + "/pagamento", pagamento.sqPagamento).remove();
+        function remover(codigoDoPagamento) {
+            return Restangular.one(_getResource() + "/pagamento", codigoDoPagamento).remove();
         }
 
         /**

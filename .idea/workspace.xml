@@ -27,14 +27,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.48075908">
+    <splitter split-orientation="horizontal" split-proportion="0.43437007">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-405">
-                  <caret line="27" column="49" lean-forward="true" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+                <state relative-caret-position="315">
+                  <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
                 </state>
               </provider>
             </entry>
@@ -43,11 +43,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/aprovar-pedidos.ctrl.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="449">
-                  <caret line="716" column="19" lean-forward="true" selection-start-line="716" selection-start-column="19" selection-end-line="716" selection-end-column="19" />
+                <state relative-caret-position="109">
+                  <caret line="655" lean-forward="true" selection-start-line="655" selection-end-line="655" />
                 </state>
               </provider>
             </entry>
@@ -56,16 +56,16 @@
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/acordo.resource.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="722">
-                  <caret line="64" column="9" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
+                  <caret line="64" column="9" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="339">
-                  <caret line="67" column="86" selection-start-line="67" selection-start-column="86" selection-end-line="67" selection-end-column="86" />
+                <state relative-caret-position="384">
+                  <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -84,7 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>situacao</find>
       <find>negar</find>
       <find>listaSubmotivoRecusa</find>
       <find>submotivo</find>
@@ -114,6 +113,7 @@
       <find>adicionarpagamento</find>
       <find>removerpaga</find>
       <find>adicionarpaga</find>
+      <find>removerpagam</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -142,9 +142,9 @@
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/index.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/index.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/index.js" />
-        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js" />
-        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js" />
         <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/aprovar-pedidos.ctrl.js" />
+        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js" />
+        <option value="$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js" />
       </list>
     </option>
   </component>
@@ -281,12 +281,12 @@
       <updated>1547748760489</updated>
       <workItem from="1547748764997" duration="28260000" />
       <workItem from="1548155249250" duration="60509000" />
-      <workItem from="1548850172282" duration="17237000" />
+      <workItem from="1548850172282" duration="17785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="106006000" />
+    <option name="totallyTimeSpent" value="106554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -583,28 +583,28 @@
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/acordo.resource.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="722">
-          <caret line="64" column="9" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="67" column="86" selection-start-line="67" selection-start-column="86" selection-end-line="67" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-405">
-          <caret line="27" column="49" lean-forward="true" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+          <caret line="64" column="9" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/aprovar-pedidos.ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="716" column="19" lean-forward="true" selection-start-line="716" selection-start-column="19" selection-end-line="716" selection-end-column="19" />
+        <state relative-caret-position="109">
+          <caret line="655" lean-forward="true" selection-start-line="655" selection-end-line="655" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="46" column="17" lean-forward="true" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
         </state>
       </provider>
     </entry>

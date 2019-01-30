@@ -587,88 +587,182 @@ module.exports = function(module) {
 }
 },{"./controller/pagamentos.controller.js":10,"./resource/pagamentos.resource.js":12,"./service/pagamentos.services.js":13}],12:[function(require,module,exports){
 /**
- * PagamentoResource
+ * ---------------------
+ * Recurso de pagamentos
+ * ---------------------
+ * @author COINT
+ * @since 01/2019
  */
 module.exports = function(module) {
 
-    'use strict';
+    "use strict";
 
-    module.factory('PagamentosResources', PagamentosResources);
+    module.factory("PagamentosResources", PagamentosResources);
 
-    /*@ngInject*/
     function PagamentosResources(Restangular){
 
         var resource = '/pagamentos';
 
         return {
-            listarPagamentos:                     listarPagamentos,
+            salvar:                               salvar,
+            remover:                              remover,
+            listar:                               listar,
+            buscar:                               buscar,
             listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
-            removerPagamento:                     removerPagamento
         }
 
-        function getResource() {
-            return resource;
+        /**
+         * ------
+         * salvar
+         * ------
+         */
+        function salvar(pagamento) {
+            return Restangular.all("/acordo/informarPagamento").post(pagamento);
         }
 
-        function listarPagamentos() {
-            return Restangular.all(getResource());
+        /**
+         * -------
+         * remover
+         * -------
+         */
+        function remover(codigoDoPagamento) {
+            return Restangular.one(_getResource() + "/pagamento", codigoDoPagamento).remove();
         }
 
+        /**
+         * ------
+         * listar
+         * ------
+         */
+        function listar() {
+            return Restangular.all(_getResource());
+        }
+
+        /**
+         * ------
+         * buscar
+         * ------
+         */
+        function buscar(codigoDoPagamento) {
+            return Restangular.one(_getResource() + "/pagamento/" + codigoDoPagamento).get();
+        }
+
+        /**
+         * ------------------------------------
+         * listarPagamentosPorPedidoHabilitacao
+         * ------------------------------------
+         */
         function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
-            return Restangular.all(getResource() + '/' + pedidoHabilitacao);
+            return Restangular.all(_getResource() + "/" + pedidoHabilitacao).getList();
         }
 
-        function removerPagamento(sqPagamento) {
-            return Restangular.one(getResource() + '/pagamento', sqPagamento).remove();
+        /**
+         * ------------
+         * _getResource
+         * ------------
+         */
+        function _getResource() {
+            return resource;
         }
     }
 }
 
 },{}],13:[function(require,module,exports){
+/**
+ * ---------------------
+ * Serviço de pagamentos
+ * ---------------------
+ * @author COINT
+ * @since 01/2019
+ */
 module.exports = function(module) {
 
-    'use strict';
+    "use strict";
 
-    module.service('PagamentosService', PagamentosService);
+    module.service("PagamentosService", PagamentosService);
 
-    function PagamentosService() {
+    function PagamentosService(PagamentosResources) {
 
         return {
-            salvar:  salvar,
-            remover: remover,
-            listar:  listar,
-            buscar:  buscar
+            salvar:                               salvar,
+            remover:                              remover,
+            listar:                               listar,
+            buscar:                               buscar,
+            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao
         }
 
         /**
-         * Solicita recurso para salvar pagamento
+         * salva pagamento
          */
         function salvar(pagamento) {
-            console.log("salvando pagamento...");
-            console.log(pagamento);
+            PagamentosResources.salvar(pagamento)
+                .then(function(response) {
+                    console.log("[INFO] Pagamento adicionado.");
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao salvar pagamento!");
+                });
         }
 
         /**
          * Solicita recurso para remover pagamento
          */
-        function remover(pagamento) {
-            console.log("removendo pagamento...");
-            console.log(pagamento)
+        function remover(codigoDoPagamento) {
+            PagamentosResources.remover(codigoDoPagamento)
+                .then(function(response) {
+                    console.log("[INFO] Pagamento removido.");
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao remover pagamento!")
+                });
         }
 
         /**
          * Solicita recurso para listar pagamento
          */
         function listar() {
-            console.log("listando pagamento...");
+            PagamentosResources.listar()
+                .then(function(response) {
+                    console.log("[INFO] Pagamentos recuperados.");
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[INFO] Erro ao recuperar pagamentos!");
+                });
         }
 
         /**
          * Solicita recurso para buscar pagamento
          */
         function buscar(codigoDoPagamento) {
-            console.log("buscando pagamento...");
-            console.log(codigoDoPagamento);
+            PagamentosResources.buscar(codigoDoPagamento)
+                .then(function(response) {
+                    console.log("[INFO] Pagamento encontrado.");
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao buscar pagamento com o código " + codigoDoPagamento);
+                });
+        }
+
+        /**
+         * Lista todos os pagamentos de determinado pedido de habilitação
+         */
+        function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao)
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao listar pagamentos do pedido de habilitação " + pedidoHabilitacao);
+                })
         }
     }
 }
@@ -809,6 +903,7 @@ module.exports = function (module) {
         'PedidosResource',
         'AcordoResource',
         'PagamentosResources',
+        'PagamentosService',
         'mask',
         '$http',
         '$stateParams',
@@ -824,6 +919,7 @@ module.exports = function (module) {
                                       PedidosResource,
                                       AcordoResource,
                                       PagamentosResources,
+                                      PagamentoService,
                                       mask,
                                       $http,
                                       $stateParams,
@@ -1445,7 +1541,7 @@ module.exports = function (module) {
          * ================
          */
         function removerPagamento(idPagamento) {
-            PagamentosResources.removerPagamento(idPagamento)
+            PagamentosResources.remover(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
                         atualizarDadosPagamento();
@@ -1495,12 +1591,9 @@ module.exports = function (module) {
          */
         function _listarPagamentos(guidPedido) {
 
-            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido).getList()
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido)
                 .then(function(response) {
                     vm.pagamentos = response.data.plain();
-                    console.log('===========');
-                    console.log(vm.pagamentos);
-                    console.log('===========');
                 })
                 .catch(function(err) {
                     console.log(err);

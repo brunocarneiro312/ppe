@@ -39,8 +39,8 @@ module.exports = function(module) {
         /**
          * Solicita recurso para remover pagamento
          */
-        function remover(pagamento) {
-            PagamentosResources.remover(pagamento)
+        function remover(codigoDoPagamento) {
+            PagamentosResources.remover(codigoDoPagamento)
                 .then(function(response) {
                     console.log("[INFO] Pagamento removido.");
                     return response.data;

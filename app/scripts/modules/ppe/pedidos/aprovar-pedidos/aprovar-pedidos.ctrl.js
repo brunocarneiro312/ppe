@@ -22,6 +22,7 @@ module.exports = function (module) {
         'PedidosResource',
         'AcordoResource',
         'PagamentosResources',
+        'PagamentosService',
         'mask',
         '$http',
         '$stateParams',
@@ -37,6 +38,7 @@ module.exports = function (module) {
                                       PedidosResource,
                                       AcordoResource,
                                       PagamentosResources,
+                                      PagamentoService,
                                       mask,
                                       $http,
                                       $stateParams,
@@ -658,7 +660,7 @@ module.exports = function (module) {
          * ================
          */
         function removerPagamento(idPagamento) {
-            PagamentosResources.removerPagamento(idPagamento)
+            PagamentosResources.remover(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
                         atualizarDadosPagamento();
