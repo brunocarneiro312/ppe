@@ -1,0 +1,9 @@
+{
+  "name": "ppe",
+  "version": "1.0.0",
+  "description": "Portal de Planos Econômicos",
+  "main": "index.js",  
+  "css": ["css/css.less"],
+  "author": "NUREA",  
+  "position":2
+}

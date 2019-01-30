@@ -1,0 +1,1534 @@
+<div class="conter-wrapper">
+	<div class="container-fluid home-page">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">Dados do Pedido</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+
+								<!-- ====== -->
+								<!-- Pedido -->
+								<!-- ====== -->
+								<fieldset style="margin: 25px 0">
+									<legend>Pedido</legend>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Guid Pedido:
+											<b ng-if="vm.pedido.cdPedidoHabilitacao">{{ vm.pedido.cdPedidoHabilitacao }}</b>
+											<b ng-if="!vm.pedido.cdPedidoHabilitacao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Protocolo:
+											<b ng-if="vm.pedido.protocolo">{{ vm.pedido.protocolo }}</b>
+											<b ng-if="!vm.pedido.protocolo" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Identificador:
+											<b ng-if="vm.pedido.cdLoteHabilitacao">{{ vm.pedido.cdLoteHabilitacao }}</b>
+											<b ng-if="!vm.pedido.cdLoteHabilitacao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Data de Abertura:
+											<b ng-if="vm.pedido.dataAbertura">{{ vm.pedido.dataAbertura | date: 'dd/MM/yyyy' }}</b>
+											<b ng-if="!vm.pedido.dataAbertura" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Data de Leitura do Banco:
+											<b ng-if="vm.pedido.dataConfirmacaoLeituraBanco">{{ vm.pedido.dataConfirmacaoLeituraBanco }}</b>
+											<b ng-if="!vm.pedido.dataConfirmacaoLeituraBanco" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Status do Pedido:
+											<b ng-if="vm.pedido.statusPedido">{{ vm.pedido.statusPedido.descricao }}</b>
+											<b ng-if="!vm.pedido.statusPedido" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Valor Custas Processuais:
+											<b ng-if="vm.pedido.valorCustasProcessuais">{{ vm.pedido.valorCustasProcessuais | currency: ""}}</b>
+											<b ng-if="!vm.pedido.valorCustasProcessuais" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Valor Total Simulado:
+											<b ng-if="vm.pedido.valorTotalSimulado">{{ vm.pedido.valorTotalSimulado | currency: ""}}</b>
+											<b ng-if="!vm.pedido.valorTotalSimulado" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Destinatário de Pagamento:
+											<b ng-if="vm.pedido.destinatarioPagamentoAcordo">{{ vm.pedido.destinatarioPagamentoAcordo }}</b>
+											<b ng-if="!vm.pedido.destinatarioPagamentoAcordo" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Situação do pedido: <b>{{ vm.pedido.situacaoPedidoHabilitacao.descricao }}</b>
+										</div>
+									</div>
+								</fieldset><!-- /pedido -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ======== -->
+								<!-- Poupador -->
+								<!-- ======== -->
+								<fieldset style="margin:25px 0">
+									<legend>Dados do Poupador</legend>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Nome:
+											<b ng-if="vm.pedido.poupadorDTO.noPessoa">{{ vm.pedido.poupadorDTO.noPessoa }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.noPessoa" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											CPF:
+											<b ng-if="vm.pedido.poupadorDTO.nrCpfPessoa">{{ vm.pedido.poupadorDTO.nrCpfPessoa }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.nrCpfPessoa" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Data de Nascimento:
+											<b ng-if="vm.pedido.poupadorDTO.envolvido.dtNascimento">{{ vm.pedido.poupadorDTO.envolvido.dtNascimento | date: 'dd/MM/yyyy' }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.envolvido.dtNascimento" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Identidade:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.nrIdentidade">{{ vm.pedido.poupadorDTO.identidade.nrIdentidade }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.nrIdentidade" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Tipo:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao">{{ vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Órgão:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.sgOrgaoEmissor">{{ vm.pedido.poupadorDTO.identidade.sgOrgaoEmissor }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.sgOrgaoEmissor" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											<!-- faltando... -->
+											Validade:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.validade">{{ vm.pedido.poupadorDTO.identidade.validade }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.validade" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Falecido:
+											<b ng-if="vm.pedido.poupadorDTO.envolvido.descricaoFalecido">{{ vm.pedido.poupadorDTO.envolvido.descricaoFalecido}}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.envolvido.descricaoFalecido" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<!--
+										<div style="margin: 10px">
+											Data do Cálculo:
+											<b ng-if="vm.pedido.poupadorDTO.envolvido.dtCalculo">{{ vm.pedido.poupadorDTO.envolvido.dtCalculo }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.envolvido.dtCalculo" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										-->
+										<div style="margin: 10px">
+											UF:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.sgUfIdentidade">{{ vm.pedido.poupadorDTO.identidade.sgUfIdentidade }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.sgUfIdentidade" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<!-- <div style="margin: 10px">
+											Emissão:
+											<b ng-if="vm.pedido.poupadorDTO.identidadeDTO.emissao">{{ vm.pedido.poupadorDTO.identidadeDTO.emissao }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidadeDTO.emissao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div> -->
+										<div style="margin: 10px">
+											Classificação:
+											<b ng-if="vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao">{{ vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.identidade.tipoDocumento.descricao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+									<!-- ======== -->
+									<!-- Contatos -->
+									<!-- ======== -->
+									<div class="col-md-12">
+										<div style="margin: 10px">
+											<b>Contatos</b>
+											<div ng-repeat="contato in vm.pedido.poupadorDTO.contatos">
+												{{ contato.dsContato }}
+											</div>
+										</div>
+									</div>
+								</fieldset><!-- /poupador -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ======== -->
+								<!-- Endereço -->
+								<!-- ======== -->
+								<fieldset style="margin:25px 0">
+									<legend>Endereço do Poupador</legend>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											CEP:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.nrCep">{{ vm.pedido.poupadorDTO.endereco.nrCep }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.nrCep" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											UF:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.sgUf">{{ vm.pedido.poupadorDTO.endereco.sgUf }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.sgUf" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Cidade:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.noCidade">{{ vm.pedido.poupadorDTO.endereco.noCidade }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.noCidade" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Bairro:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.dsBairro">{{ vm.pedido.poupadorDTO.endereco.dsBairro }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.dsBairro" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Tipo Logradouro:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.dsTipoLogradouro">{{ vm.pedido.poupadorDTO.endereco.dsTipoLogradouro }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.dsTipoLogradouro" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Logradouro:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.logradouro">{{ vm.pedido.poupadorDTO.endereco.logradouro }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.logradouro" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Complemento:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.dsComplemento">{{ vm.pedido.poupadorDTO.endereco.dsComplemento }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.dsComplemento" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Número:
+											<b ng-if="vm.pedido.poupadorDTO.endereco.dsNumeroEndereco">{{ vm.pedido.poupadorDTO.endereco.dsNumeroEndereco }}</b>
+											<b ng-if="!vm.pedido.poupadorDTO.endereco.dsNumeroEndereco" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+						<div class="row" ng-if="vm.pedido.listaEnvolvidos.length > 0">
+							<div class="col-md-12">
+								<!-- ========== -->
+								<!-- Envolvidos -->
+								<!-- ========== -->
+								<fieldset style="margin:25px 0">
+									<!-- Lista -->
+									<legend>Dados dos Envolvidos</legend>
+									<fieldset style="margin:0 25px">
+										<legend><small style="font-size:0.8em">Envolvido 1</small></legend>
+										<div class="col-md-6">
+											<div style="margin: 10px">
+												Nome:
+											</div>
+											<div style="margin: 10px">
+												CPF:
+											</div>
+											<div style="margin: 10px">
+												Identidade:
+											</div>
+											<div style="margin: 10px">
+												Tipo:
+											</div>
+											<div style="margin: 10px">
+												Órgão:
+											</div>
+											<div style="margin: 10px">
+												CEP:
+											</div>
+											<div style="margin: 10px">
+												UF:
+											</div>
+											<div style="margin: 10px">
+												Cidade:
+											</div>
+											<div style="margin: 10px">
+												Bairro:
+											</div>
+											<div style="margin: 10px">
+												Telefone Fixo:
+											</div>
+											<div style="margin: 10px">
+												Email:
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div style="margin: 10px">
+												Emissão:
+											</div>
+											<div style="margin: 10px">
+												Classificação:
+											</div>
+											<div style="margin: 10px">
+												Validade:
+											</div>
+											<div style="margin: 10px">
+												Qualificação:
+											</div>
+											<div style="margin: 10px">
+												Tipo Logradouro:
+											</div>
+											<div style="margin: 10px">
+												Logradouro:
+											</div>
+											<div style="margin: 10px">
+												Complemento:
+											</div>
+											<div style="margin: 10px">
+												Número:
+											</div>
+											<div style="margin: 10px">
+												Telefone Celular:
+											</div>
+										</div>
+									</fieldset>
+								</fieldset><!-- /envolvido -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ======== -->
+								<!-- Processo -->
+								<!-- ======== -->
+								<fieldset style="margin:25px 0">
+									<legend>Dados do Processo</legend>
+
+									<div class="row" ng-repeat="processo in vm.pedido.listaProcessos" ng-if="vm.pedido.listaProcessos.length > 0">
+										<div class="col-md-12" style="margin: 0 25px">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">
+														Processo n° {{ processo.cdProcesso }}
+													</small>
+												</legend>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Número CNJ:
+														<b ng-if="processo.cdCnjProcesso">{{ processo.cdCnjProcesso }}</b>
+														<b ng-if="!processo.cdCnjProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Número Antigo:
+														<b ng-if="processo.cdProcessoAntigo">{{ processo.cdProcessoAntigo }}</b>
+														<b ng-if="!processo.cdProcessoAntigo" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Identificador Legado:
+														<b ng-if="processo.cdProcessoSistemaLegado">{{ processo.cdProcessoSistemaLegado }}</b>
+														<b ng-if="!processo.cdProcessoSistemaLegado" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Órgão:
+														<b ng-if="processo.orgaoLegal.descricao">{{ processo.orgaoLegal.descricao }}</b>
+														<b ng-if="!processo.orgaoLegal.descricao" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Tipo de Ação:
+														<b ng-if="processo.tipoAcaoProcesso.descricao">{{ processo.tipoAcaoProcesso.descricao }}</b>
+														<b ng-if="!processo.tipoAcaoProcesso.descricao" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Vara:
+														<b ng-if="processo.noVaraOrigemProcesso">{{ processo.noVaraOrigemProcesso }}</b>
+														<b ng-if="!processo.noVaraOrigemProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Comarca de Origem:
+														<b ng-if="processo.noComarcaOrigemProcesso">{{ processo.noComarcaOrigemProcesso }}</b>
+														<b ng-if="!processo.noComarcaOrigemProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Data de Ajuizamento:
+														<b ng-if="processo.dtAjuizamentoProcesso">{{ processo.dtAjuizamentoProcesso | date: 'dd/MM/yyyy' }}</b>
+														<b ng-if="!processo.dtAjuizamentoProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Data de Procuração:
+														<b ng-if="processo.dtProcuracaoProcesso">{{ processo.dtProcuracaoProcesso | date: 'dd/MM/yyyy' }}</b>
+														<b ng-if="!processo.dtProcuracaoProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														UF de Origem:
+														<b ng-if="processo.sgUfProcesso">{{ processo.sgUfProcesso }}</b>
+														<b ng-if="!processo.sgUfProcesso" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<div class="col-md-12" ng-if="!vm.pedido.listaProcessos || vm.pedido.listaProcessos.length == 0">
+										<div class="alert alert-warning">
+											<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Não existem <u>processos</u> cadastrados para o
+											pedido
+										</div>
+									</div>
+								</fieldset><!-- /processo -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ======= -->
+								<!-- Patrono -->
+								<!-- ======= -->
+								<fieldset style="margin:25px 0">
+									<legend>Patrono do Processo</legend>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											Nome:
+											<b ng-if="vm.pedido.patrono.pessoa.noPessoa">{{ vm.pedido.patrono.pessoa.noPessoa }}</b>
+											<b ng-if="!vm.pedido.patrono.pessoa.noPessoa" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											CPF:
+											<b ng-if="vm.pedido.patrono.pessoa.nrCpfPessoa">{{ vm.pedido.patrono.pessoa.nrCpfPessoa}}</b>
+											<b ng-if="!vm.pedido.patrono.pessoa.nrCpfPessoa" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+										<div style="margin: 10px">
+											Qualificação:
+											<b ng-if="vm.pedido.patrono.qualificacaoPatrono.descricao">{{ vm.pedido.patrono.qualificacaoPatrono.descricao}}</b>
+											<b ng-if="!vm.pedido.patrono.qualificacaoPatrono.descricao" style="color: firebrick">
+												<small>Não informado</small>
+											</b>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div style="margin: 10px">
+											<div style="margin: 10px">
+												<b>Contatos</b>
+												<div ng-repeat="contato in vm.pedido.patrono.pessoa.contatos">
+													{{contato.tipoContato.descricao}}: {{ contato.dsContato }}
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12" style="margin: 0 25px">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">
+														Advogado
+													</small>
+												</legend>
+												<div class="col-md-6" ng-repeat="patronoOrgao in vm.pedido.patrono.patronosOrgao">
+													<div ng-if="patronoOrgao.tipoOrgaoPatrono.descricao == 'OAB'">
+														<div style="margin: 10px">
+															Número OAB:
+															<b ng-if="patronoOrgao.nrMatricula">{{patronoOrgao.nrMatricula}}</b>
+														</div>
+														<div style="margin: 10px">
+															Esfera:
+															<b ng-if="patronoOrgao.descricaoTipoEsfera">{{ patronoOrgao.descricaoTipoEsfera }}</b>
+															<b ng-if="!patronoOrgao.descricaoTipoEsfera" style="color: firebrick">
+																<small>Não informado</small>
+															</b>
+														</div>
+														<div style="margin: 10px">
+															UF:
+															<b ng-if="patronoOrgao.sgUfOrgao">{{ patronoOrgao.sgUfOrgao }}</b>
+															<b ng-if="!patronoOrgao.sgUfOrgao" style="color: firebrick">
+																<small>Não informado</small>
+															</b>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12" style="margin: 0 25px">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">
+														Defensor
+													</small>
+												</legend>
+												<div class="col-md-6" ng-repeat="patronoOrgao in vm.pedido.patrono.patronosOrgao">
+													<div ng-if="patronoOrgao.tipoOrgaoPatrono.descricao == 'Defensoria'">
+														<div style="margin: 10px">
+															Número OAB:
+															<b ng-if="patronoOrgao.nrMatricula">{{ patronoOrgao.nrMatricula}}</b>
+															<b ng-if="!patronoOrgao.nrMatricula" style="color: firebrick">
+																<small>Não informado</small>
+															</b>
+														</div>
+														<div style="margin: 10px">
+															Esfera:
+															<b ng-if="patronoOrgao.descricaoTipoEsfera">{{ patronoOrgao.descricaoTipoEsfera }}</b>
+															<b ng-if="!patronoOrgao.descricaoTipoEsfera" style="color: firebrick">
+																<small>Não informado</small>
+															</b>
+														</div>
+														<div style="margin: 10px">
+															UF:
+															<b ng-if="patronoOrgao.sgUfOrgao">{{ patronoOrgao.sgUfOrgao }}</b>
+															<b ng-if="!patronoOrgao.sgUfOrgao" style="color: firebrick">
+																<small>Não informado</small>
+															</b>
+														</div>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<div class="col-md-12" ng-if="!vm.pedido.patrono">
+										<div class="alert alert-warning">
+											<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Não existem <u>patronos</u> cadastrados para o pedido
+										</div>
+									</div>
+								</fieldset><!-- /patrono -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ====== -->
+								<!-- Contas -->
+								<!-- ====== -->
+								<fieldset style="margin:25px 0">
+									<legend>Contas</legend>
+									<div class="row">
+
+										<div class="col-md-12" style="margin: 0 25px" ng-repeat="conta in vm.pedido.listaContas" ng-if="vm.pedido.listaContas.length > 0">
+
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">Conta n° {{ conta.cdConta }} - {{conta.categoriaConta.descricao}}</small>
+												</legend>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Titular da Conta:
+														<b ng-if="conta.pessoa.noPessoa">{{ conta.pessoa.noPessoa }}</b>
+														<b ng-if="!conta.pessoa.noPessoa" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														CPF/CNPJ:
+														<b ng-if="conta.pessoa.nrCpfPessoa">{{ conta.pessoa.nrCpfPessoa }}</b>
+														<b ng-if="!conta.pessoa.nrCpfPessoa" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Número do Banco:
+														<b ng-if="conta.nrBanco">{{ conta.nrBanco }}</b>
+														<b ng-if="!conta.nrBanco" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Agência:
+														<b ng-if="conta.cdAgencia">{{ conta.cdAgencia }}</b>
+														<b ng-if="!conta.cdAgencia" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														DV Agência:
+														<b ng-if="conta.cdAgenciaDV">{{ conta.cdAgenciaDV }}</b>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Conta:
+														<b ng-if="conta.cdConta">{{ conta.cdConta }}</b>
+														<b ng-if="!conta.cdConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														DV Conta:
+														<b ng-if="conta.cdContaDV">{{ conta.cdContaDV }}</b>
+														<b ng-if="!conta.cdContaDV" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<!--
+													<div style="margin: 10px">
+														Validade:
+														<b ng-if="conta.dtValidade">{{ conta.cdAgencia.dtValidade }}</b>
+													</div>
+													-->
+													<div style="margin: 10px">
+														Tipo da Conta:
+														<b ng-if="conta.tpConta">{{ conta.tpConta }}</b>
+														<b ng-if="!conta.tpConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<div class="col-md-12" ng-if="!vm.pedido.listaContas || vm.pedido.listaContas.length == 0">
+										<div class="alert alert-warning">
+											<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Não existem <u>contas</u> cadastrados para o pedido
+										</div>
+									</div>
+								</fieldset><!-- /contas -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<!-- =================== -->
+								<!-- Contas Contempladas -->
+								<!-- =================== -->
+								<fieldset style="margin:25px 0">
+									<legend>Contas Contempladas</legend>
+									<div class="row">
+
+										<!-- Lista de contas -->
+										<div class="col-md-12" style="margin: 0 25px" ng-repeat="contaContemplada in vm.pedido.listaContasContempladas"
+										 ng-if="vm.pedido.listaContasContempladas.length > 0">
+
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">Conta n° {{ contaContemplada.conta.cdConta }}</small>
+												</legend>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Titular da Conta:
+														<b ng-if="contaContemplada.conta.pessoa.noPessoa">{{ contaContemplada.conta.pessoa.noPessoa }}</b>
+														<b ng-if="!contaContemplada.conta.pessoa.noPessoa" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														CPF/CNPJ:
+														<b ng-if="contaContemplada.conta.pessoa.nrCpfPessoa">{{ contaContemplada.conta.pessoa.nrCpfPessoa }}</b>
+														<b ng-if="!contaContemplada.conta.pessoa.nrCpfPessoa" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Número do Banco:
+														<b ng-if="contaContemplada.conta.nrBanco">{{ contaContemplada.conta.nrBanco }}</b>
+														<b ng-if="!contaContemplada.conta.nrBanco" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Agência:
+														<b ng-if="contaContemplada.conta.cdAgencia">{{ contaContemplada.conta.cdAgencia }}</b>
+														<b ng-if="!contaContemplada.conta.cdAgencia" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														DV Agência:
+														<b ng-if="contaContemplada.conta.cdAgenciaDV">{{ contaContemplada.conta.cdAgenciaDV }}</b>
+													</div>
+													<div style="margin: 10px">
+														Plano econômico:
+														<b ng-if="contaContemplada.planoEconomico.descricao">{{ contaContemplada.planoEconomico.descricao }}</b>
+														<b ng-if="!contaContemplada.planoEconomico.descricao" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Valor simulado:
+														<b ng-if="contaContemplada.vlSimuladoCalculado">{{ contaContemplada.vlSimuladoCalculado | currency: ""}}</b>
+														<b ng-if="!contaContemplada.vlSimuladoCalculado" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Conta:
+														<b ng-if="contaContemplada.conta.cdConta">{{ contaContemplada.conta.cdConta }}</b>
+														<b ng-if="!contaContemplada.conta.cdConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														DV Conta:
+														<b ng-if="contaContemplada.conta.cdContaDV">{{ contaContemplada.conta.cdContaDV }}</b>
+														<b ng-if="!contaContemplada.conta.cdContaDV" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+
+													<!--
+													<div style="margin: 10px">
+														Validade:
+														<b ng-if="contaContemplada.conta.dtValidade">{{ contaContemplada.conta.dtValidade }}</b>
+													</div>
+													-->
+													<div style="margin: 10px">
+														Tipo da Conta:
+														<b ng-if="contaContemplada.conta.tpConta">{{ contaContemplada.conta.tpConta }}</b>
+														<b ng-if="!contaContemplada.conta.tpConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Saldo base:
+														<b ng-if="contaContemplada.vlSaldoBaseConta">{{ contaContemplada.vlSaldoBaseConta | currency: ""}}</b>
+														<b ng-if="!contaContemplada.vlSaldoBaseConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+													<div style="margin: 10px">
+														Aniversário conta:
+														<b ng-if="contaContemplada.diAniversarioConta">{{ contaContemplada.diAniversarioConta }}</b>
+														<b ng-if="!contaContemplada.diAniversarioConta" style="color: firebrick">
+															<small>Não informado</small>
+														</b>
+													</div>
+												</div>
+											</fieldset>
+										</div>
+									</div>
+									<div class="col-md-12" ng-if="!vm.pedido.listaContasContempladas || vm.pedido.listaContasContempladas.length == 0">
+										<div class="alert alert-warning">
+											<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Não existem <u>contas contempladas</u> cadastrados
+											para o pedido
+										</div>
+									</div>
+								</fieldset><!-- /contas -->
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-12">
+								<!-- ========== -->
+								<!-- Documentos -->
+								<!-- ========== -->
+								<fieldset style="margin:25px 0">
+									<legend>Documentos</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table table-default table-condensed table-striped table-hover" ng-if="vm.pedido.listaDocumentos.length > 0">
+												<thead>
+													<tr>
+														<th>ID</th>
+														<th>Nome</th>
+														<th></th>
+														<th>Tipo</th>
+														<th>Contexto</th>
+														<th>ID Chave Contexto</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="documento in vm.pedido.listaDocumentos">
+														<td>{{ documento.cdDocumento }}</td>
+														<td>
+															{{ documento.noDocumento }}
+														</td>
+														<td>
+															<button type="button"
+																	class="btn btn-primary btn-rounded ng-scope ng-isolate-scope"
+																	title="Download"
+															 		data-ng-click="vm.downloadArquivo(vm.pedido.cdPedidoHabilitacao, documento.cdDocumento)">
+																<span class="fa fa-download" />
+															</button>
+														</td>
+														<td>{{ documento.tipoDocumento.descricao }}</td>
+														<td>{{ documento.contextoDocumento.descricao }}</td>
+														<td>{{ documento.contextoDocumento.id }}</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+									<div class="row" ng-if="!vm.pedido.listaDocumentos">
+										<div class="col-md-12">
+											<div class="alert alert-warning">
+												<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Não existem <u>documentos</u> cadastrados para o
+												pedido
+											</div>
+										</div>
+									</div>
+								</fieldset><!-- /documentos -->
+							</div>
+							<div class="col-md-12 text-center" style="margin-top:25px" ng-if="vm.pedido.statusPedido.descricao == 'ANALISE_DA_INSTITUICAO' &&  !vm.bloquearCamposAcordo">
+								<button class="btn btn-success" style="margin: 0 5px" ng-click="vm.setModalidade('aprovar')">
+									Aprovar
+								</button>
+								<button class="btn btn-primary" style="margin: 0 5px" ng-click="vm.setModalidade('aprovar-ressalvas')">
+									Aprovar Com Ressalvas
+								</button>
+								<button class="btn btn-danger" style="margin: 0 5px" ng-click="vm.setModalidade('negar')">
+									Negar
+								</button>
+							</div>
+						</div>
+
+						<!-- =================================== -->
+						<!--        F O R M U L Á R I O S        -->
+						<!-- =================================== -->
+						<div class="alert alert-success" style="margin:25px 0" ng-if="vm.modalidade === 'aprovar' && vm.bloquearCamposAcordo">
+							<i class="fa fa-check fa-lg fa-fw"></i> Pedido Aprovado
+						</div>
+						<div class="alert alert-info" style="margin:25px 0" ng-if="vm.modalidade === 'aprovar-ressalva' && vm.bloquearCamposAcordo">
+							<i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Pedido aprovado com Ressalvas
+						</div>
+						<div class="alert alert-danger" style="margin:25px 0" ng-if="vm.modalidade === 'negar' && vm.bloquearCamposAcordo">
+							<i class="fa fa-times fa-lg fa-fw"></i> Pedido Negado
+						</div>
+
+						<!-- =================================== -->
+						<!-- Aprovar ou Aprovar com ressalvas    -->
+						<!-- =================================== -->
+						<div class="row" ng-if="vm.modalidade === 'aprovar' || vm.modalidade === 'aprovar-ressalva'">
+							<div class="col-md-12">
+								<form name="formAprovarAcordo">
+									<fieldset style="margin:25px 0">
+										<legend>Acordo</legend>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label id="label-identificador-proposta" for="input-identificador-proposta">Identificador Proposta:</label>
+
+												<!-- #input-identificador-proposta -->
+												<input type="text"
+													   class="form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   name="identificadorProposta"
+													   id="input-identificador-proposta"
+													   ng-model="vm.resultadoAnalisePedido.proposta.identificadorPropostaBanco"
+													   ng-required="true"
+													   mask="inteiro10"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.identificadorProposta.$valid" style="color: firebrick">* O campo deve
+														ser informado</small>
+													<small ng-show="formAprovarAcordo.identificadorProposta.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-valor-total-acordo" for="input-valor-total-acordo">Valor Total Acordo:</label>
+
+												<!-- #input-valor-total-acordo -->
+												<input type="text"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   class="moeda aceitaZero form-control"
+													   maxlength="14"
+													   name="valorTotalAcordo"
+													   id="input-valor-total-acordo"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorTotalAcordoFormatado"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorTotalAcordo.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarAcordo.valorTotalAcordo.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-valor-destinado-portador" for="input-valor-destinado-portador">Valor Destinado ao
+													Portador:</label>
+
+												<!-- #input-valor-destinado-portador -->
+												<input type="text"
+													   class="moeda aceitaZero form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   maxlength="14"
+													   name="valorDestinadoPortador"
+													   id="input-valor-destinado-portador"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorPoupadorFormatado"
+												 	   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorDestinadoPortador.$valid" style="color: firebrick">* O campo deve
+														ser informado</small>
+													<small ng-show="formAprovarAcordo.valorDestinadoPortador.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-valor-honorario-patrono" for="input-valor-honorario-patrono">Valor de Honorário ao Patrono
+													do Processo:</label>
+
+												<!-- #input-valor-honorario-partono -->
+												<input type="text"
+													   class="moeda aceitaZero form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   maxlength="14"
+												 	   name="valorHonorarioPatrono"
+													   id="input-valor-honorario-patrono"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorHonorariosAdvogadoFormatado"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorHonorarioPatrono.$valid" style="color: firebrick">* O campo deve
+														ser informado</small>
+													<small ng-show="formAprovarAcordo.valorHonorarioPatrono.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-valor-honorario-instituicao_aprovado" for="input-valor-honorario-instituicao_aprovado">Valor
+													honorário da instituição:</label>
+
+												<!-- #input-valor-honorario-instituicao_aprovado -->
+												<input type="text"
+													   class="moeda aceitaZero form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   maxlength="14"
+													   name="valorHonorarioInstituicao"
+													   id="input-valor-honorario-instituicao_aprovado"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorHonorariosFebrapoFormatado"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorHonorarioInstituicao.$valid" style="color: firebrick">* O campo
+														deve ser informado</small>
+													<small ng-show="formAprovarAcordo.valorHonorarioInstituicao.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label id="label-valor-reembolso-custas" for="input-valor-reembolso-custas">Valor de Reembolso de Custas:</label>
+
+												<!-- #input-valor-reembolso-custas -->
+												<input type="text"
+													   class="moeda aceitaZero form-control"
+													   maxlength="14"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   name="valorReembolsoCustas"
+													   id="input-valor-reembolso-custas"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorReembolsoCustasFormatado"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorReembolsoCustas.$valid" style="color: firebrick">* O campo deve
+														ser informado</small>
+													<small ng-show="formAprovarAcordo.valorReembolsoCustas.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-quantidade-parcelas" for="input-quantidade-parcelas">Quantidade de Parcelas:</label>
+
+												<!-- #input-quantidade-parcelas -->
+												<input type="text"
+													   class="form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   mask="inteiro4"
+													   name="quantidadeParcelas"
+													   id="input-quantidade-parcelas"
+													   ng-model="vm.resultadoAnalisePedido.proposta.quantidadeParcelas"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.quantidadeParcelas.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarAcordo.quantidadeParcelas.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-valor-parcela" for="input-valor-parcela">Valor da Parcela:</label>
+
+												<!-- #input-valor-parcela -->
+												<input type="text"
+													   class="moeda aceitaZero form-control"
+													   ng-disabled="true"
+													   maxlength="14"
+													   name="valorParcela"
+													   id="input-valor-parcela"
+													   ng-model="vm.resultadoAnalisePedido.proposta.valorParcelaFormatado"
+													   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.valorParcela.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarAcordo.valorParcela.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-data-primeira-parcela" for="input-data-primeira-parcela">Data da Primeira Parcela:</label>
+
+												<!-- #input-data-primeira-parcela -->
+												<input type="date"
+													   mask="data"
+													   class="form-control"
+													   ng-readonly="vm.bloquearCamposAcordo"
+													   name="datePrimeiraParcela"
+													   id="input-data-primeira-parcela"
+													   ng-model="vm.resultadoAnalisePedido.proposta.datePrimeiraParcela"
+												 	   ng-required="true"
+													   autocomplete="off" />
+
+												<div class="text-right">
+													<small ng-show="!formAprovarAcordo.datePrimeiraParcela.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarAcordo.datePrimeiraParcela.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<label id="label-acordo-observacoes" for="textarea-acordo-observacoes">Observações:</label>
+
+											<!-- #textarea-acordo-observacoes-->
+											<textarea id="textarea-acordo-observacoes"
+													  class="form-control"
+													  name="acordoObservacoes"
+													  ng-readonly="vm.bloquearCamposAcordo"
+											 		  cols="20"
+													  rows="10"
+													  style="resize: none"
+													  ng-model="vm.resultadoAnalisePedido.observacoes"
+													  ng-required="true"
+													  autocomplete="off"
+													  maxlength="500">
+											</textarea>
+
+											<div class="row">
+												<div class="col-md-6">
+													<small>{{ 500 - vm.resultadoAnalisePedido.observacoes.length }} restantes</small>
+												</div>
+												<div class="col-md-6 text-right">
+													<small ng-show="!formAprovarAcordo.acordoObservacoes.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarAcordo.acordoObservacoes.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12 text-center" ng-if="!vm.isAcordoConfirmado">
+											<br />
+											<button class="btn btn-primary" style="margin: 0 5px" ng-click="vm.aprovar()" ng-disabled="formAprovarAcordo.$invalid">
+												Confirmar Acordo
+												<i class="fa fa-ban fa-fw" ng-if="formAprovarAcordo.$invalid"></i>
+												<i class="fa fa-check fa-fw" ng-if="formAprovarAcordo.$valid"></i>
+											</button>
+											<button class="btn btn-danger" style="margin: 0 5px" ng-click="vm.cancelar()">
+												Cancelar
+											</button>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+
+                            <!-- ================= -->
+                            <!-- aprovar pagamento -->
+                            <!-- ================= -->
+							<div class="col-md-12" ng-if="vm.isAcordoConfirmado">
+								<form name="formAprovarPagamento">
+									<fieldset style="margin:25px 0">
+										<legend>Pagamento</legend>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label id="label-pagamento-guid-pedido" for="input-pagamento-guid-pedido">Guid Pedido:</label>
+
+												<!-- #input-pagamento-guid-pedido -->
+												<input type="text"
+													   id="input-pagamento-guid-pedido"
+													   name="pagamentoGuidPedido"
+													   class="form-control"
+													   ng-readonly="true"
+													   ng-model="vm.resultadoAnalisePedido.guidPedido"
+													   ng-required="true">
+
+												<small ng-show="formAprovarPagamento.pagamentoGuidPedido.$valid" style="color: green"><i class="fa fa-check"></i></small>
+											</div>
+											<div class="form-group">
+												<label id="label-pagamento-identificador-proposta" for="input-pagamento-identificador-proposta">Identificador
+													da Proposta:</label>
+
+												<!-- # input-pagamento-identificador-proposta -->
+												<input type="text"
+													   mask="inteiro10"
+													   id="input-pagamento-identificador-proposta"
+													   name="pagamentoIdentificadorProposta"
+												 	   class="form-control"
+													   ng-readonly="vm.bloquearCamposPagamento"
+													   ng-model="vm.resultadoAnalisePedido.identificadorPropostaBanco"
+													   mask="inteiro10"
+													   ng-required="true">
+
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.pagamentoIdentificadorProposta.$valid" style="color: firebrick">* O
+														campo deve ser informado</small>
+													<small ng-show="formAprovarPagamento.pagamentoIdentificadorProposta.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<div class="form-group">
+												<label id="label-numero-parcela" for="input-numero-parcela">Parcela Número:</label>
+
+												<!-- #input-numero-parcela -->
+												<input type="text"
+													   mask="inteiro4"
+													   id="input-numero-parcela"
+													   name="numeroParcela"
+													   class="form-control"
+													   ng-readonly="vm.bloquearCamposPagamento"
+													   ng-model="vm.resultadoAnalisePedido.numeroParcela"
+													   ng-required="true">
+
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.numeroParcela.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarPagamento.numeroParcela.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label id="label-pagamento-valor" for="input-pagamento-valor">Valor do Pagamento:</label>
+
+												<!-- #input-pagamento-valor -->
+												<input type="text"
+													   id="input-pagamento-valor"
+													   name="pagamentoValor"
+													   class="moeda aceitaZero form-control"
+													   maxlength="14"
+													   ng-readonly="vm.bloquearCamposPagamento"
+													   ng-model="vm.resultadoAnalisePedido.valorPagamentoFormatado"
+													   ng-required="true">
+
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.pagamentoValor.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarPagamento.pagamentoValor.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											<!--
+											<div class="form-group">
+												<label id="label-pagamento-status" for="select-pagamento-status">Status do Pagamento:</label>
+												<select id="select-pagamento-status"
+														name="pagamentoStatus"
+														class="form-control"
+														ng-readonly="vm.bloquearCamposPagamento"
+														ng-model="vm.resultadoAnalisePedido.statusPagamento">
+														<option value="NAO_REALIZADO">Não Realizado...</option>
+														<option value="REALIZADO">Realizado</option>
+												</select>
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.pagamentoStatus.$valid" style="color: firebrick">* O campo deve ser informado</small>
+													<small ng-show="formAprovarPagamento.pagamentoStatus.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+											-->
+											<div class="form-group">
+												<label id="label-pagamento-data-pagamento" for="input-pagamento-data-pagamento">Data do Pagamento:</label>
+
+												<!-- #input-pagamento-data-pagamento -->
+												<input type="date"
+													   mask="data"
+													   id="input-pagamento-data-pagamento"
+													   name="dataPagamento"
+													   class="form-control"
+													   ng-readonly="vm.bloquearCamposPagamento"
+													   ng-model="vm.resultadoAnalisePedido.dataPagamento"
+													   ng-required="true">
+
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.dataPagamento.$valid" style="color: firebrick">* O campo deve ser
+														informado</small>
+													<small ng-show="formAprovarPagamento.dataPagamento.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<label id="label-pagamento-observacoes" for="input-pagamento-observacoes">Observações:</label>
+
+												<!-- #input-pagamento-observacoes -->
+												<textarea id="input-pagamento-observacoes"
+														  name="pagamentoObservacoes"
+														  class="form-control"
+														  ng-readonly="vm.bloquearCamposPagamento"
+														  cols="20"
+														  rows="10"
+														  style="resize: none"
+														  ng-model="vm.resultadoAnalisePedido.observacoesPagamento"
+												 		  ng-required="true"><!-- campo duplicado -->
+												</textarea>
+
+												<div class="text-right">
+													<small ng-show="!formAprovarPagamento.pagamentoObservacoes.$valid" style="color: firebrick">* O campo deve
+														ser informado</small>
+													<small ng-show="formAprovarPagamento.pagamentoObservacoes.$valid" style="color: green"><i class="fa fa-check"></i></small>
+												</div>
+											</div>
+										</div>
+										<!--
+										<div class="row col-md-12">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">Comprovante</small>
+												</legend>
+												<div ng-if="!vm.exibirComprovantePagamento">
+													<div class="col-md-6">
+														<div style="margin: 10px">
+															<label for="input-pagamento-comprovante-identificador" id="label-pagamento-comprovante-identificador">Identificador do Comprovante:</label>
+															<input type="text"
+																	class="form-control"
+																	ng-readonly="vm.bloquearCamposPagamento"
+																	id="input-pagamento-comprovante-identificador"
+																	name="comprovanteIdentificador"
+																	mask="inteiro10"
+																	ng-model="vm.resultadoAnalisePedido.comprovante.identificadorDocumento"
+																    ng-required="true">
+														</div>
+													</div>
+                                                    <div class="col-md-6" ng-if="!formAprovarPagamento.comprovanteIdentificador.$valid">
+                                                        <button class="btn btn-primary btn-rounded ng-scope ng-isolate-scope "
+                                                                style="margin-top: 35px;"
+                                                                ng-click="vm.verificaIdentificador()">
+                                                            Selecionar Arquivo
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6" ng-if="formAprovarPagamento.comprovanteIdentificador.$valid">
+                                                        <label style="margin-top: 35px;" for="arquivoSelecionado"
+                                                               class="btn btn-primary btn-rounded ng-scope ng-isolate-scope ">Selecionar Arquivo
+                                                        </label>
+                                                        <input accept=".pdf" type="file" id="arquivoSelecionado" style="display: none"
+                                                               onchange='var scope = angular.element(this).scope(); scope.adicionarArquivo(this); scope.$apply()'/>
+                                                    </div>
+												</div>
+												<div class="row" ng-if="vm.exibirComprovantePagamento">
+													<div class="col-md-12 form-group">
+														<div>
+															<table class="table table-bordered table-striped">
+																<thead>
+																<tr>
+																	<th style="text-align: center;">Identificador do Comprovante</th>
+																	<th style="text-align: center;">Nome do arquivo</th>
+																	<th style="text-align: center;">Remover</th>
+																</tr>
+																</thead>
+																<tbody>
+																<tr>
+																	<td style="text-align: center;">{{vm.resultadoAnalisePedido.comprovante.identificadorDocumento}}</td>
+																	<td style="text-align: center;"> {{vm.resultadoAnalisePedido.comprovante.nomeArquivo}}</td>
+																	<td style="text-align: center;">
+																		<button type="button" class="btn btn-danger btn-sm" title="Excluir"
+																				data-ng-click="vm.removerComprovante()"> <span class="fa fa-remove"/>
+																		</button>
+																	</td>
+																</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+
+											</fieldset>
+										</div>	
+										-->
+										<div class="col-md-12 text-center" style="margin-top:25px">
+											<button class="btn btn-primary" style="margin: 0 5px" ng-click="vm.adicionarPagamento()" ng-disabled="formAprovarPagamento.$invalid">
+												Adicionar Pagamento
+												<i class="fa fa-ban fa-fw" ng-if="formAprovarPagamento.$invalid"></i>
+												<i class="fa fa-check fa-fw" ng-if="formAprovarPagamento.$valid"></i>
+											</button>
+											<!-- <button class="btn btn-danger" 
+													style="margin: 0 5px"
+													ng-click="vm.cancelarConfirmarPagamento()">
+												Cancelar
+											</button> -->
+										</div>
+
+										<!-- <div class="col-md-12" ng-if="vm.isPagamentoConfirmado">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">Conta Bancária - Acordo</small>
+												</legend>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Titular da conta:
+													</div>
+													<div style="margin: 10px">
+														CPF/CNPJ:
+													</div>
+													<div style="margin: 10px">
+														Número do Banco:
+													</div>
+													<div style="margin: 10px">
+														Nome do Banco:
+													</div>
+													<div style="margin: 10px">
+														Agência:
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														DV Agência:
+													</div>
+													<div style="margin: 10px">
+														Conta:
+													</div>
+													<div style="margin: 10px">
+														DV Conta:
+													</div>
+													<div style="margin: 10px">
+														Validade:
+													</div>
+													<div style="margin: 10px">
+														Tipo Conta:
+													</div>
+												</div>
+											</fieldset>
+										</div> -->
+
+										<!-- <div class="col-md-12" ng-if="vm.isPagamentoConfirmado">
+											<fieldset style="margin:25px 0">
+												<legend>
+													<small style="font-size:0.8em">Conta Judicial - Acordo</small>
+												</legend>
+												<div class="col-md-6">
+													<div style="margin: 10px">
+														Número do Banco:
+													</div>
+													<div style="margin: 10px">
+														Nome do Banco:
+													</div>
+													<div style="margin: 10px">
+														Identificador do Depósito:
+													</div>
+													<div style="margin: 10px">
+														Data de Validade:
+													</div>
+												</div>
+											</fieldset>
+										</div> -->
+									</fieldset>
+								</form>
+
+								<fieldset style="margin:25px 0" ng-if="vm.pagamentos.length > 0">
+									<legend>Pagamentos cadastrados</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<table class="table table-default table-condensed table-striped table-hover text-center">
+												<thead>
+													<tr>
+														<th class="text-center">Valor do pagamento</th>
+														<th class="text-center">Status</th>
+														<th class="text-center">Observações</th>
+														<th class="text-center">Data</th>
+														<th class="text-center">Ações</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr ng-repeat="pagamento in vm.pagamentos">
+														<td>{{pagamento.vlPagamento | currency : ""}}</td>
+														<td>{{pagamento.stPagamento}}</td>
+														<td>{{pagamento.dsObservacaoPagamento}}</td>
+														<td>{{pagamento.dtPagamento | date: 'dd/MM/yyyy' }}</td>
+														<td>
+															<button type="button" class="btn btn-primary btn-sm" title="Informar comprovante" ng-click="vm.abrirModalPagamento(pagamento)"
+															 ng-if="pagamento.stPagamento == 2">
+																<i class="fa fa-usd"></i>
+															</button>
+															<button type="button" class="btn btn-danger btn-sm" title="Excluir pagamento" ng-if="pagamento.stPagamento == 2"
+															 data-ng-click="vm.removerPagamento(pagamento.sqPagamento)"> <span class="fa fa-remove" />
+															</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</fieldset><!-- pagamentos já cadastrados -->
+								<div ng-if="vm.pagamentos.length == 0">
+									<div class="alert alert-warning">
+										<b>Não existem pagamentos cadastrados para o pedido ({{vm.pedido.cdPedidoHabilitacao}})</b>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- ============ -->
+						<!-- Negar Pedido -->
+						<!-- ============ -->
+						<div class="row" ng-if="vm.modalidade === 'negar'">
+							<form name="formRecusaDaProposta">
+								<div class="col-md-12">
+									<fieldset style="margin:25px 0">
+										<legend>Recusa da Proposta</legend>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="select-motivo-recusa">Motivo da Recusa:</label>
+
+												<!-- #select-motivo-recusa -->
+												<select class="form-control"
+														id="select-motivo-recusa"
+														ng-model="vm.resultadoAnalisePedido.motivoRecusaPedido"
+												 		ng-disabled="vm.bloquearCamposAcordo"
+														ng-options="t.id as t.descricao for t in vm.listaMotivoRecusa">
+
+													<option value="">Selecione...</option>
+												</select>
+
+											</div>
+											<div class="form-group">
+												<label for="select-submotivo-recusa">Submotivo da Recusa:</label>
+
+												<!-- #select-submotivo-recusa -->
+												<select class="form-control"
+														id="select-submotivo-recusa"
+														ng-model="vm.resultadoAnalisePedido.subMotivoRecusaPedido"
+												 		ng-disabled="vm.bloquearCamposAcordo"
+														ng-options="t.descricao as t.descricao for t in vm.listaSubmotivoRecusa">
+
+													<option value="">Selecione...</option>
+												</select>
+
+											</div>
+											<div class="form-group">
+												<label for="textarea-obervacoes-motivo-recusa">Observações:</label>
+
+												<!-- #textarea-observacoes-motivo-recusa-->
+												<textarea name="observacoesMotivoRecusa"
+														  id="textarea-obervacoes-motivo-recusa"
+														  class="form-control"
+												 		  ng-readonly="vm.bloquearCamposAcordo"
+														  cols="20"
+														  rows="10"
+														  style="resize: none"
+														  maxlength="500"
+														  ng-model="vm.resultadoAnalisePedido.observacoes"
+												 		  ng-required="true">
+												</textarea>
+
+												<div class="row">
+													<div class="col-md-6">
+														{{ 500 - vm.resultadoAnalisePedido.observacoes.length}} caracteres restantes
+													</div>
+													<div class="col-md-6 text-right">
+														<small ng-show="!formRecusaDaProposta.observacoesMotivoRecusa.$valid" style="color: firebrick">* O campo
+															deve ser informado</small>
+														<small ng-show="formRecusaDaProposta.observacoesMotivoRecusa.$valid" style="color: green"><i class="fa fa-check"></i></small>
+													</div>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+								<div class="col-md-12 text-center" style="margin-top:25px" ng-if="!vm.bloquearCamposAcordo">
+									<button class="btn btn-primary" style="margin: 0 5px" ng-disabled="formRecusaDaProposta.$invalid" ng-click="vm.negar()">
+										Enviar Negação
+										<i class="fa fa-ban fa-fw" ng-if="formRecusaDaProposta.$invalid"></i>
+										<i class="fa fa-check fa-fw" ng-if="formRecusaDaProposta.$valid"></i>
+									</button>
+									<button class="btn btn-danger" style="margin: 0 5px" ng-click="vm.cancelar()">
+										Cancelar
+									</button>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-md-12">
+								<span class="fa fa-angle-double-left fa-fw"></span>
+								<a href="/#!/consultar-pedidos">Voltar</a>
+							</div>
+							<!-- <div class="col-md-12" style="width: 100%;" ng-if="vm.debug">
+								<pre><code>{{ vm.formatarJson() }}</code></pre>
+							</div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-md-12" style="width: 35%; position: fixed; bottom: 15px; left: 0; z-index: 9999; max-height: 250px; overflow: auto; opacity: .75"
+ ng-if="vm.debug">
+	<pre><code>{{ vm.formatarJson() }}</code></pre>
+</div>

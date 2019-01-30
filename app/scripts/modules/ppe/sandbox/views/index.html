@@ -1,0 +1,13 @@
+<div class="container">
+    <h3>Sandbox</h3>
+    <hr />
+
+    {{ vm.tablePedidos }}
+
+    <table ng-table="vm.tablePedidos" class="table table-condensed table-striped table-boredered table-hover">
+        <tr ng-repeat="row in $data">
+            <td data-title="'Name'" sortable="'name'" filter="{name: 'text'}">{{row.name}}</td>
+            <td data-title="'Description'" sortable="'description'" filter="{descricao: 'text'}">{{row.description}}</td>
+        </tr>
+    </table>
+</div>

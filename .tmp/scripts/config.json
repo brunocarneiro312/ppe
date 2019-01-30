@@ -1,0 +1,24 @@
+{
+    "sigla": "PPE",
+    "nome": "Portal de Planos Econômicos",
+    "env": "DSV",
+    "autoLoading": true,
+    "paths": {
+        "server": "http://localhost:8081/api/v1.0.0",
+        "home": "home"
+    },
+    "home":{
+        "url" : "/inicio",
+        "templateUrl": "ppe/views/home.html",
+        "auth": false
+    },
+    "oauth": {
+        "clientId": "UFBFOlBQRQ==",
+        "path": {
+            "server": "http://localhost:8081/",
+            "auth": "oauth/token",
+            "logout": "api/logout",
+            "profile": "api/security/currentuser/profiles"
+        }
+    }
+}

@@ -1,0 +1,24 @@
+{
+    "sigla": "PPE",
+    "nome": "Portal de Planos Econômicos",
+    "env": "DSV",
+    "autoLoading": true,
+    "paths": {
+        "server": "https://ppebackenddsv.brb.com.br/ppe/api/v1.0.0",
+        "home": "home"
+    },
+    "home":{
+        "url" : "/inicio",
+        "templateUrl": "ppe/views/home.html",
+        "auth": true
+    },
+    "oauth": {
+        "clientId": "UFBFOlBQRQ==",
+        "path": {
+        "server": "https://ppebackenddsv.brb.com.br/ppe/",
+        "auth": "oauth/token",
+        "logout": "api/logout",
+        "profile": "api/security/currentuser/profiles"
+        }
+    }
+}

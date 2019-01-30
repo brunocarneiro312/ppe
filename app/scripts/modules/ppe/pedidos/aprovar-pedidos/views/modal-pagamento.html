@@ -1,0 +1,86 @@
+<form name="formPagamento">
+    <div class="modal-header">
+        <h3 class="modal-title">Informar comprovante</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row col-md-12">
+            <fieldset style="margin:25px 0">
+                <legend>
+                    <small style="font-size:0.8em">{{vm.tituloTela}}</small>
+                </legend>
+                <div class="row" ng-if="!vm.exibirComprovantePagamento">
+                    <div class="col-md-6">
+                        <div style="margin: 10px">
+                            <label for="input-pagamento-comprovante-identificador" id="label-pagamento-comprovante-identificador">{{vm.tituloCampo}}</label>
+                            <input type="text"
+                                   class="form-control"
+                                   ng-readonly="vm.bloquearCamposPagamento"
+                                   id="input-pagamento-comprovante-identificador"
+                                   name="comprovanteIdentificador"
+                                   mask="inteiro10"
+                                   ng-model="vm.comprovante.identificadorDocumento">
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-if="!vm.comprovante.identificadorDocumento">
+                        <button class="btn btn-primary btn-rounded ng-scope ng-isolate-scope "
+                                style="margin-top: 35px;"
+                                ng-click="vm.verificaIdentificador()">
+                            Selecionar Arquivo
+                        </button>
+                    </div>
+                    <div class="col-md-6" ng-if="vm.comprovante.identificadorDocumento">
+                        <label style="margin-top: 35px;" for="arquivoSelecionado"
+                               class="btn btn-primary btn-rounded ng-scope ng-isolate-scope ">Selecionar Arquivo
+                        </label>
+                        <input accept=".pdf" 
+						       type="file" 
+							   name="arquivoSelecionado" 
+							   id="arquivoSelecionado" 
+							   style="display: none"
+							   ng-model="vm.file"
+                               onchange='var scope = angular.element(this).scope(); scope.adicionarArquivo(this); scope.$apply(); vm.changeFile()'/>
+                    </div>
+                </div>
+                <div class="row" ng-if="vm.exibirComprovantePagamento">
+                    <div class="col-md-12 form-group">
+                        <div>
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;">Identificador</th>
+                                    <th style="text-align: center;">Nome do arquivo</th>
+                                    <th style="text-align: center;">Remover</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td style="text-align: center;">{{vm.comprovante.identificadorDocumento}}</td>
+                                    <td style="text-align: center;"> {{vm.comprovante.nomeArquivo}}</td>
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-danger btn-sm" title="Excluir"
+                                                data-ng-click="vm.removerComprovante()"> <span class="fa fa-remove"/>
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="modal-footer">
+	
+        <button class="btn btn-warning btn-rounded" 
+		        style="float: right;" 
+				ng-click="vm.fecharModalPagamento()">Cancelar
+		</button>
+		
+        <button class="btn btn-primary btn-rounded" 
+		        style="float: right;" 
+				ng-click="vm.confimarPagamento()" 
+				ng-disabled="formPagamento.arquivoSelecionado.$invalid || !vm.comprovante.nomeArquivo">Confirmar
+		</button>
+    </div>
+</form>
