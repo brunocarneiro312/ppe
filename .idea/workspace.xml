@@ -27,14 +27,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.44333157">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="285">
-                  <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+                <state relative-caret-position="-123">
+                  <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
                 </state>
               </provider>
             </entry>
@@ -43,11 +43,29 @@
       </split-first>
       <split-second>
         <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/aprovar-pedidos.ctrl.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="342" column="36" lean-forward="true" selection-start-line="342" selection-start-column="36" selection-end-line="342" selection-end-column="36" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/acordo.resource.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="722">
+                  <caret line="64" column="9" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="317">
-                  <caret line="68" column="53" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
+                <state relative-caret-position="180">
+                  <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
                 </state>
               </provider>
             </entry>
@@ -66,9 +84,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Situiacao</find>
-      <find>Situação:</find>
-      <find>route</find>
       <find>situacao</find>
       <find>negar</find>
       <find>listaSubmotivoRecusa</find>
@@ -95,7 +110,10 @@
       <find>ações</find>
       <find>pagamentos cadas</find>
       <find>aprovar</find>
+      <find>adicionar pagam</find>
+      <find>adicionarpagamento</find>
       <find>removerpaga</find>
+      <find>adicionarpaga</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -263,12 +281,12 @@
       <updated>1547748760489</updated>
       <workItem from="1547748764997" duration="28260000" />
       <workItem from="1548155249250" duration="60509000" />
-      <workItem from="1548850172282" duration="15470000" />
+      <workItem from="1548850172282" duration="16722000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104239000" />
+    <option name="totallyTimeSpent" value="105491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1040" extended-state="6" />
@@ -287,7 +305,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.28898582" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.28898582" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3293348" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3293348" />
@@ -296,7 +314,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18133895" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24881391" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Gulp" order="2" side_tool="true" />
       <window_info id="npm" order="3" side_tool="true" />
@@ -309,7 +327,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.47437295" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.28898582" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3293348" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3293348" />
@@ -419,13 +437,6 @@
             <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#div#3;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#4;n#form#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/acordo.resource.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -559,8 +570,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/views/aprovar-pedidos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="817" column="93" selection-start-line="817" selection-start-column="93" selection-end-line="817" selection-end-column="93" />
+        <state relative-caret-position="177">
+          <caret line="1312" column="116" selection-start-line="1312" selection-start-column="116" selection-end-line="1312" selection-end-column="116" />
           <folding>
             <element signature="n#style#0;n#fieldset#0;n#div#1;n#div#12;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#fieldset#0;n#div#0;n#form#0;n#div#13;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -569,24 +580,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/acordo.resource.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="64" column="9" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="64" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pedidos/aprovar-pedidos/aprovar-pedidos.ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="32" column="45" lean-forward="true" selection-start-line="32" selection-start-column="45" selection-end-line="32" selection-end-column="45" />
+        <state relative-caret-position="192">
+          <caret line="342" column="36" lean-forward="true" selection-start-line="342" selection-start-column="36" selection-end-line="342" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/service/pagamentos.services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+        <state relative-caret-position="-123">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/modules/ppe/pagamentos/resource/pagamentos.resource.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="68" column="53" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
+        <state relative-caret-position="180">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
         </state>
       </provider>
     </entry>

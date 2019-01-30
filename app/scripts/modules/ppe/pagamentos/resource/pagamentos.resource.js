@@ -11,7 +11,6 @@ module.exports = function(module) {
 
     module.factory('PagamentosResources', PagamentosResources);
 
-    /*@ngInject*/
     function PagamentosResources(Restangular){
 
         var resource = '/pagamentos';
@@ -30,7 +29,7 @@ module.exports = function(module) {
          * ------
          */
         function salvar(pagamento) {
-            return Restangular.one(_getResource() + "/")
+            return Restangular.all("/acordo/informarPagamento").post(pagamento);
         }
 
         /**
@@ -57,7 +56,7 @@ module.exports = function(module) {
          * ------
          */
         function buscar(codigoDoPagamento) {
-
+            return Restangular.one(_getResource() + "/pagamento/" + codigoDoPagamento).get();
         }
 
         /**
