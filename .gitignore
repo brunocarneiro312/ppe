@@ -128,6 +128,8 @@ typings/
 # .idea/*.iml
 # .idea/modules
 
+.idea/
+
 # CMake
 cmake-build-*/
 
@@ -217,8 +219,8 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml
-# *.ipr
+.idea/misc.xml
+*.ipr
 
 # Sonarlint plugin
 
