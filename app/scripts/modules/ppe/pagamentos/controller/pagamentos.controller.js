@@ -1,17 +1,16 @@
-exports.module = function(module) {
+module.exports = function(module) {
 
     'use strict';
 
-    module.controller('PagamentoController2', PagamentoController2);
+    module.controller('PagamentosController', PagamentosController);
 
-    function PagamentoController2() {
+    function PagamentosController() {
 
         var vm = this;
 
         function init() {
-            console.log('[INFO] PagamentoController.init()');
+            console.log("[INFO] PagamentosController.init()");
         }
         init();
-
     }
 }

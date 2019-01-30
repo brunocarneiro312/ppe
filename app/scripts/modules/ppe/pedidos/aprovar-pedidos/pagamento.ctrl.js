@@ -52,7 +52,7 @@ module.exports = function(module) {
                 .customPOST(vm.comprovante.arquivo, undefined, undefined, {'Content-Type': undefined})
                 .then(function (response) {
                     if(response.status == 200) {
-                        //recuperar os pagamentos para atualizar a lista de pagamentos
+                        //recuperar os pag para atualizar a lista de pag
                         growl.success("Pagamento confirmado com sucesso!");
                         $uibModalInstance.close(true);
                     } else {

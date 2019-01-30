@@ -1,10 +1,14 @@
+/**
+ * PagamentoResource
+ */
 module.exports = function(module) {
 
     'use strict';
 
-    module.factory('PagamentoResource', PagamentoResource);
+    module.factory('PagamentoResources', PagamentoResources);
 
-    function PedidosResource(Restangular) {
+    /*@ngInject*/
+    function PagamentoResources(Restangular){
 
         function init() {
             console.log("[INFO] PagamentoResource.init()");

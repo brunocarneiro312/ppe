@@ -275,7 +275,7 @@ module.exports = function (module) {
                 });
 
             console.log('----------------------');
-            console.log('listando pagamentos...');
+            console.log('listando pag...');
             console.log('----------------------');
             _listarPagamentos('b6e31307-4011-44b1-9404-10d2e8ab5731');
         }
@@ -348,7 +348,7 @@ module.exports = function (module) {
                     {
                         growl.success("Pagamento adicionado.");
 
-                        //recuperar os pagamentos para atualizar a lista de pagamentos
+                        //recuperar os pag para atualizar a lista de pag
                         // AcordoResource.recuperarPagamentos(vm.resultadoAnalisePedido.guidPedido).getList().then(function (response) {
                         //     vm.pedido.listaPagamentos = response.data;
                         //     growl.success("Pagamento adicionado com sucesso!");
@@ -707,7 +707,7 @@ module.exports = function (module) {
         }, true);
 
         /**
-         * Lista todos os pagamentos cadastrados para o pedido habilitacao
+         * Lista todos os pag cadastrados para o pedido habilitacao
          */
         function _listarPagamentos(guidPedido) {
 

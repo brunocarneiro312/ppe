@@ -2,9 +2,9 @@ module.exports = function(module) {
 
     'use strict';
 
-    module.service('PagamentoService', PagamentoService);
+    module.service('PagamentosService', PagamentosService);
 
-    function PagamentoService() {
+    function PagamentosService() {
 
         return {
             salvar:  salvar,
@@ -12,6 +12,11 @@ module.exports = function(module) {
             listar:  listar,
             buscar:  buscar
         }
+
+        function init() {
+            console.log("[INFO] PagamentosService.init()");
+        }
+        init();
 
         /**
          * Solicita recurso para salvar pagamento

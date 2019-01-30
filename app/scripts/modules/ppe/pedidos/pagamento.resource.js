@@ -17,7 +17,7 @@ module.exports = function(module) {
         }
         init();
 
-        var resource = '/pagamentos';
+        var resource = '/pag';
 
         return {
             listarPagamentos:                     listarPagamentos,

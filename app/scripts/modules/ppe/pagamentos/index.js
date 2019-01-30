@@ -1,12 +1,13 @@
 module.exports = function(module) {
-
-    // Controller
-    require('./controller/pagamentos.controller')(module);
+    'use strict';
 
     // Resource
-    // require('./resource/pagamento.resource')(module);
+    require('./resource/pagamentos.resource.js')(module);
 
     // Service
-    // require('./service/pagamento.service')(module);
+    require('./service/pagamentos.services.js')(module);
+
+    // Controller
+    require('./controller/pagamentos.controller.js')(module);
 
 }
