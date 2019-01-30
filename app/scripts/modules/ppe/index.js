@@ -8,4 +8,7 @@
     require('./ppe.routes.js')(ppe);
 
     require('./pedidos')(ppe);
+
+    // pagamentos
+    require('./pagamentos');
 })();

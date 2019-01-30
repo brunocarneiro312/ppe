@@ -11,7 +11,4 @@ module.exports = function(module) {
     require('./aprovar-pedidos-com-ressalva')(module);
     require('./negar-pedido')(module);
 
-    // pagamentos
-
-
 }
