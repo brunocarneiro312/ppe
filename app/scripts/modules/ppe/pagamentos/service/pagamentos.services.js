@@ -14,7 +14,7 @@ module.exports = function(module) {
         }
 
         /**
-         * salvar
+         * salva pagamento
          */
         function salvar(pagamento) {
             PagamentosResources.salvar(pagamento)
