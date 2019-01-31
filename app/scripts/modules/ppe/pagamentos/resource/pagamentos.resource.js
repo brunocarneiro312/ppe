@@ -38,7 +38,8 @@ module.exports = function(module) {
          * -------
          */
         function remover(codigoDoPagamento) {
-            return Restangular.one(_getResource() + "/pagamento", codigoDoPagamento).remove();
+            console.log(codigoDoPagamento);
+            return Restangular.one(_getResource() + "/pagamento/", codigoDoPagamento).remove();
         }
 
         /**

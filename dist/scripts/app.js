@@ -626,7 +626,8 @@ module.exports = function(module) {
          * -------
          */
         function remover(codigoDoPagamento) {
-            return Restangular.one(_getResource() + "/pagamento", codigoDoPagamento).remove();
+            console.log(codigoDoPagamento);
+            return Restangular.one(_getResource() + "/pagamento/", codigoDoPagamento).remove();
         }
 
         /**
@@ -825,6 +826,9 @@ module.exports = function(module) {
         }
         
         function recuperarPagamentos(guidPedido) {
+            console.log('----------------------');
+            console.log("recuperando pagamentos");
+            console.log('----------------------');
             return Restangular.all(getResource() + "/recuperarpagamentos/" + guidPedido);
         }
 
@@ -1536,15 +1540,15 @@ module.exports = function (module) {
         }
 
         /**
-         * ================
+         * ----------------
          * removerPagamento
-         * ================
+         * ----------------
          */
         function removerPagamento(idPagamento) {
             PagamentosResources.remover(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
-                        atualizarDadosPagamento();
+                        // atualizarDadosPagamento();
                         growl.success("Pagamento excluído com sucesso.");
                     }
                     else {

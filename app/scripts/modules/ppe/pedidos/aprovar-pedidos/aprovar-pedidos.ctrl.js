@@ -655,15 +655,15 @@ module.exports = function (module) {
         }
 
         /**
-         * ================
+         * ----------------
          * removerPagamento
-         * ================
+         * ----------------
          */
         function removerPagamento(idPagamento) {
             PagamentosResources.remover(idPagamento)
                 .then(function (response) {
                     if (response.status == 200) {
-                        atualizarDadosPagamento();
+                        // atualizarDadosPagamento();
                         growl.success("Pagamento excluído com sucesso.");
                     }
                     else {
