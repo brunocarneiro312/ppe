@@ -4,7 +4,12 @@ module.exports = function(module) {
 
     module.controller('PagamentoController', PagamentoController);
 
-    function PagamentoController($scope, $uibModalInstance, items, growl, AcordoResource) {
+    function PagamentoController($scope,
+                                 $uibModalInstance,
+                                 items,
+                                 growl,
+                                 AcordoResource,
+                                 ArquivoResource) {
 
         var vm = this;
 
@@ -12,6 +17,7 @@ module.exports = function(module) {
         vm.confimarPagamento            = confimarPagamento;
         vm.removerComprovante           = removerComprovante;
         vm.verificaIdentificador        = verificaIdentificador;
+        vm.teste                        = teste;
 
         vm.pagamento                    = {};
         vm.comprovante                  = {};
@@ -36,7 +42,7 @@ module.exports = function(module) {
         }
 
 
-        $scope.adicionarArquivo                = adicionarArquivo;
+        $scope.adicionarArquivo = adicionarArquivo;
 
         function init() {
             vm.pagamento = items.pagamento;
@@ -66,6 +72,23 @@ module.exports = function(module) {
                 .catch(function (erro) {
                     growl.error(erro.data.message);
                 });
+
+            // Salvando arquivo de comprovante na base
+            ArquivoResource.salvar(vm.comprovante.arquivo)
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+        }
+
+        /**
+         * --------------------
+         * confirmarComprovante
+         * --------------------
+         */
+        function confirmarComprovante() {
 
         }
 
@@ -121,5 +144,20 @@ module.exports = function(module) {
             vm.comprovante = {};
         }
 
+        function teste() {
+            // ArquivoResource.buscar(1)
+            //     .then(function(response) {
+            //         var file = new Blob([response.data], { type: 'application/pdf' });
+            //         var url = (window.URL || window.webkitURL).createObjectURL(file);
+            //         console.log(url);
+            //     })
+            //     .catch(function(err) {
+            //         console.log(err)
+            //     });
+
+            ArquivoResource.download(62);
+
+            ArquivoResource.buscar(62);
+        }
     }
 }

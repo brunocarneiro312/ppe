@@ -623,14 +623,15 @@ module.exports = function (module) {
         }
 
         /**
-         * ===================
+         * -------------------
          * abrirModalPagamento
-         * ===================
+         * -------------------
          */
         function abrirModalPagamento(pagamento)
         {
             var modalInstance = $uibModal.open({
-                templateUrl: 'ppe/pedidos/aprovar-pedidos/views/modal-pagamento.html',
+                // templateUrl: 'ppe/pedidos/aprovar-pedidos/views/modal-pagamento.html',
+                templateUrl: 'ppe/pedidos/aprovar-pedidos/views/comprovante.html',
                 controller: 'PagamentoController as vm',
                 size: 'xMd',
                 resolve: {

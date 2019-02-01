@@ -12,26 +12,32 @@
                     <div class="col-md-6">
                         <div style="margin: 10px">
                             <label for="input-pagamento-comprovante-identificador" id="label-pagamento-comprovante-identificador">{{vm.tituloCampo}}</label>
+
                             <input type="text"
                                    class="form-control"
                                    ng-readonly="vm.bloquearCamposPagamento"
                                    id="input-pagamento-comprovante-identificador"
                                    name="comprovanteIdentificador"
                                    mask="inteiro10"
-                                   ng-model="vm.comprovante.identificadorDocumento">
+                                   ng-model="vm.comprovante.identificadorDocumento" />
+
                         </div>
                     </div>
                     <div class="col-md-6" ng-if="!vm.comprovante.identificadorDocumento">
+
                         <button class="btn btn-primary btn-rounded ng-scope ng-isolate-scope "
                                 style="margin-top: 35px;"
                                 ng-click="vm.verificaIdentificador()">
+
                             Selecionar Arquivo
                         </button>
+
                     </div>
                     <div class="col-md-6" ng-if="vm.comprovante.identificadorDocumento">
                         <label style="margin-top: 35px;" for="arquivoSelecionado"
                                class="btn btn-primary btn-rounded ng-scope ng-isolate-scope ">Selecionar Arquivo
                         </label>
+
                         <input accept=".pdf" 
 						       type="file" 
 							   name="arquivoSelecionado" 
@@ -39,6 +45,7 @@
 							   style="display: none"
 							   ng-model="vm.file"
                                onchange='var scope = angular.element(this).scope(); scope.adicionarArquivo(this); scope.$apply(); vm.changeFile()'/>
+
                     </div>
                 </div>
                 <div class="row" ng-if="vm.exibirComprovantePagamento">
@@ -57,8 +64,13 @@
                                     <td style="text-align: center;">{{vm.comprovante.identificadorDocumento}}</td>
                                     <td style="text-align: center;"> {{vm.comprovante.nomeArquivo}}</td>
                                     <td style="text-align: center;">
-                                        <button type="button" class="btn btn-danger btn-sm" title="Excluir"
-                                                data-ng-click="vm.removerComprovante()"> <span class="fa fa-remove"/>
+
+                                        <button type="button"
+                                                class="btn btn-danger btn-sm"
+                                                title="Excluir"
+                                                data-ng-click="vm.removerComprovante()">
+
+                                            <span class="fa fa-remove" />
                                         </button>
                                     </td>
                                 </tr>
@@ -74,13 +86,17 @@
 	
         <button class="btn btn-warning btn-rounded" 
 		        style="float: right;" 
-				ng-click="vm.fecharModalPagamento()">Cancelar
+				ng-click="vm.fecharModalPagamento()">
+
+            Cancelar
 		</button>
 		
         <button class="btn btn-primary btn-rounded" 
 		        style="float: right;" 
 				ng-click="vm.confimarPagamento()" 
-				ng-disabled="formPagamento.arquivoSelecionado.$invalid || !vm.comprovante.nomeArquivo">Confirmar
+				ng-disabled="formPagamento.arquivoSelecionado.$invalid || !vm.comprovante.nomeArquivo">
+
+            Confirmar
 		</button>
     </div>
 </form>

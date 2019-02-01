@@ -12,4 +12,7 @@
     // Pagamentos
     require('./pagamentos')(ppe);
 
+    // Arquivo
+    require("./arquivo")(ppe);
+
 })();
