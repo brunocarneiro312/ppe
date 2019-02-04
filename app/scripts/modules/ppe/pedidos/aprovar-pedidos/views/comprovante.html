@@ -8,6 +8,11 @@
                 <legend>
                     <small style="font-size:0.8em">{{vm.tituloTela}}</small>
                 </legend>
+
+                <div style="background: indianred">
+                    <div arquivo-upload></div>
+                </div>
+
                 <div class="row" ng-if="!vm.exibirComprovantePagamento">
                     <div class="col-md-6">
                         <div style="margin: 10px">
@@ -33,6 +38,7 @@
                         </button>
 
                     </div>
+
                     <div class="col-md-6" ng-if="vm.comprovante.identificadorDocumento">
                         <label style="margin-top: 35px;" for="arquivoSelecionado"
                                class="btn btn-primary btn-rounded ng-scope ng-isolate-scope ">Selecionar Arquivo
@@ -44,7 +50,7 @@
                                id="arquivoSelecionado"
                                style="display: none"
                                ng-model="vm.file"
-                               onchange='var scope = angular.element(this).scope(); scope.adicionarArquivo(this); scope.$apply(); vm.changeFile()'/>
+                               onchange="var scope = angular.element(this).scope(); scope.adicionarArquivo(this); scope.$apply(); vm.changeFile()"/>
 
                     </div>
                 </div>
@@ -98,7 +104,5 @@
 
             Confirmar
         </button>
-
-        <!--<button class="btn btn-default" ng-click="vm.teste()">Teste</button>-->
     </div>
 </form>

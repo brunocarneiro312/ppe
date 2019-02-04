@@ -19,37 +19,49 @@ module.exports = function(module) {
             salvar:  salvar,
             buscar:  buscar,
             remover: remover,
-            download: download
         }
 
         function salvar(arquivo) {
-            return Restangular.all(resource + "/arquivo").customPOST(
-                arquivo, undefined, undefined, {"Content-Type": undefined});
+
+            return $http({
+                method: "POST",
+                url: window.config.paths.server + "/" + resource + "/arquivo?idDocumento=" + arquivo.identificadorDocumento,
+                headers: {
+                    'Content-Type': undefined
+                },
+                data: arquivo.arquivo
+            });
         }
 
+        /**
+         * ------
+         * buscar
+         * ------
+         */
         function buscar(idArquivo) {
-            return Restangular.one(resource + "/arquivo/" + idArquivo).get();
+
+            window.URL = window.URL || window.webkitURL;
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', Restangular.one(resource + "/arquivo/", idArquivo)
+                .getRestangularUrl(), true);
+
+            xhr.responseType = 'blob';
+
+            xhr.onload = function(e) {
+                if (this.status == 200) {
+                    var blob = this.response;
+                    var url  = window.URL.createObjectURL(blob);
+                    window.open(url);
+                }
+            };
+
+            xhr.send();
         }
 
         function remover(idArquivo) {
             return Restangular.one(resource + "/arquivo/", idArquivo).remove();
-        }
-
-        function _setFileTypeHeader() {
-            return {
-                "Content-Type": undefined
-            }
-        }
-
-        function download(idArquivo) {
-            $http.get(resource + "/arquivo/" + idArquivo, {
-                responseType: "arraybuffer"
-            }).then(function(response) {
-                console.log(response);
-                return response;
-            }).catch(function(err) {
-                console.log(err);
-            });
         }
     }
 }

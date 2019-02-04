@@ -56,9 +56,6 @@ module.exports = function(module) {
         }
         
         function recuperarPagamentos(guidPedido) {
-            console.log('----------------------');
-            console.log("recuperando pagamentos");
-            console.log('----------------------');
             return Restangular.all(getResource() + "/recuperarpagamentos/" + guidPedido);
         }
 

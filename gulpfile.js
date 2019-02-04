@@ -15,4 +15,4 @@ require('./gulp/browserify-vendor');
 require('./gulp/html');
 require('./gulp/watch');
 require('./gulp/config');
-require('./gulp/modulos')
+require('./gulp/modulos');

@@ -17,7 +17,6 @@ module.exports = function(module) {
         vm.confimarPagamento            = confimarPagamento;
         vm.removerComprovante           = removerComprovante;
         vm.verificaIdentificador        = verificaIdentificador;
-        vm.teste                        = teste;
 
         vm.pagamento                    = {};
         vm.comprovante                  = {};
@@ -54,33 +53,17 @@ module.exports = function(module) {
         }
 
         function confimarPagamento() {
-            AcordoResource.informarDocumento().withHttpConfig({transformRequest: angular.identity})
-                .customPOST(vm.comprovante.arquivo, undefined, undefined, {'Content-Type': undefined})
-                .then(function (response) {
-                    if(response.status == 200) {
-                        //recuperar os pag para atualizar a lista de pag
-                        growl.success("Pagamento confirmado com sucesso!");
-                        $uibModalInstance.close(true);
-                    } else {
-                        if(response.data != undefined) {
-                            growl.error(response.data.message.message);
-                        }else {
-                            growl.error(response.statusText);
-                        }
-                    }
-                })
-                .catch(function (erro) {
-                    growl.error(erro.data.message);
-                });
 
             // Salvando arquivo de comprovante na base
-            ArquivoResource.salvar(vm.comprovante.arquivo)
+            ArquivoResource.salvar(vm.comprovante)
                 .then(function(response) {
-                    console.log(response);
+                    growl.success("Arquivo " + vm.comprovante.nomeArquivo + " enviado com sucesso.");
                 })
                 .catch(function(err) {
-                    console.log(err);
+                    growl.error("Erro ao enviar arquivo " + vm.comprovante.nomeArquivo);
                 });
+
+            fecharModalPagamento();
         }
 
         /**
@@ -93,6 +76,7 @@ module.exports = function(module) {
         }
 
         function adicionarArquivo(element) {
+
             var identificadorDocumento = vm.comprovante.identificadorDocumento;
             if(identificadorDocumento == undefined || identificadorDocumento == null || identificadorDocumento == '') {
                 growl.warning("Informe o identificador do arquivo.");
@@ -142,22 +126,6 @@ module.exports = function(module) {
         function removerComprovante() {
             vm.exibirComprovantePagamento = false;
             vm.comprovante = {};
-        }
-
-        function teste() {
-            // ArquivoResource.buscar(1)
-            //     .then(function(response) {
-            //         var file = new Blob([response.data], { type: 'application/pdf' });
-            //         var url = (window.URL || window.webkitURL).createObjectURL(file);
-            //         console.log(url);
-            //     })
-            //     .catch(function(err) {
-            //         console.log(err)
-            //     });
-
-            ArquivoResource.download(62);
-
-            ArquivoResource.buscar(62);
         }
     }
 }
