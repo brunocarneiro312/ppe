@@ -1409,11 +1409,10 @@
 														<td>{{pagamento.dsObservacaoPagamento}}</td>
 														<td>{{pagamento.dtPagamento | date: 'dd/MM/yyyy' }}</td>
 														<td>
-
 															<button type="button"
 																	class="btn btn-primary btn-sm"
 																	title="Informar comprovante"
-																	ng-click="vm.abrirModalPagamento(pagamento)"
+																	ng-click="vm.abrirModalPagamento(pagamento, vm.pedido.cdPedidoHabilitacao)"
 															 		ng-if="pagamento.stPagamento == 2">
 
 																<i class="fa fa-usd"></i>

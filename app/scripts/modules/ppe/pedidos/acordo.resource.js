@@ -52,7 +52,7 @@ module.exports = function(module) {
         }
 
         function negar() {
-            return Restangular.all(getResource() + "/negar");
+            return Restangular.all(getResource() + "/negarAnalisePedido");
         }
         
         function recuperarPagamentos(guidPedido) {

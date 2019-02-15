@@ -45,6 +45,9 @@ module.exports = function(module) {
 
         function init() {
             vm.pagamento = items.pagamento;
+
+            var pagamento = Util.getObjeto("pagamento");
+            var guidPedido = Util.getObjeto("guidPedido");
         }
         init();
 

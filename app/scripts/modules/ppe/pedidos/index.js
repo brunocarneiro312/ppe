@@ -10,5 +10,16 @@ module.exports = function(module) {
     require('./aprovar-pedidos-com-ressalva')(module);
     require('./negar-pedido')(module);
 
+    // Resources
+    require('./resource/pedido.resource')(module);
+    require('./resource/analise-pedido.resource')(module);
+
+    // Services
+    require('./service/pedido.service')(module);
+    require('./service/analise-pedido.service')(module);
+
+    // Controllers
+    require('./controller/pedido.controller')(module);
+
 
 }

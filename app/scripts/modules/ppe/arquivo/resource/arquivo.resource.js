@@ -23,6 +23,10 @@ module.exports = function(module) {
 
         function salvar(arquivo) {
 
+            console.log("-----");
+            console.log(arquivo);
+            console.log("-----");
+
             return $http({
                 method: "POST",
                 url: window.config.paths.server + "/" + resource + "/arquivo?idDocumento=" + arquivo.identificadorDocumento,

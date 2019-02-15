@@ -1,0 +1,1148 @@
+<style>
+    .banner {
+        font-weight: bold;
+        font-size: 2.2em;
+        padding: 0;
+    }
+    .steelblue {
+        color: #2e6e9e;
+    }
+    .conter-wrapper {
+        padding: 50px;
+    }
+    .custom-hr {
+        background-color: #2e6e9e;
+        padding: 2px 0;
+        margin: 0 0 10px 0;
+    }
+    .custom-hr-gray {
+        background-color: #ddd;
+        padding: 1px 0;
+        margin: 0 0 10px 0;
+    }
+    .custom-section {
+        margin: 30px 0;
+    }
+    .font-big {
+        font-size: 1.3em;
+    }
+    .font-regular {
+        font-size: 1.1em;
+    }
+    .vt-spacer-xs {
+        padding-bottom: 5px;
+    }
+    .vt-spacer-sm {
+        padding-bottom: 10px;
+    }
+    .vt-spacer {
+        padding-bottom: 25px;
+    }
+    table thead tr th {
+
+    }
+    .background-banner {
+        background: rgb(197, 239, 247);
+        border: 1px dotted #2e6e9e;
+        padding: 5px 15px;
+        margin: 10px 0 20px 0;
+    }
+    .form-div {
+        background: white;
+        border: 1px solid #ddd;
+        padding-bottom: 25px;
+        box-shadow: 0 1px 3px #ddd;
+    }
+    .bar-right {
+        border-right: 1px solid #ddd;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        border-radius: 0 !important;
+        box-shadow: 0 1px 1px #ddd;
+    }
+    .btn {
+        border-radius: 0;
+    }
+    ul.nav.nav-tabs {
+        border-bottom: 0 !important;
+    }
+    .nav.nav-tabs li a:hover {
+        border-bottom: 0;
+    }
+    .nav.nav-tabs li.active a {
+        border-radius: 0;
+        background: rgb(197, 239, 247);
+        border: 1px dotted #2e6e9e;
+        color: #2e6e9e;
+    }
+    .indianred {
+        color: indianred;
+    }
+    .green {
+        color: #327245;
+    }
+    .bold {
+        font-weight: bold;
+    }
+    .hr-style {
+        background: #ddd;
+        padding: 1px 0;
+    }
+    .bg-lime {
+        background: lime;
+    }
+    .bg-indianred {
+        background: indianred;
+    }
+    .bg-orange {
+        background: orange;
+    }
+    .box {
+        padding: 15px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 2px 1px #ddd;
+        background: #f5f5f5;
+    }
+    .box label {
+        color: steelblue;
+    }
+    .box .form-control {
+        border-radius: 0;
+        box-shadow: inset 1px 2px 1px #ddd;
+    }
+    .box textarea {
+        resize: none;
+    }
+    .modalidade-aprovar {
+        color: green;
+    }
+    .modalidade-ressalva {
+        color: orangered;
+    }
+    .modalidade-negar {
+        color: firebrick;
+    }
+    .div-radio {
+        padding: 2.5px;
+    }
+</style>
+<div class="conter-wrapper">
+
+    <span class="banner steelblue">
+        Pedidos
+    </span>
+    <hr class="custom-hr"/>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-class="vm.getTabClass('pedidos')">
+            <a href=""><i class="fa fa-search fa-fw"></i> Consultar pedidos</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('detalhes')">
+            <a href=""><i class="fa fa-edit"></i> Detalhes do pedido</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('processo')">
+            <a href=""><i class="fa fa-folder-open-o"></i> Detalhes do processo</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('dadosbancarios')">
+            <a href=""><i class="fa fa-bank"></i> Dados bancários</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('documentos')">
+            <a href=""><i class="fa fa-id-card-o"></i> Documentos</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('proposta')">
+            <a href=""><i class="fa fa-handshake-o"></i> Proposta</a>
+        </li>
+        <li role="presentation" ng-class="vm.getTabClass('pagamentos')">
+            <a href=""><i class="fa fa-dollar"></i> Pagamentos</a>
+        </li>
+    </ul>
+    <div class="custom-section">
+        <!--<div class="font-big vt-spacer-xs">-->
+            <!--{{ vm.activeTab }}-->
+        <!--</div>-->
+
+        <!-- ------- -->
+        <!-- Pedidos -->
+        <!-- ------- -->
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'pedidos'">
+            <form>
+                <div class="row" style="padding: 0 25px">
+                    <div class="col-md-12" style="margin:25px 0">
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Filtro de Pesquisa
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="input-guid-pedido">Guid Pedido:</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="input-guid-pedido"
+                                       mask="guid"
+                                       placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+                                       ng-model="vm.pedido.guidPedido"
+                                       autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input-protocolo">Protocolo:</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="input-protocolo"
+                                       ng-model="vm.pedido.protocolo"
+                                       mask="protocolo"
+                                       placeholder="XXX-XXX-XXXXXXXX-XXXXXXXX"
+                                       autocomplete="off">
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="input-data-cadastro">Data de Cadastro:</label>
+                                <input type="date"
+                                       mask="data"
+                                       class="form-control"
+                                       id="input-data-cadastro"
+                                       ng-model="vm.pedido.dateCadastro"
+                                       autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="select-status">Status:</label>
+                                <select class="form-control" id="select-status" ng-model="vm.pedido.status"
+                                        ng-options="t.descricao as t.descricao for t in vm.listaStatusPedido">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="input-situacao">Situação:</label>
+                                <select class="form-control"
+                                        id="input-situacao"
+                                        ng-model="vm.pedido.situacaoInternaPedido"
+                                        ng-options="t.id as t.descricao for t in vm.listaSituacao">
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-cpf">CPF do Poupador:</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="input-cpf"
+                                       ng-model="vm.pedido.cpfPoupador"
+                                       mask="cpf"
+                                       placeholder="999.999.999-99"
+                                       autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group text-right">
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg"
+                                    style="margin: 10px 0"
+                                    ng-click="vm.consultar()">
+                                Consultar <i class="fa fa-search fa-fw"></i>
+                            </button>
+                            &nbsp;
+                            <button class="btn btn-default btn-lg"
+                                    style="margin:10px 0"
+                                    ng-click="vm.limpar()">
+                                Limpar <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <table ng-show="vm.listaPedidos.length > 0" ng-table="vm.tabelaPedidos" class="table table-default table-hover table-condensed table-bordered table-striped">
+                            <tr ng-repeat="pedido in $data" class="text-center">
+                                <td data-title="'GUID'" sortable="'cdPedidoHabilitacao'">
+                                    <a href="" ng-click="vm.consultarPorGuid(pedido.cdPedidoHabilitacao)">
+                                        {{ pedido.cdPedidoHabilitacao }}
+                                    </a>
+                                </td>
+                                <td data-title="'Protocolo'" sortable="'protocolo'">{{ pedido.protocolo }}</td>
+                                <td data-title="'Data Abertura'" sortable="'dataAbertura'">{{ pedido.dataAbertura | date: 'dd/MM/yyyy' }}</td>
+                                <td data-title="'Nome'" sortable="'poupadorDTO.noPessoa'">{{ pedido.poupadorDTO.noPessoa }}</td>
+                                <td data-title="'CPF'" sortable="'poupadorDTO.nrCpfPessoa'">{{ pedido.poupadorDTO.nrCpfPessoa }}</td>
+                                <td data-title="'Status'" sortable="'statusPedido.descricao'">{{ pedido.statusPedido.descricao }}</td>
+                                <td data-title="'Situação'" sortable="'situacaoPedidoHabilitacao.descricao'">{{ pedido.situacaoInternaPedido.descricao || '-' }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="text-right" style="font-weight: bold; padding-right: 15px">
+                            <span ng-if="vm.listaPedidos.length > 0">Quantidade de pedidos recuperados: {{ vm.listaPedidos.length }}</span>
+                            <span ng-if="vm.listaPedidos.length == 0">&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- -------- -->
+        <!-- Detalhes -->
+        <!-- -------- -->
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'detalhes'">
+            <form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-9 col-offset-3 text-right">
+                            <button class="btn btn-primary btn-lg" ng-click="vm.pedidosView()" style="margin-left: 25px; margin-top: 25px">
+                                <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                            </button>
+                            <button class="btn btn-success btn-lg" ng-click="vm.processoView()" style="margin-right: 25px; margin-top: 25px">
+                                Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding: 0 25px">
+                    <div class="col-md-12" style="margin: 25px 0">
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Detalhes do pedido: <span class="green">{{ vm.pedidoSelecionado.cdPedidoHabilitacao }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4 col-sm-6">
+                            <div style="border: 1px solid #ddd; padding: 15px">
+                                <table class="table table-default table-condensed table-hover">
+                                    <thead>
+                                        <!-- --------------- -->
+                                        <!-- Dados do Pedido -->
+                                        <!-- --------------- -->
+                                        <tr>
+                                            <th colspan="2"><i class="fa fa-edit fa-fw"></i> Dados do Pedido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Protocolo</td>
+                                            <td>{{ vm.pedidoSelecionado.protocolo }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Identificador</td>
+                                            <td>{{ vm.pedidoSelecionado.cdLoteHabilitacao }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Data de leitura do banco</td>
+                                            <td>{{ vm.pedidoSelecionado.dataAbertura | date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Data de Abertura</td>
+                                            <td>{{ vm.pedidoSelecionado.dataConfirmacaoLeituraBanco | date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status do pedido</td>
+                                            <td>{{ vm.pedidoSelecionado.statusPedido.descricao }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Valor custas processuais</td>
+                                            <td>{{ vm.pedidoSelecionado.valorCustasProcessuais }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Valor total simulado</td>
+                                            <td>{{ vm.pedidoSelecionado.valorTotalSimulado }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Destinatário do pagamento</td>
+                                            <td>{{ vm.pedidoSelecionado.destinatarioPagamentoAcordo }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Situação do pedido</td>
+                                            <td>{{ vm.pedidoSelecionado.descricao }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div style="border: 1px solid #ddd; padding: 15px">
+                                <table class="table table-default table-condensed table-hover">
+                                    <thead>
+                                    <tr>
+                                        <!-- ----------------- -->
+                                        <!-- Dados do poupador -->
+                                        <!-- ----------------- -->
+                                        <th colspan="2"><i class="fa fa-user-circle-o fa-fw"></i> Dados do Poupador</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Nome</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.noPessoa }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>CPF</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.nrCpfPessoa }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Data de Nascimento</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.envolvido.dtNascimento | date: 'dd/MM/yyyy' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Identidade</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.nrIdentidade }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>UF</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.sgUfIdentidade }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tipo</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.tipoDocumento.descricao }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Órgão</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.sgOrgaoEmissor }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Classificação</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.tipoDocumento.descricao }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Validade</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.identidade.validade }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Falecido</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.envolvido.descricaoFalecido }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div style="border: 1px solid #ddd; padding: 15px">
+                                <table class="table table-default table-condensed table-hover">
+                                    <thead>
+                                    <tr>
+                                        <!-- -------- -->
+                                        <!-- Contatos -->
+                                        <!-- -------- -->
+                                        <th colspan="2"><i class="fa fa-phone fa-fw"></i> Contatos</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.contatos[0].tipoContato.descricao }}</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.contatos[0].dsContato }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.contatos[1].tipoContato.descricao }}</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.contatos[1].dsContato }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="border: 1px solid #ddd; padding: 15px; margin: 25px 0">
+                                <table class="table table-default table-condensed table-hover">
+                                    <thead>
+                                    <tr>
+                                        <!-- -------- -->
+                                        <!-- Endereço -->
+                                        <!-- -------- -->
+                                        <th colspan="2"><i class="fa fa-home fa-fw"></i> Endereço</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>CEP</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.nrCep }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>UF</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.sgUf }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cidade</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.noCidade }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bairro</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.dsBairro }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Logradouro</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.logradouro }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Complemento</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.dsComplemento }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Número</td>
+                                            <td>{{ vm.pedidoSelecionado.poupadorDTO.endereco.dsNumeroEndereco }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="border: 1px solid #ddd; padding: 15px; margin: 25px 0">
+                                <table class="table table-default table-condensed table-hover">
+                                    <thead>
+                                    <tr>
+                                        <!-- ---------- -->
+                                        <!-- Envolvidos -->
+                                        <!-- ---------- -->
+                                        <th colspan="2"><i class="fa fa-male fa-fw"></i> Dados dos Envolvidos</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <b class="indianred">Não existem envolvidos cadastrados</b>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'processo'">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary btn-lg" ng-click="vm.detalhesView()" style="margin-left: 25px; margin-top: 25px">
+                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                    </button>
+                    <button class="btn btn-success btn-lg" ng-click="vm.dadosBancariosView()" style="margin-right: 25px; margin-top: 25px">
+                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
+                    </button>
+                </div>
+                <div class="col-md-12" style="margin: 25px 0">
+                    <div class="col-md-12" >
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Dados do processo
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-default table-condensed table-condensed table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <!-- -------- -->
+                                    <!-- Processo -->
+                                    <!-- -------- -->
+                                    <th class="text-center">Nª processo</th>
+                                    <th class="text-center">Nª CNJ</th>
+                                    <th class="text-center">Nª processo antigo</th>
+                                    <th class="text-center">Id Legado</th>
+                                    <th class="text-center">Órgão</th>
+                                    <th class="text-center">Tipo de Ação</th>
+                                    <th class="text-center">Vara</th>
+                                    <th class="text-center">Comarca de Origem</th>
+                                    <th class="text-center">Data Ajuizamento</th>
+                                    <th class="text-center">Data Procuração</th>
+                                    <th class="text-center">UF Origem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="processo in vm.pedidoSelecionado.listaProcessos"
+                                ng-if="vm.pedidoSelecionado.listaProcessos.length > 0"
+                                class="text-center">
+
+                                <td>{{ processo.cdProcesso }}</td>
+                                <td>{{ processo.cdCnjProcesso }}</td>
+                                <td>{{ processo.cdProcessoAntigo }}</td>
+                                <td>{{ processo.cdProcessoSistemaLegado }}</td>
+                                <td>{{ processo.orgaoLegal.descricao }}</td>
+                                <td>{{ processo.tipoAcaoProcesso.descricao }}</td>
+                                <td>{{ processo.noVaraOrigemProcesso }}</td>
+                                <td>{{ processo.noComarcaOrigemProcesso }}</td>
+                                <td>{{ processo.dtAjuizamentoProcesso | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{ processo.dtProcuracaoProcesso | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{ processo.sgUfProcesso }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-12" style="margin: 25px 0">
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Dados do Patrono
+                        </div>
+                        <div>
+                            <table class="table table-default table-condensed table-condensed table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <!-- -------- -->
+                                        <!-- Processo -->
+                                        <!-- -------- -->
+                                        <th class="text-center">Nome</th>
+                                        <th class="text-center">CPF</th>
+                                        <th class="text-center">Qualificação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="vm.pedidoSelecionado.patrono">
+                                        <td>{{ vm.pedidoSelecionado.patrono.pessoa.noPessoa }}</td>
+                                        <td>{{ vm.pedidoSelecionado.patrono.pessoa.nrCpfPessoa }}</td>
+                                        <td>{{ vm.pedidoSelecionado.patrono.qualificacaoPatrono.descricao }}</td>
+                                    </tr>
+                                    <tr ng-if="!vm.pedidoSelecionado.patrono">
+                                        <td colspan="3"><b class="indianred">Não consta patrono registrado para o processo.</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'dadosbancarios'">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary btn-lg" ng-click="vm.processoView()" style="margin-left: 25px; margin-top: 25px">
+                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                    </button>
+                    <button class="btn btn-success btn-lg" ng-click="vm.documentosView()" style="margin-right: 25px; margin-top: 25px">
+                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
+                    </button>
+                </div>
+                <div class="col-md-12" style="margin: 25px 0">
+                    <div class="col-md-12" >
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Contas Cadastradas
+                        </div>
+                        <div>
+                            <table class="table table-default table-condensed table-condensed table-hover">
+                                <thead>
+                                <tr class="text-center">
+                                    <!-- --------->
+                                    <!-- Contas -->
+                                    <!-- --------->
+                                    <th class="text-center">Titular da Conta</th>
+                                    <th class="text-center">CPF/CNPJ</th>
+                                    <th class="text-center">Número do Banco</th>
+                                    <th class="text-center">Agência</th>
+                                    <th class="text-center">DV Agência</th>
+                                    <th class="text-center">Conta</th>
+                                    <th class="text-center">DV Conta</th>
+                                    <th class="text-center">Tipo da Conta</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="conta in vm.pedidoSelecionado.listaContas"
+                                    ng-if="vm.pedidoSelecionado.listaContas.length > 0"
+                                    class="text-center">
+                                    <td>{{ conta.pessoa.noPessoa }}</td>
+                                    <td>{{ conta.pessoa.nrCpfPessoa }}</td>
+                                    <td>{{ conta.nrBanco }}</td>
+                                    <td>{{ conta.cdAgencia }}</td>
+                                    <td>{{ conta.cdAgenciaDV }}</td>
+                                    <td>{{ conta.cdConta }}</td>
+                                    <td>{{ conta.cdContaDV }}</td>
+                                    <td>{{ conta.tpConta }}</td>
+                                </tr>
+                                <tr ng-if="vm.pedidoSelecionado.listaContas.length == 0">
+                                    <td colspan="8">
+                                        <b class="indianred">Não existem contas cadastradas</b>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12" >
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Contas Contempladas
+                        </div>
+                        <div>
+                            <table class="table table-default table-condensed table-condensed table-hover">
+                                <thead>
+                                <tr class="text-center">
+                                    <!-- ------------------- -->
+                                    <!-- Contas Contempladas -->
+                                    <!-- ------------------- -->
+                                    <th class="text-center">Titular da Conta</th>
+                                    <th class="text-center">CPF/CNPJ</th>
+                                    <th class="text-center">Número do Banco</th>
+                                    <th class="text-center">Conta</th>
+                                    <th class="text-center">DV Conta</th>
+                                    <th class="text-center">Agência</th>
+                                    <th class="text-center">DV Agência</th>
+                                    <th class="text-center">Plano Econômico</th>
+                                    <th class="text-center">Valor Simulado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="contaContemplada in vm.pedidoSelecionado.listaContasContempladas"
+                                        ng-if="vm.pedidoSelecionado.listaContasContempladas.length > 0"
+                                        class="text-center">
+
+                                        <td>{{ contaContemplada.conta.pessoa.noPessoa }}</td>
+                                        <td>{{ contaContemplada.conta.pessoa.nrCpfPessoa }}</td>
+                                        <td>{{ contaContemplada.conta.nrBanco }}</td>
+                                        <td>{{ contaContemplada.conta.cdConta }}</td>
+                                        <td>{{ contaContemplada.conta.cdContaDV }}</td>
+                                        <td>{{ contaContemplada.conta.cdAgencia }}</td>
+                                        <td>{{ contaContemplada.conta.cdAgenciaDV }}</td>
+                                        <td>{{ contaContemplada.planoEconomico.descricao }}</td>
+                                        <td>R$ {{ contaContemplada.vlSimuladoCalculado }}</td>
+                                    </tr>
+                                    <tr ng-if="vm.pedidoSelecionado.listaContasContempladas.length == 0">
+                                        <td colspan="8">
+                                            <b class="indianred">Não existem contas contempladas</b>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'documentos'">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary btn-lg" ng-click="vm.dadosBancariosView()" style="margin-left: 25px; margin-top: 25px">
+                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                    </button>
+                    <button class="btn btn-success btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px">
+                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
+                    </button>
+                </div>
+                <div class="col-md-12" style="margin: 25px 0">
+                    <div class="col-md-12" >
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Documentos
+                        </div>
+                        <div style="border: 1px solid #ddd; padding: 15px">
+                            <table class="table table-default table-condensed table-condensed table-hover">
+                                <thead>
+                                    <tr class="text-center">
+                                        <!-- ---------- -->
+                                        <!-- Documentos -->
+                                        <!-- ---------- -->
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Nome</th>
+                                        <th class="text-center">Tipo</th>
+                                        <th class="text-center">Contexto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="documento in vm.pedidoSelecionado.listaDocumentos"
+                                        ng-if="vm.pedidoSelecionado.listaDocumentos.length > 0"
+                                        class="text-center">
+
+                                        <td>{{ documento.cdDocumento }}</td>
+                                        <td>{{ documento.contextoDocumento.descricao }}</td>
+                                        <td>{{ documento.contextoDocumento.id }}</td>
+                                        <td>
+                                            <button type="button"
+                                                    class="btn btn-primary btn-rounded ng-scope ng-isolate-scope"
+                                                    title="Download"
+                                                    data-ng-click="vm.downloadArquivo(vm.pedidoSelecionado.cdPedidoHabilitacao, documento.cdDocumento)">
+                                                <span class="fa fa-download" />
+                                        </td>
+
+                                    </tr>
+                                <tr ng-if="vm.pedidoSelecionado.listaDocumentos.length == 0">
+                                    <td colspan="8">
+                                        <b class="indianred">Não existem documentos cadastrados</b>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'proposta'">
+            <form name="form-proposta">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary btn-lg" ng-click="vm.documentosView()" style="margin-left: 25px; margin-top: 25px;">
+                            <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                        </button>
+                        <button class="btn btn-success btn-lg" ng-click="vm.pagamentosView()" style="margin-right: 25px; margin-top: 25px;">
+                            Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-12" style="margin: 25px 0">
+                        <div class="col-md-12" ng-if="vm.pedidoHabilitacao">
+                            <div class="font-regular vt-spacer-sm background-banner">
+                                O pedido já possui uma proposta de acordo cadastrada.
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-if="!vm.pedidoHabilitacao">
+                            <div class="font-regular vt-spacer-sm background-banner">
+                                Cadastrar proposta de acordo
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-if="vm.pedidoHabilitacao">
+                            <table class="table table-default text-center">
+                                <thead>
+                                <tr>
+                                    <th colspan="4" style="color: cornflowerblue; font-size: 1.2em">Dados do pedido de habilitação</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Data da análise</th>
+                                    <th class="text-center">Resultado da análise</th>
+                                    <th class="text-center">Status do pedido</th>
+                                    <th class="text-center">Situação interna do pedido</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ vm.pedidoHabilitacao.dtConclusaoAnalise | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ vm.pedidoHabilitacao.resultadoAnalise.descricao }}</td>
+                                    <td>{{ vm.pedidoHabilitacao.pedidoHabilitacao.statusPedido.descricao }}</td>
+                                    <td>{{ vm.pedidoHabilitacao.pedidoHabilitacao.situacaoInternaPedido.descricao }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-default text-center">
+                                <thead>
+                                <tr>
+                                    <th colspan="4" style="color: cornflowerblue; font-size: 1.2em">Dados da proposta de acordo</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">Id da proposta</th>
+                                    <th class="text-center">Valor total</th>
+                                    <th class="text-center">Valor poupador</th>
+                                    <th class="text-center">Valor honorário</th>
+                                    <th class="text-center">Valor instituição</th>
+                                    <th class="text-center">Valor reembolso</th>
+                                    <th class="text-center">Qtd parcelas</th>
+                                    <th class="text-center">Dt aceite proposta</th>
+                                    <th class="text-center">Observações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{ vm.propostaAcordo.sqProposta }}</td>
+                                    <td>{{ vm.propostaAcordo.vlTotalProposta }}</td>
+                                    <td>{{ vm.propostaAcordo.vlPoupador }}</td>
+                                    <td>{{ vm.propostaAcordo.vlHonorarioPatrono }}</td>
+                                    <td>{{ vm.propostaAcordo.vlHonorarioIntituicao }}</td>
+                                    <td>{{ vm.propostaAcordo.vlReembolsoCusta }}</td>
+                                    <td>{{ vm.propostaAcordo.qtParcela }}</td>
+                                    <td>{{ vm.propostaAcordo.dtAceitePropota | date: 'dd/MM/yyyy' }}</td>
+                                    <td>{{ vm.propostaAcordo.dsObservacaoProposta }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12" ng-if="!vm.pedidoHabilitacao">
+                            <div class="col-md-3">
+                                <div class="form-group box">
+                                    <div class="div-radio">
+                                        <input type="radio"
+                                               name="modalidade"
+                                               id="radio-aprovar"
+                                               value="aprovar"
+                                               ng-change="vm.limparFormProposta(true)"
+                                               ng-model="vm.formPropostaActive" />
+
+                                        <label for="radio-aprovar" style="color: #50754b"><i class="fa fa-fw fa-check"></i> Aprovar</label>
+                                    </div>
+                                    <div class="div-radio">
+                                        <input type="radio"
+                                               name="modalidade"
+                                               id="radio-ressalva"
+                                               value="ressalva"
+                                               ng-change="vm.limparFormProposta(true)"
+                                               ng-model="vm.formPropostaActive" />
+
+                                        <label for="radio-ressalva" style="color: #c69323"><i class="fa fa-fw fa-exclamation-circle"></i> Aprovar com Ressalvas</label>
+                                    </div>
+                                    <div class="div-radio">
+                                        <input type="radio"
+                                               name="modalidade"
+                                               id="radio-negar"
+                                               value="negar"
+                                               ng-change="vm.limparFormProposta(true)"
+                                               ng-model="vm.formPropostaActive" />
+
+                                        <label for="radio-negar" style="color: #e06969"><i class="fa fa-fw fa-times"></i> Negar</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+
+                                <div class="row box" ng-style="vm.getFormStyle()">
+
+                                    <div class="col-md-12">
+                                        <!-- ------------------------------- -->
+                                        <!-- Aprovar / Aprovar com Ressalvar -->
+                                        <!-- ------------------------------- -->
+                                        <div ng-if="vm.formPropostaActive === 'aprovar' || vm.formPropostaActive === 'ressalva'">
+                                            <div class="col-md-4">
+
+                                                <!-- Id Proposta -->
+                                                <div class="form-group">
+                                                    <label for="input-identificador-proposta" ng-style="vm.getLabelStyle()">
+                                                        Id Proposta
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           ng-style="vm.getInputStyle()"
+                                                           name="identificadorProposta"
+                                                           id="input-identificador-proposta"
+                                                           ng-model="vm.propostaAcordo.proposta.identificadorPropostaBanco"
+                                                           mask="inteiro10"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Valor Total do Acordo -->
+                                                <div class="form-group">
+                                                    <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
+                                                        Valor Total do Acordo
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorTotalAcordo"
+                                                           id="input-valor-destinado-portador"
+                                                           ng-model="vm.propostaAcordo.proposta.valorTotalAcordo"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorTotalAcordo, 'input-valor-destinado-portador')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           maxlength="14"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Valor Destinado ao Portador -->
+                                                <div class="form-group">
+                                                    <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
+                                                        Valor Destinado ao Portador
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorDestinadoPortador"
+                                                           id="input-valor-total-acordo"
+                                                           ng-model="vm.propostaAcordo.proposta.valorDestinadoPortador"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorDestinadoPortador, 'input-valor-total-acordo')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           maxlength="14"
+                                                           autocomplete="off" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!-- Valor Honorário Advogado -->
+                                                <div class="form-group">
+                                                    <label for="input-identificador-proposta" ng-style="vm.getLabelStyle()">
+                                                        Valor Honorário Advogado
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorHonorarioPatrono"
+                                                           id="input-valor-honorario-patrono"
+                                                           maxlength="14"
+                                                           ng-model="vm.propostaAcordo.proposta.valorHonorarioPatrono"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorarioPatrono, 'input-valor-honorario-patrono')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Valor Total do Acordo -->
+                                                <div class="form-group">
+                                                    <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
+                                                        Valor Honorário Instituição
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorHonorarioInstituicao"
+                                                           id="input-valor-honorario-instituicao"
+                                                           maxlength="14"
+                                                           ng-model="vm.propostaAcordo.proposta.valorHonorarioInstituicao"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorarioInstituicao, 'input-valor-honorario-instituicao')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Valor Destinado ao Portador -->
+                                                <div class="form-group">
+                                                    <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
+                                                        Valor Reembolso Custas Processuais
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorReembolsoCustas"
+                                                           id="input-valor-reembolso-custas"
+                                                           ng-model="vm.propostaAcordo.proposta.valorReembolsoCustas"
+                                                           maxlength="14"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorReembolsoCustas, 'input-valor-reembolso-custas')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           autocomplete="off" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <!-- Id Proposta -->
+                                                <div class="form-group">
+                                                    <label for="input-identificador-proposta" ng-style="vm.getLabelStyle()">
+                                                        Quantidade de Parcelas
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="quantidadeParcelas"
+                                                           id="input-quantidade-parcelas"
+                                                           ng-model="vm.propostaAcordo.proposta.quantidadeParcelas"
+                                                           ng-style="vm.getInputStyle()"
+                                                           mask="inteiro4"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Valor da Parcela -->
+                                                <div class="form-group">
+                                                    <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
+                                                        Valor da Parcela
+                                                    </label>
+                                                    <input type="text"
+                                                           class="form-control"
+                                                           name="valorHonorarioInstituicao"
+                                                           id="input-valor-parcela"
+                                                           maxlength="14"
+                                                           ng-model="vm.propostaAcordo.proposta.valorParcela"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorParcela, 'input-valor-parcela')"
+                                                           ng-style="vm.getInputStyle()"
+                                                           autocomplete="off" />
+                                                </div>
+
+                                                <!-- Data da Primeira Parcela -->
+                                                <div class="form-group">
+                                                    <label for="input-data-primeira-parcela" ng-style="vm.getLabelStyle()">
+                                                        Data da Primeira Parcela
+                                                    </label>
+                                                    <input type="date"
+                                                           class="form-control"
+                                                           name="dataPrimeiraParcela"
+                                                           id="input-data-primeira-parcela"
+                                                           mask="data"
+                                                           ng-model="vm.propostaAcordo.proposta.dataPrimeiraParcela"
+                                                           ng-style="vm.getInputStyle()"
+                                                           autocomplete="off" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div ng-if="vm.formPropostaActive === 'aprovar' || vm.formPropostaActive === 'ressalva'" style="padding:15px">
+
+                                            <label for="textarea-proposta-observacoes" ng-style="vm.getLabelStyle()">
+                                                Observações
+                                            </label>
+                                            <textarea name="observacoes"
+                                                      id="textarea-proposta-observacoes"
+                                                      ng-model="vm.propostaAcordo.observacoes"
+                                                      cols="30"
+                                                      rows="5"
+                                                      maxlength="500"
+                                                      class="form-control"
+                                                      ng-style="vm.getInputStyle()"
+                                                      autocomplete="off">
+                                            </textarea>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <small>{{ 500 - vm.propostaAcordo.observacoes.length }} caracteres restantes</small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- ----- -->
+                                        <!-- Negar -->
+                                        <!-- ----- -->
+                                        <div ng-if="vm.formPropostaActive === 'negar'">
+                                            <div class="col-md-4">
+                                                <label for="select-motivo-recusa" ng-style="vm.getLabelStyle()">Motivo da recusa</label>
+                                                <select id="select-motivo-recusa"
+                                                        class="form-control"
+                                                        ng-model="vm.propostaAcordo.proposta.motivoRecusaPedido"
+                                                        ng-style="vm.getInputStyle()"
+                                                        ng-options="t.id as t.descricao for t in vm.listaMotivoRecusa">
+
+                                                    <option value="">-- Selecione --</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="select-submotivo-recusa" ng-style="vm.getLabelStyle()">Submotivo da recusa</label>
+                                                <select id="select-submotivo-recusa"
+                                                        class="form-control"
+                                                        ng-model="vm.propostaAcordo.proposta.subMotivoRecusa"
+                                                        ng-style="vm.getInputStyle()"
+                                                        ng-options="t.descricao as t.descricao for t in vm.listaSubmotivoRecusa">
+
+                                                    <option value="">-- Selecione --</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="text-right"
+                                             ng-if="vm.formPropostaActive === 'aprovar'"
+                                             style="border-top: 1px dotted #ddd;
+                                             padding-top: 15px">
+
+                                            <button class="btn btn-default"
+                                                    ng-click="vm.limparFormProposta()">
+
+                                                Limpar <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                            <button class="btn btn-success"
+                                                    ng-click="vm.confirmarProposta()"
+                                                    ng-style="vm.getButtonStyle()">
+                                                Aprovar <i class="fa fa-check fa-fw"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="text-right"
+                                             ng-if="vm.formPropostaActive === 'ressalva'"
+                                             style="border-top: 1px dotted #ddd;
+                                             padding-top: 15px">
+
+                                            <button class="btn btn-default"
+                                                    ng-click="vm.limparFormProposta()">
+
+                                                Limpar <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                            <button class="btn btn-warning"
+                                                    ng-click="vm.confirmarProposta()"
+                                                    ng-style="vm.getButtonStyle()">
+                                                Aprovar com Ressalvas <i class="fa fa-exclamation-circle fa-fw"></i>
+                                            </button>
+                                        </div>
+
+                                        <div class="text-right"
+                                             ng-if="vm.formPropostaActive === 'negar'"
+                                             style="border-top: 1px dotted #ddd;
+                                             padding-top: 15px">
+
+                                            <button class="btn btn-default"
+                                                    ng-click="vm.limparFormProposta()">
+
+                                                Limpar <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                            <button class="btn btn-danger"
+                                                    ng-click="vm.negarProposta()"
+                                                    ng-style="vm.getButtonStyle()">
+                                                Negar Proposta <i class="fa fa-times fa-fw"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'pagamentos'">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px;">
+                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
+                    </button>
+                </div>
+                <div class="col-md-12" style="margin: 25px 0">
+                    <div class="col-md-12" >
+                        <div class="font-regular vt-spacer-sm background-banner">
+                            Pagamentos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -196,8 +196,8 @@ module.exports = function (module) {
          * Aprova pedido
          * =============
          */
-        function aprovar()
-        {
+        function aprovar() {
+
             vm.resultadoAnalisePedido.resultado = vm.modalidade == 'aprovar'
                 ? 'PROPOSTA_DE_ACORDO'
                 : 'PROPOSTA_DE_ACORDO_COM_VALOR_DIVERGENTE_SIMULADO';
@@ -220,19 +220,22 @@ module.exports = function (module) {
             /**
              * Verificando situação interna do pedido
              */
-            if (vm.modalidade.toLowerCase() === 'aprovar')
-            {
+            if (vm.modalidade.toLowerCase() === 'aprovar') {
                 vm.resultadoAnalisePedido.situacaoInterna = 1;
             }
 
-            if (vm.modalidade.toLowerCase() === 'aprovar-ressalva')
-            {
+            if (vm.modalidade.toLowerCase() === 'aprovar-ressalva') {
                 vm.resultadoAnalisePedido.situacaoInterna = 2;
             }
 
-            if (vm.resultadoAnalisePedido.proposta.datePrimeiraParcela)
-            {
+            if (vm.resultadoAnalisePedido.proposta.datePrimeiraParcela) {
                 vm.resultadoAnalisePedido.proposta.dataPrimeiraParcela = $filter('date')(new Date(vm.resultadoAnalisePedido.proposta.datePrimeiraParcela), 'dd/MM/yyyy');
+            }
+
+            // Validando se campos de valores
+            if (!_validarValoresInformados(proposta)) {
+                growl.error("Os valores informados extrapolam o valor total da proposta!");
+                return;
             }
 
             var dataAtual = new Date();
@@ -241,42 +244,56 @@ module.exports = function (module) {
             var dataComparada = new Date(vm.resultadoAnalisePedido.proposta.datePrimeiraParcela);
             dataComparada.setHours(0, 0, 0, 0);
 
-            if (dataAtual > dataComparada)
-            {
+            if (dataAtual > dataComparada) {
                 growl.error("A data da primeira parcela não pode ser menor que o dia de hoje!");
                 return;
             }
 
+            console.log('-----------------------');
+            console.log(vm.resultadoAnalisePedido);
+            console.log('-----------------------');
+
             // Seta status da variável de confirmação de pagamento
             AcordoResource.cadastrarResultadoAnalisePedido().post(vm.resultadoAnalisePedido)
-                .then(function (response)
-                {
-                    if (response.status == 200)
-                    {
+                .then(function (response) {
+
+                    if (response.status == 200) {
                         vm.isAcordoConfirmado         = true;
                         vm.exibirComprovantePagamento = false;
                         vm.bloquearCamposAcordo       = true;
 
                         growl.success("Acordo confirmado com sucesso!");
                     }
-                    else
-                    {
-                        if (response.data != undefined)
-                        {
+                    else {
+                        if (response.data != undefined) {
                             growl.error(response.data.message.message);
                         }
-                        else
-                        {
+                        else {
                             growl.error(response.statusText);
                         }
                     }
 
                     _listarPagamentos(vm.resultadoAnalisePedido.guidPedido);
                 })
-                .catch(function (erro)
-                {
+                .catch(function (erro) {
                     console.log(erro);
                 });
+        }
+
+        /**
+         * Valida se valores da proposta
+         */
+        function _validarValoresInformados(proposta) {
+
+            // Os valores informados não devem extrapolar o valor total da proposta
+            var valorTotalInformado = proposta.valorHonorariosAdvogado
+                + proposta.valorPoupador
+                + proposta.valorReembolsoCustas
+                + proposta.valorHonorariosFebrapo;
+
+            return valorTotalInformado > proposta.valorTotalAcordo
+                ? false
+                : true;
         }
 
         /**
@@ -303,31 +320,27 @@ module.exports = function (module) {
          * Nega pedido
          * ===========
          */
-        function negar()
-        {
+        function negar() {
+
             vm.resultadoAnalisePedido.resultado  = 'HABILITACAO_NEGADA'
             vm.resultadoAnalisePedido.gridPedido = vm.pedido.cdPedidoHabilitacao;
 
-            AcordoResource.negar().post(vm.resultadoAnalisePedido).then(function (response) {
-                if (response.status == 200)
-                {
-                    vm.bloquearCamposAcordo = true;
-                    growl.success("Acordo negado com sucesso!");
-                }
-                else
-                {
-                    if (response.data != undefined)
-                    {
-                        growl.error(response.data.message.message);
+            AcordoResource.negar().post(vm.resultadoAnalisePedido)
+                .then(function (response) {
+                    if (response.status == 200) {
+                        vm.bloquearCamposAcordo = true;
+                        growl.success("Acordo negado com sucesso!");
                     }
-                    else
-                    {
-                        growl.error(response.statusText);
+                    else {
+                        if (response.data != undefined) {
+                            growl.error(response.data.message.message);
+                        }
+                        else {
+                            growl.error(response.statusText);
+                        }
                     }
-                }
             })
-            .catch(function (erro)
-            {
+            .catch(function (erro) {
                 console.log(erro);
             });
         }
@@ -339,7 +352,7 @@ module.exports = function (module) {
         function adicionarPagamento()
         {
             vm.resultadoAnalisePedido.guidPedido     = vm.pedido.cdPedidoHabilitacao;
-            vm.resultadoAnalisePedido.valorPagamento = Util.stringToDouble(vm.resultadoAnalisePedido.valorPagamentoFormatado);
+            vm.resultadoAnalisePedido.valorPagamento = Util.formatarMonetario(Util.stringToDouble(vm.resultadoAnalisePedido.valorPagamentoFormatado));
 
             AcordoResource.adicionarPagamento().post(vm.resultadoAnalisePedido)
                 .then(function (response) {
@@ -389,8 +402,8 @@ module.exports = function (module) {
 
         }
 
-        function atualizarDadosPagamento()
-        {
+        function atualizarDadosPagamento() {
+
             AcordoResource.recuperarPagamentos(vm.resultadoAnalisePedido.guidPedido).getList().then(function (response) {
                 vm.pedido.listaPagamentos = response.data;
 
@@ -407,8 +420,8 @@ module.exports = function (module) {
             });
         }
 
-        function cancelarConfirmarPagamento()
-        {
+        function cancelarConfirmarPagamento() {
+
             // Removendo classe 'text-muted' nas labels do formulário de pagamento
             document.getElementById('label-identificador-proposta').classList.remove('text-muted');
             document.getElementById('label-valor-total-acordo').classList.remove('text-muted');
@@ -454,8 +467,8 @@ module.exports = function (module) {
             document.getElementById('input-pagamento-comprovante-nomearquivo').disabled = false;
         }
 
-        function confirmarPagamentoRessalvas()
-        {
+        function confirmarPagamentoRessalvas() {
+
             vm.resultadoAnalisePedido.resultado  = 'PROPOSTA_DE_ACORDO_COM_VALOR_DIVERGENTE_SIMULADO';
             vm.resultadoAnalisePedido.guidPedido = vm.pedido.cdPedidoHabilitacao;
 
@@ -475,35 +488,31 @@ module.exports = function (module) {
             // Seta status da variável de confirmação de pagamento
             AcordoResource.cadastrarResultadoAnalisePedido().post(vm.resultadoAnalisePedido)
                 .then(function (response) {
-                    if (response.status == 200)
-                    {
+                    if (response.status == 200) {
                         vm.isPagamentoRessalvasConfirmado = true;
                         vm.bloquearCamposRessalva         = true;
 
                         growl.success("Acordo confirmado com ressalvas!");
 
                     }
-                    else
-                    {
-                        if (response.data != undefined)
-                        {
+                    else {
+
+                        if (response.data != undefined) {
                             growl.error(response.data.message.message);
                         }
-                        else
-                        {
+                        else {
                             growl.error(response.statusText);
                         }
                     }
                 })
-                .catch(function (erro)
-                {
+                .catch(function (erro) {
                     console.log(erro);
                 });
 
         }
 
-        function cancelarConfirmarPagamentoRessalvas()
-        {
+        function cancelarConfirmarPagamentoRessalvas() {
+
             // Adicionando classe 'text-muted' aos labels
             document.getElementById("label-identificador-proposta-ressalvas").classList.remove('text-muted');
             document.getElementById("label-valor-total-acordo-ressalvas").classList.remove('text-muted');
@@ -531,20 +540,17 @@ module.exports = function (module) {
 
         }
 
-        function downloadArquivo(gridPedido, codigoArquivo)
-        {
-            PedidosResource.obterArquivo(gridPedido, codigoArquivo).get().then(function (response)
-            {
+        function downloadArquivo(gridPedido, codigoArquivo) {
+
+            PedidosResource.obterArquivo(gridPedido, codigoArquivo).get().then(function (response) {
                 Util.gerarBase64Arquivo(response.data.conteudo, 'application/pdf', response.data.nomeArquivo);
             })
-            .catch(function (erro)
-            {
+            .catch(function (erro) {
                 growl.error(erro.data.message);
             });
         }
 
-        function formatarJson()
-        {
+        function formatarJson() {
             return Util.formatJson(vm.resultadoAnalisePedido);
         }
 
@@ -553,22 +559,19 @@ module.exports = function (module) {
          * Cancela a modalidade escolhida
          * ==============================
          */
-        function cancelar()
-        {
+        function cancelar() {
             vm.modalidade             = undefined;
             vm.resultadoAnalisePedido = {};
         }
 
-        function verificarCamposInformados(obj)
-        {
+        function verificarCamposInformados(obj) {
             var hasNull = undefined;
 
-            if (typeof obj === 'object')
-            {
-                Object.keys(obj).forEach(function (attr)
-                {
-                    if (obj[attr])
-                    {
+            if (typeof obj === 'object') {
+
+                Object.keys(obj).forEach(function (attr) {
+
+                    if (obj[attr]) {
                         hasNull = true;
                     }
                 });
@@ -576,14 +579,13 @@ module.exports = function (module) {
             return true;
         }
 
-        function adicionarArquivoRessalva(element)
-        {
+        function adicionarArquivoRessalva(element) {
+
             var identificadorRacionalCalculo = vm.resultadoAnalisePedido.racionalDeCalculo != undefined
                 ? vm.resultadoAnalisePedido.racionalDeCalculo.identificadorRacionalCalculo
                 : undefined;
 
-            if (identificadorRacionalCalculo == undefined || identificadorRacionalCalculo == null || identificadorRacionalCalculo == '')
-            {
+            if (identificadorRacionalCalculo == undefined || identificadorRacionalCalculo == null || identificadorRacionalCalculo == '') {
                 growl.error("Informe o Identificador do Racional de Cálculo.");
                 return;
             }
@@ -592,8 +594,7 @@ module.exports = function (module) {
             var arquivo       = element.files[0];
             var tamanhoMaximo = 5242880;
 
-            if (arquivo.size > tamanhoMaximo)
-            {
+            if (arquivo.size > tamanhoMaximo) {
                 growl.warning("Tamanho máximo ultrapassado, o limite máximo de 5 MB.");
                 return;
             }
@@ -615,8 +616,7 @@ module.exports = function (module) {
             scope.$apply();
         }
 
-        function removerArquivoCalculo()
-        {
+        function removerArquivoCalculo() {
             vm.exibirArquivoCalculo                                                  = false;
             vm.resultadoAnalisePedido.comprovante                                    = {};
             vm.resultadoAnalisePedido.racionalDeCalculo.identificadorRacionalCalculo = '';
@@ -627,10 +627,12 @@ module.exports = function (module) {
          * abrirModalPagamento
          * -------------------
          */
-        function abrirModalPagamento(pagamento)
+        function abrirModalPagamento(pagamento, guidPedido)
         {
+            Util.setObjetos('pagamento', pagamento);
+            Util.setObjetos('guidPedido', guidPedido);
+
             var modalInstance = $uibModal.open({
-                // templateUrl: 'ppe/pedidos/aprovar-pedidos/views/modal-pagamento.html',
                 templateUrl: 'ppe/pedidos/aprovar-pedidos/views/comprovante.html',
                 controller: 'PagamentoController as vm',
                 size: 'xMd',

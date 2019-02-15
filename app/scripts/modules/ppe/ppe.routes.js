@@ -47,6 +47,18 @@ module.exports = function(module){
                 auth: false,
                 profile: profileAdm
             })
+            .state('home.consultarpedidosref', {
+                url: '/pedidos',
+                templateUrl: 'ppe/pedidos/view/index.html',
+                controller: 'PedidoController as vm',
+                parent: 'dashboard',
+                ncyBreadcrumb:{
+                    parent: 'home.consultarpedidos',
+                    label: 'Pedidos'
+                },
+                auth: false,
+                profile: profileAdm
+            })
             .state('home.obterpedidos',{
                 url: '/obter-pedidos',
                 parent: 'dashboard',

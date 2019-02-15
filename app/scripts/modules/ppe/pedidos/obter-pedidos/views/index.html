@@ -1,3 +1,17 @@
+<style>
+    .big-button {
+        font-size: 2.5em;
+        border-radius: 0;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -ms-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+    }
+    .big-button:hover {
+        box-shadow: 0 1px 2px 1px #4f8e45;
+    }
+</style>
 <div class="conter-wrapper">
 	<div class="container-fluid home-page">
 		<div class="row">
@@ -9,90 +23,15 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <!--<div class="alert alert-info">-->
-                                    <!--<i class="fa fa-info-circle fa-fw"></i>-->
-                                    <!--Informe os parâmetros abaixo para carregar os pedidos.-->
-                                    <!--<a href="" class="pull-right" style="color:white" ng-click="vm.exibirCriterioPesquisa()" ng-show="!vm.isCriterioPesquisa">-->
-                                       <!--Critérios de pesquisa-->
-                                       <!--<i class="fa fa-angle-right fa-fw"></i>                                       -->
-                                    <!--</a>-->
-                                    <!--<a href="" class="pull-right" style="color:white" ng-click="vm.ocultarCriterioPesquisa()" ng-show="vm.isCriterioPesquisa">-->
-                                        <!--Ocultar<i class="fa fa-angle-down fa-fw"></i>                                       -->
-                                    <!--</a>                                    -->
-                                    <!--<div ng-show="vm.isCriterioPesquisa">-->
-                                        <!--<br>-->
-                                        <!--<ul>-->
-                                            <!--<li> - Caso não seja informado parâmetro algum, será obtido todos os pedidos disponíveis.</li>                            -->
-                                            <!--<li> - Caso seja informado algum parâmetro, a consulta será feita com base nos parâmetros informados.</li>                          -->
-                                            <!--<li> - Caso não seja informada a <span style="color:firebrick;font-weight: bold">data de início</span> mas seja informada a <span style="color:green;font-weight: bold">data fim</span>, a consulta retornará os pedidos até a <u>data fim</u>.</li>-->
-                                            <!--<li> - Caso seja informada a <span style="color:green;font-weight: bold">data de início</span> mas não seja informada a <span style="color:firebrick;font-weight: bold">data fim</span>, a consulta retornará os pedidos até a <u>data vigente</u>.</li>-->
-                                            <!--<li> - Caso seja informada a quantidade a retornar, somente o número de pedidos especificados serão retornados ordenados de acordo com a consulta ao WS.</li>-->
-                                        <!--</ul>    -->
-                                    <!--</div>-->
-                                <!--</div>-->
                                 <form>
                                     <div class="col-md-12">
-                                        <!--<div class="col-md-6">-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="input-guid-pedido" id="label-guid-pedido">Guid Pedido:</label>-->
-                                                <!--<input type="text" -->
-                                                    <!--name="guid-pedido" -->
-                                                    <!--id="input-guid-pedido" -->
-                                                    <!--class="form-control"-->
-                                                    <!--mask="guid"-->
-                                                    <!--placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX (32 dígitos)"-->
-                                                    <!--ng-model="vm.obterPedidosRequest.guidPedido"-->
-                                                    <!--autocomplete="off">-->
-                                            <!--</div>-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="input-data-inicio" id="label-data-inicio">Data início:</label>-->
-                                                <!--<input type="date" -->
-                                                    <!--name="data-inicio" -->
-                                                    <!--id="input-data-inicio" -->
-                                                    <!--class="form-control"-->
-                                                    <!--mask="data"-->
-                                                    <!--ng-model="vm.obterPedidosRequest.dateInicio">-->
-                                            <!--</div>-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="input-qtd-retornar" id="label-qtd-retornar">Quantidade a retornar:</label>-->
-                                                <!--<input type="text" -->
-                                                        <!--mask="inteiro5"-->
-                                                        <!--style="width: 75px"-->
-                                                        <!--name="qtd-retornar" -->
-                                                        <!--id="input-qtd-retornar" -->
-                                                        <!--class="form-control"-->
-                                                        <!--ng-model="vm.obterPedidosRequest.quantidadeARetornar">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="col-md-6">-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="select-status-pedido" id="label-status-pedido">Status do Pedido:</label>-->
-                                                    <!--<select class="form-control" id="select-status" ng-model="vm.obterPedidosRequest.statusPedido"-->
-                                                        <!--ng-options="t.descricao as t.descricao for t in vm.listaStatusPedido">-->
-                                                    <!--<option value="">Selecione...</option>-->
-                                                <!--</select>-->
-                                            <!--</div>-->
-                                            <!--<div class="form-group">-->
-                                                <!--<label for="input-data-fim" id="label-data-fim">Data fim:</label>-->
-                                                <!--<input type="date"-->
-                                                    <!--name="data-fim" -->
-                                                    <!--id="input-data-fim" -->
-                                                    <!--class="form-control"-->
-                                                    <!--mask="data"-->
-                                                    <!--ng-model="vm.obterPedidosRequest.dateFim">-->
-                                            <!--</div>                                        -->
-                                        <!--</div>                                    -->
                                         <div class="col-md-12 text-center">
-                                            <button class="btn btn-primary" 
+                                            <button class="btn btn-success big-button"
                                                     style="margin-right:10px" 
                                                     ng-click="vm.obterPedidos()">
-                                                Carregar <i class="fa fa-arrow-down fa-fw"></i>
+
+                                                CARREGAR <i class="fa fa-download fa-fw"></i>
                                             </button>
-                                            <!--<button class="btn btn-default" -->
-                                                    <!--type="reset" -->
-                                                    <!--ng-click="vm.reset()">-->
-                                                <!--Limpar <i class="fa fa-times fa-fw"></i>-->
-                                            <!--</button>-->
                                         </div>
                                     </div>
                                 </form>

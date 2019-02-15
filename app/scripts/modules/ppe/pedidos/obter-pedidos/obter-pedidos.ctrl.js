@@ -36,10 +36,6 @@ module.exports = function(module) {
 
         function obterPedidos() {
 
-            console.log("-------------------------");
-            console.log(vm.obterPedidosRequest);
-            console.log("-------------------------");
-
             if (!Util.isUndefinedOuNull(vm.obterPedidosRequest.dateInicio) || !Util.isUndefinedOuNull(vm.obterPedidosRequest.dateFim)) {
                 //Valida de acordo com as regras de filtro de data do sistema
                 var isDatasValidas = Util.validaDatas(vm.obterPedidosRequest.dateInicio, vm.obterPedidosRequest.dateFim, growl);
@@ -52,11 +48,8 @@ module.exports = function(module) {
             vm.obterPedidosRequest.dataInicio = Util.dateToString(vm.obterPedidosRequest.dateInicio, 'dd/mm/yy');
             vm.obterPedidosRequest.dataFim    = Util.dateToString(vm.obterPedidosRequest.dateFim,    'dd/mm/yy');
 
-            console.log(vm.obterPedidosRequest);
-
             PedidosResource.obterPedidos().get(vm.obterPedidosRequest)
                 .then(function(response) {
-                    console.log(response);
                     if(response.status != 200) {
                         growl.error(response.data.message.message);
                     } else {
