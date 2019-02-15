@@ -156,10 +156,6 @@
         </li>
     </ul>
     <div class="custom-section">
-        <!--<div class="font-big vt-spacer-xs">-->
-            <!--{{ vm.activeTab }}-->
-        <!--</div>-->
-
         <!-- ------- -->
         <!-- Pedidos -->
         <!-- ------- -->
@@ -1044,30 +1040,63 @@
                                         <!-- Negar -->
                                         <!-- ----- -->
                                         <div ng-if="vm.formPropostaActive === 'negar'">
-                                            <div class="col-md-4">
-                                                <label for="select-motivo-recusa" ng-style="vm.getLabelStyle()">Motivo da recusa</label>
-                                                <select id="select-motivo-recusa"
-                                                        class="form-control"
-                                                        ng-model="vm.propostaAcordo.proposta.motivoRecusaPedido"
-                                                        ng-style="vm.getInputStyle()"
-                                                        ng-options="t.id as t.descricao for t in vm.listaMotivoRecusa">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="select-motivo-recusa" ng-style="vm.getLabelStyle()">Motivo da recusa</label>
+                                                            <select id="select-motivo-recusa"
+                                                                    class="form-control"
+                                                                    ng-model="vm.propostaAcordo.proposta.motivoRecusaPedido"
+                                                                    ng-style="vm.getInputStyle()"
+                                                                    ng-options="t.id as t.descricao for t in vm.listaMotivoRecusa">
 
-                                                    <option value="">-- Selecione --</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="select-submotivo-recusa" ng-style="vm.getLabelStyle()">Submotivo da recusa</label>
-                                                <select id="select-submotivo-recusa"
-                                                        class="form-control"
-                                                        ng-model="vm.propostaAcordo.proposta.subMotivoRecusa"
-                                                        ng-style="vm.getInputStyle()"
-                                                        ng-options="t.descricao as t.descricao for t in vm.listaSubmotivoRecusa">
+                                                                <option value="">-- Selecione --</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for="select-submotivo-recusa" ng-style="vm.getLabelStyle()">Submotivo da recusa</label>
+                                                            <select id="select-submotivo-recusa"
+                                                                    class="form-control"
+                                                                    ng-model="vm.propostaAcordo.proposta.subMotivoRecusa"
+                                                                    ng-style="vm.getInputStyle()"
+                                                                    ng-options="t.descricao as t.descricao for t in vm.listaSubmotivoRecusa">
 
-                                                    <option value="">-- Selecione --</option>
-                                                </select>
+                                                                <option value="">-- Selecione --</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label for="textarea-obervacoes-motivo-recusa" ng-style="vm.getLabelStyle()">Observações:</label>
+
+                                                            <!-- #textarea-observacoes-motivo-recusa-->
+                                                            <textarea name="observacoesMotivoRecusa"
+                                                                      id="textarea-obervacoes-motivo-recusa"
+                                                                      class="form-control"
+                                                                      cols="20"
+                                                                      rows="5"
+                                                                      style="resize: none"
+                                                                      ng-style="vm.getInputStyle()"
+                                                                      maxlength="500"
+                                                                      ng-model="vm.propostaAcordo.observacoes"
+                                                                      ng-required="true">
+                                                            </textarea>
+
+                                                            <div class="row">
+                                                                <div class="col-md-8">
+                                                                    <small>{{ 500 - vm.propostaAcordo.observacoes.length }} caracteres restantes</small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="col-md-12">
                                         <div class="text-right"

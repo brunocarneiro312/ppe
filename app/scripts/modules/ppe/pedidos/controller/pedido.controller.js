@@ -103,8 +103,8 @@ module.exports = function(module) {
             vm.listaSituacao = [];
 
             // Setando tab inicial
-            changeTab("proposta");
-            vm.activeTab = "proposta";
+            changeTab("pedidos");
+            vm.activeTab = "pedidos";
 
             // Setando formulário padrão
             vm.formPropostaActive = 'aprovar';
@@ -422,10 +422,6 @@ module.exports = function(module) {
                     vm.propostaAcordo.situacaoInterna = 2;
                 }
 
-                if (vm.formPropostaActive.toLowerCase() === 'negar') {
-                    vm.propostaAcordo.situacaoInterna = 3;
-                }
-
                 if (vm.propostaAcordo.proposta.dataPrimeiraParcela) {
                     vm.propostaAcordo.proposta.dataPrimeiraParcela = $filter('date')(new Date(vm.propostaAcordo.proposta.dataPrimeiraParcela), 'dd/MM/yyyy');
                 }
@@ -535,8 +531,35 @@ module.exports = function(module) {
          */
         function negarProposta() {
             if (confirm('deseja negar o acordo?')) {
-                vm.limparFormProposta(true);
 
+                vm.propostaAcordo.guidPedido = vm.pedidoSelecionado.cdPedidoHabilitacao;
+                vm.propostaAcordo.resultado  = 'HABILITACAO_NEGADA'
+                vm.propostaAcordo.situacaoInterna = 3;
+
+                AcordoResource.negar().post(vm.propostaAcordo)
+                    .then(function (response) {
+                        if (response.status == 200) {
+
+                            // Realiza novamente a consulta após salvar o acordo
+                            consultarPorGuid(vm.pedidoSelecionado.cdPedidoHabilitacao);
+
+                            growl.success("Acordo negado com sucesso!");
+                        }
+                        else {
+                            if (response.data != undefined) {
+                                growl.error(response.data.message.message);
+                            }
+                            else {
+                                growl.error(response.statusText);
+                            }
+                        }
+                    })
+                    .catch(function (erro) {
+                        console.log(erro);
+                    });
+
+
+                vm.limparFormProposta(true);
                 growl.success("Proposta negada com sucesso!");
             }
         }
@@ -782,17 +805,20 @@ module.exports = function(module) {
         function getInputStyle() {
             if (vm.formPropostaActive === 'aprovar') {
                 return {
-                    'border': '1px solid #a8bc96'
+                    'border': '1px solid #a8bc96',
+                    'background': '#e0efd0'
                 }
             }
             if (vm.formPropostaActive === 'ressalva') {
                 return {
-                    'border': '1px solid #d89d5d'
+                    'border': '1px solid #d89d5d',
+                    'background': '#efe0c9'
                 }
             }
             if (vm.formPropostaActive === 'negar') {
                 return {
-                    'border': '1px solid #e06969'
+                    'border': '1px solid #e06969',
+                    'background': '#fcecea'
                 }
             }
         }
@@ -817,7 +843,7 @@ module.exports = function(module) {
             }
             if (vm.formPropostaActive === 'negar') {
                 return {
-                    'background': 'firebrick',
+                    'background': '#b75d52',
                     'border': '1px solid #e06969'
                 }
             }
@@ -825,7 +851,7 @@ module.exports = function(module) {
 
         /**
          * -----------------
-         * getInputTextColor
+         * getLabelStyle
          * -----------------
          */
         function getLabelStyle() {
