@@ -22,7 +22,8 @@ module.exports = function(module) {
         return {
             listarPagamentos:                     listarPagamentos,
             listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
-            removerPagamento:                     removerPagamento
+            removerPagamento:                     removerPagamento,
+            verificarPagamentoDeParcela:          verificarPagamentoDeParcela
         }
 
         function getResource() {
@@ -40,5 +41,10 @@ module.exports = function(module) {
         function removerPagamento(sqPagamento) {
             return Restangular.one(getResource() + '/pagamento', sqPagamento).remove();
         }
+
+        function verificarPagamentoDeParcela(sqParcela) {
+            return Restangular.one(getResource() + '/parcelas/pagas/' + sqParcela).get();
+        }
+
     }
 }

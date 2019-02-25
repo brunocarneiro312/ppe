@@ -194,7 +194,7 @@ module.exports = function (module) {
         /**
          * =============
          * Aprova pedido
-         * =============
+         * ============
          */
         function aprovar() {
 
@@ -248,10 +248,6 @@ module.exports = function (module) {
                 growl.error("A data da primeira parcela não pode ser menor que o dia de hoje!");
                 return;
             }
-
-            console.log('-----------------------');
-            console.log(vm.resultadoAnalisePedido);
-            console.log('-----------------------');
 
             // Seta status da variável de confirmação de pagamento
             AcordoResource.cadastrarResultadoAnalisePedido().post(vm.resultadoAnalisePedido)

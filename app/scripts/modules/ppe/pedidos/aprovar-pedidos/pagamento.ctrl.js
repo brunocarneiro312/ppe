@@ -9,7 +9,8 @@ module.exports = function(module) {
                                  items,
                                  growl,
                                  AcordoResource,
-                                 ArquivoResource) {
+                                 ArquivoResource,
+                                 PagamentosResources) {
 
         var vm = this;
 
@@ -17,7 +18,6 @@ module.exports = function(module) {
         vm.confimarPagamento            = confimarPagamento;
         vm.removerComprovante           = removerComprovante;
         vm.verificaIdentificador        = verificaIdentificador;
-
         vm.pagamento                    = {};
         vm.comprovante                  = {};
         vm.exibirComprovantePagamento   = false;
@@ -45,7 +45,7 @@ module.exports = function(module) {
 
         function init() {
             vm.pagamento = items.pagamento;
-
+            vm.guid      = items.guidPedido;
             var pagamento = Util.getObjeto("pagamento");
             var guidPedido = Util.getObjeto("guidPedido");
         }
@@ -57,10 +57,41 @@ module.exports = function(module) {
 
         function confimarPagamento() {
 
+            vm.comprovante.guidPedido = Util.getObjeto("guidPedido");
+
             // Salvando arquivo de comprovante na base
             ArquivoResource.salvar(vm.comprovante)
                 .then(function(response) {
                     growl.success("Arquivo " + vm.comprovante.nomeArquivo + " enviado com sucesso.");
+
+                    var dataArray = vm.pagamento.dtVencimentoParcela.split('-');
+                    var dataFormatada = dataArray[2] + '/' + dataArray[1] + '/' + dataArray[0];
+
+                    var cdDocumento = response.data.resultado.cdDocumento;
+
+                    var pagamentoDaParcela = {
+                        'sqConta':            Util.getObjeto('sqConta'),
+                        'dataPagamento':      dataFormatada,
+                        'descricaoPagamento': 'pagamento da parcela de número ' + vm.pagamento.numeroOrdemParcela,
+                        'idDocumento':        vm.comprovante.identificadorDocumento,
+                        'idParcela':          vm.pagamento.sqParcelaProposta,
+                        'situacaoPagamento':  1,
+                        'valorPagamento':     vm.pagamento.vlParcelaProposta,
+                        'cdDocumento':        cdDocumento
+                    };
+
+                    // Gerando pagamento de parcela
+                    PagamentosResources.informarPagamento(pagamentoDaParcela)
+                        .then(function(response) {
+                            growl.success("Pagamento efetuado com sucesso");
+                            console.log(response.data);
+
+                        })
+                        .catch(function(err) {
+                            growl.error("Falha ao criar pagamento");
+                            console.log(err);
+                        });
+
                 })
                 .catch(function(err) {
                     growl.error("Erro ao enviar arquivo " + vm.comprovante.nomeArquivo);

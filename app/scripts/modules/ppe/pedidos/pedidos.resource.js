@@ -32,6 +32,7 @@ module.exports = function(module) {
             getResource:              getResource,
             consultarStatusPedido:    consultarStatusPedido,
             obterArquivo:             obterArquivo,
+            obterComprovante:         obterComprovante,
             obterPedidos:             obterPedidos,
             consultarMotivoRecusa:    consultarMotivoRecusa,
             consultarSubmotivoRecusa: consultarSubmotivoRecusa,
@@ -58,8 +59,8 @@ module.exports = function(module) {
             return Restangular.all('tabeladominio/statuspedido');
         }
 
-        function obterArquivo(gridPedido, codigoArquivo) {
-            return Restangular.one('documento/obterarquivo/'+ gridPedido +"/"+ codigoArquivo);
+        function obterArquivo(guidPedido, codigoArquivo) {
+            return Restangular.one('documento/obterarquivo/'+ guidPedido +"/"+ codigoArquivo);
         }
 
         function obterPedidos() {
@@ -76,6 +77,10 @@ module.exports = function(module) {
 
         function consultarSituacaoPedido() {
             return Restangular.all('tabeladominio/situacaopedido');
+        }
+
+        function obterComprovante(codigoComprovante) {
+            return Restangular.one('arquivos/arquivo/' + codigoComprovante);
         }
     }
 }

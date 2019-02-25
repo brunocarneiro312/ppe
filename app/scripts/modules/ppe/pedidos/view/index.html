@@ -125,34 +125,131 @@
     .div-radio {
         padding: 2.5px;
     }
+    .a-green {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #2e772b !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-muted {
+        color: #3d3d3d;
+    }
+    .a-green:hover {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #2e772b !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-green:focus {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #2e772b !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-green:active {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #2e772b !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .nav-tabs a:focus {
+        outline: 0;
+    }
+    .nav-tabs a {
+        border-radius: 0 !important
+    }
+    .form-log {
+        color: #877d42;
+        padding: 15px;
+        background: #fcea79;
+        border: 1px dashed #5b531f;
+    }
+    .form-log.warning {
+        color: #877d42;
+        padding: 15px;
+        background: #fcea79;
+        border: 1px dashed #5b531f;
+    }
+    .form-log.success {
+        color: white;
+        padding: 15px;
+        background: #5caf5b;
+        border: 1px dashed #316030;
+    }
+
+    .log-header {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+    }
+
+    .form-log.warning .log-header {
+    }
+    .form-log.success .log-header {
+        border-bottom: 1px solid #468444;
+    }
+    .div-acordo-aprovado {
+        font-size: 1.2em;
+        padding: 15px;
+        background-color: #b9ffaf;
+        border: 1px dashed #43a335;
+        color: #43a335;
+        text-align: center;
+    }
+    .div-acordo-negado {
+        font-size: 1.2em;
+        padding: 15px;
+        background-color: #f2d5d5;
+        border: 1px dashed #e06969;
+        color: #e06969;
+        text-align: center;
+    }
+    .div-acordo-ressalva {
+        font-size: 1.2em;
+        padding: 15px;
+        background-color: #ffe0bc;
+        border: 1px dashed #fc9928;
+        color: #c68233;
+        text-align: center;
+    }
+    .div-acordo-inexistente {
+        font-size: 1.2em;
+        padding: 15px;
+        margin: 25px;
+        background: #f5f5f5;
+        border: 1px dashed #ddd;
+        text-align: center;
+    }
 </style>
 <div class="conter-wrapper">
-
     <span class="banner steelblue">
         Pedidos
     </span>
     <hr class="custom-hr"/>
     <ul class="nav nav-tabs">
-        <li role="presentation" ng-class="vm.getTabClass('pedidos')">
-            <a href=""><i class="fa fa-search fa-fw"></i> Consultar pedidos</a>
+        <li role="presentation">
+            <a href="" ng-click="vm.pedidosView()" ng-class="vm.activeTab === 'pedidos' ? 'a-green' : ''"><i class="fa fa-search fa-fw"></i> Consultar</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('detalhes')">
-            <a href=""><i class="fa fa-edit"></i> Detalhes do pedido</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.detalhesView()" ng-class="vm.activeTab === 'detalhes' ? 'a-green' : ''"><i class="fa fa-edit"></i> Detalhes</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('processo')">
-            <a href=""><i class="fa fa-folder-open-o"></i> Detalhes do processo</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.processoView()" ng-class="vm.activeTab === 'processo' ? 'a-green' : ''"><i class="fa fa-folder-open-o"></i> Processo</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('dadosbancarios')">
-            <a href=""><i class="fa fa-bank"></i> Dados bancários</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.dadosBancariosView()" ng-class="vm.activeTab === 'dadosbancarios' ? 'a-green' : ''"><i class="fa fa-bank"></i> Dados bancários</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('documentos')">
-            <a href=""><i class="fa fa-id-card-o"></i> Documentos</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.documentosView()" ng-class="vm.activeTab === 'documentos' ? 'a-green' : ''"><i class="fa fa-id-card-o"></i> Documentos</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('proposta')">
-            <a href=""><i class="fa fa-handshake-o"></i> Proposta</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.propostaView()" ng-class="vm.activeTab === 'proposta' ? 'a-green' : ''"><i class="fa fa-handshake-o"></i> Proposta</a>
         </li>
-        <li role="presentation" ng-class="vm.getTabClass('pagamentos')">
-            <a href=""><i class="fa fa-dollar"></i> Pagamentos</a>
+        <li role="presentation" ng-class="vm.pedidoSelecionado ? '' : 'disabled'">
+            <a href="" ng-click="vm.pagamentosView()" ng-class="vm.activeTab === 'pagamentos' ? 'a-green' : ''"><i class="fa fa-dollar"></i> Pagamentos</a>
         </li>
     </ul>
     <div class="custom-section">
@@ -284,12 +381,12 @@
 
                         </div>
                         <div class="col-9 col-offset-3 text-right">
-                            <button class="btn btn-primary btn-lg" ng-click="vm.pedidosView()" style="margin-left: 25px; margin-top: 25px">
-                                <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                            </button>
-                            <button class="btn btn-success btn-lg" ng-click="vm.processoView()" style="margin-right: 25px; margin-top: 25px">
-                                Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
-                            </button>
+                            <!--<button class="btn btn-primary btn-lg" ng-click="vm.pedidosView()" style="margin-left: 25px; margin-top: 25px">-->
+                                <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                            <!--</button>-->
+                            <!--<button class="btn btn-success btn-lg" ng-click="vm.processoView()" style="margin-right: 25px; margin-top: 25px">-->
+                                <!--Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>-->
+                            <!--</button>-->
                         </div>
                     </div>
                 </div>
@@ -500,12 +597,12 @@
         <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'processo'">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-lg" ng-click="vm.detalhesView()" style="margin-left: 25px; margin-top: 25px">
-                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                    </button>
-                    <button class="btn btn-success btn-lg" ng-click="vm.dadosBancariosView()" style="margin-right: 25px; margin-top: 25px">
-                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
-                    </button>
+                    <!--<button class="btn btn-primary btn-lg" ng-click="vm.detalhesView()" style="margin-left: 25px; margin-top: 25px">-->
+                        <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                    <!--</button>-->
+                    <!--<button class="btn btn-success btn-lg" ng-click="vm.dadosBancariosView()" style="margin-right: 25px; margin-top: 25px">-->
+                        <!--Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>-->
+                    <!--</button>-->
                 </div>
                 <div class="col-md-12" style="margin: 25px 0">
                     <div class="col-md-12" >
@@ -590,12 +687,12 @@
         <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'dadosbancarios'">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-lg" ng-click="vm.processoView()" style="margin-left: 25px; margin-top: 25px">
-                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                    </button>
-                    <button class="btn btn-success btn-lg" ng-click="vm.documentosView()" style="margin-right: 25px; margin-top: 25px">
-                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
-                    </button>
+                    <!--<button class="btn btn-primary btn-lg" ng-click="vm.processoView()" style="margin-left: 25px; margin-top: 25px">-->
+                        <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                    <!--</button>-->
+                    <!--<button class="btn btn-success btn-lg" ng-click="vm.documentosView()" style="margin-right: 25px; margin-top: 25px">-->
+                        <!--Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>-->
+                    <!--</button>-->
                 </div>
                 <div class="col-md-12" style="margin: 25px 0">
                     <div class="col-md-12" >
@@ -693,12 +790,12 @@
         <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'documentos'">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-lg" ng-click="vm.dadosBancariosView()" style="margin-left: 25px; margin-top: 25px">
-                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                    </button>
-                    <button class="btn btn-success btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px">
-                        Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
-                    </button>
+                    <!--<button class="btn btn-primary btn-lg" ng-click="vm.dadosBancariosView()" style="margin-left: 25px; margin-top: 25px">-->
+                        <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                    <!--</button>-->
+                    <!--<button class="btn btn-success btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px">-->
+                        <!--Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>-->
+                    <!--</button>-->
                 </div>
                 <div class="col-md-12" style="margin: 25px 0">
                     <div class="col-md-12" >
@@ -748,15 +845,15 @@
             </div>
         </div>
         <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'proposta'">
-            <form name="form-proposta">
+            <form name="propostaForm">
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button class="btn btn-primary btn-lg" ng-click="vm.documentosView()" style="margin-left: 25px; margin-top: 25px;">
-                            <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                        </button>
-                        <button class="btn btn-success btn-lg" ng-click="vm.pagamentosView()" style="margin-right: 25px; margin-top: 25px;">
-                            Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>
-                        </button>
+                        <!--<button class="btn btn-primary btn-lg" ng-click="vm.documentosView()" style="margin-left: 25px; margin-top: 25px;">-->
+                            <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                        <!--</button>-->
+                        <!--<button class="btn btn-success btn-lg" ng-click="vm.pagamentosView()" style="margin-right: 25px; margin-top: 25px;">-->
+                            <!--Próximo <i class="fa fa-angle-double-right fa-lg fa-fw"></i>-->
+                        <!--</button>-->
                     </div>
                     <div class="col-md-12" style="margin: 25px 0">
                         <div class="col-md-12" ng-if="vm.pedidoHabilitacao">
@@ -823,43 +920,72 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-12" ng-if="!vm.pedidoHabilitacao">
-                            <div class="col-md-3">
-                                <div class="form-group box">
-                                    <div class="div-radio">
-                                        <input type="radio"
-                                               name="modalidade"
-                                               id="radio-aprovar"
-                                               value="aprovar"
-                                               ng-change="vm.limparFormProposta(true)"
-                                               ng-model="vm.formPropostaActive" />
+                        <div class="col-md-12" ng-if="!vm.pedidoHabilitacao && vm.pedidoSelecionado.statusPedido.descricao === 'ANALISE_DA_INSTITUICAO'">
+                            <div class="col-md-4">
+                                <div class="col-md-12">
 
-                                        <label for="radio-aprovar" style="color: #50754b"><i class="fa fa-fw fa-check"></i> Aprovar</label>
+                                    <div class="form-group box">
+                                        <div class="div-radio">
+                                            <input type="radio"
+                                                   name="modalidade"
+                                                   id="radio-aprovar"
+                                                   value="aprovar"
+                                                   ng-change="vm.limparFormProposta(true)"
+                                                   ng-model="vm.formPropostaActive" />
+
+                                            <label for="radio-aprovar" style="color: #50754b"><i class="fa fa-fw fa-check"></i> Aprovar</label>
+                                        </div>
+                                        <div class="div-radio">
+                                            <input type="radio"
+                                                   name="modalidade"
+                                                   id="radio-ressalva"
+                                                   value="ressalva"
+                                                   ng-change="vm.limparFormProposta(true)"
+                                                   ng-model="vm.formPropostaActive" />
+
+                                            <label for="radio-ressalva" style="color: #c69323"><i class="fa fa-fw fa-exclamation-circle"></i> Aprovar com Ressalvas</label>
+                                        </div>
+                                        <div class="div-radio">
+                                            <input type="radio"
+                                                   name="modalidade"
+                                                   id="radio-negar"
+                                                   value="negar"
+                                                   ng-change="vm.limparFormProposta(true)"
+                                                   ng-model="vm.formPropostaActive" />
+
+                                            <label for="radio-negar" style="color: #e06969"><i class="fa fa-fw fa-times"></i> Negar</label>
+                                        </div>
                                     </div>
-                                    <div class="div-radio">
-                                        <input type="radio"
-                                               name="modalidade"
-                                               id="radio-ressalva"
-                                               value="ressalva"
-                                               ng-change="vm.limparFormProposta(true)"
-                                               ng-model="vm.formPropostaActive" />
-
-                                        <label for="radio-ressalva" style="color: #c69323"><i class="fa fa-fw fa-exclamation-circle"></i> Aprovar com Ressalvas</label>
-                                    </div>
-                                    <div class="div-radio">
-                                        <input type="radio"
-                                               name="modalidade"
-                                               id="radio-negar"
-                                               value="negar"
-                                               ng-change="vm.limparFormProposta(true)"
-                                               ng-model="vm.formPropostaActive" />
-
-                                        <label for="radio-negar" style="color: #e06969"><i class="fa fa-fw fa-times"></i> Negar</label>
+                                    <div class="col-md-12" ng-style="vm.getFormStyle()" style="padding:15px">
+                                        <div class="log-header bold" ng-style="vm.getLabelStyle()">
+                                            Atenção <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                        </div>
+                                        <div ng-style="vm.getLabelStyle()" class="bold">
+                                            <p>Preencha todos os campos obrigatórios</p>
+                                        </div>
+                                        <div ng-style="vm.getLabelStyle()" class="bold">
+                                            <ul ng-if="vm.formPropostaActive === 'aprovar' || vm.formPropostaActive === 'ressalva'">
+                                                <li ng-style="vm.propostaAcordo.proposta.identificadorPropostaBanco ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.identificadorPropostaBanco"></i>Id da proposta</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorTotalAcordo           ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorTotalAcordo"></i>Valor total da proposta</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorPoupador              ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorPoupador"></i>Valor destinado ao portador</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorHonorariosAdvogado    ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorHonorariosAdvogado"></i>Valor dos honorários do advogado</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorHonorariosFebrapo     ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorHonorariosFebrapo"></i>Valor dos honorários da instituição</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorReembolsoCustas       ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorReembolsoCustas"></i>Valor de reembolso de custas processuais</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.quantidadeParcelas         ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.quantidadeParcelas"></i>Quantidade de parcelas</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.valorParcela               ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.valorParcela"></i>Valor das parcelas</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.dataPrimeiraParcela        ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.dataPrimeiraParcela"></i>Data da primeira parcela</li>
+                                                <li ng-style="vm.propostaAcordo.observacoes                         ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.observacoes"></i>Observações</li>
+                                            </ul>
+                                            <ul ng-if="vm.formPropostaActive === 'negar'">
+                                                <li ng-style="vm.propostaAcordo.motivoRecusaPedido    ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.motivoRecusaPedido"></i>Motivo da recusa</li>
+                                                <li ng-style="vm.propostaAcordo.proposta.subMotivoRecusa ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.proposta.subMotivoRecusa"></i>Submotivo da recusa</li>
+                                                <li ng-style="vm.propostaAcordo.observacoes                    ? {'text-decoration' : 'line-through'} : ''"><i class="fa fa-check fa-fw" ng-if="vm.propostaAcordo.observacoes"></i>Observações</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
-
+                            <div class="col-md-8">
                                 <div class="row box" ng-style="vm.getFormStyle()">
 
                                     <div class="col-md-12">
@@ -872,7 +998,7 @@
                                                 <!-- Id Proposta -->
                                                 <div class="form-group">
                                                     <label for="input-identificador-proposta" ng-style="vm.getLabelStyle()">
-                                                        Id Proposta
+                                                        Id
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
@@ -880,6 +1006,7 @@
                                                            name="identificadorProposta"
                                                            id="input-identificador-proposta"
                                                            ng-model="vm.propostaAcordo.proposta.identificadorPropostaBanco"
+                                                           ng-required="true"
                                                            mask="inteiro10"
                                                            autocomplete="off" />
                                                 </div>
@@ -887,7 +1014,7 @@
                                                 <!-- Valor Total do Acordo -->
                                                 <div class="form-group">
                                                     <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
-                                                        Valor Total do Acordo
+                                                        Valor Total
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
@@ -897,22 +1024,24 @@
                                                            ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorTotalAcordo, 'input-valor-destinado-portador')"
                                                            ng-style="vm.getInputStyle()"
                                                            maxlength="14"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
 
                                                 <!-- Valor Destinado ao Portador -->
                                                 <div class="form-group">
                                                     <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
-                                                        Valor Destinado ao Portador
+                                                        Valor Portador
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
                                                            name="valorDestinadoPortador"
                                                            id="input-valor-total-acordo"
-                                                           ng-model="vm.propostaAcordo.proposta.valorDestinadoPortador"
-                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorDestinadoPortador, 'input-valor-total-acordo')"
+                                                           ng-model="vm.propostaAcordo.proposta.valorPoupador"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorPoupador, 'input-valor-total-acordo')"
                                                            ng-style="vm.getInputStyle()"
                                                            maxlength="14"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
                                             </div>
@@ -920,39 +1049,41 @@
                                                 <!-- Valor Honorário Advogado -->
                                                 <div class="form-group">
                                                     <label for="input-identificador-proposta" ng-style="vm.getLabelStyle()">
-                                                        Valor Honorário Advogado
+                                                        Valor Advogado
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
                                                            name="valorHonorarioPatrono"
                                                            id="input-valor-honorario-patrono"
                                                            maxlength="14"
-                                                           ng-model="vm.propostaAcordo.proposta.valorHonorarioPatrono"
-                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorarioPatrono, 'input-valor-honorario-patrono')"
+                                                           ng-model="vm.propostaAcordo.proposta.valorHonorariosAdvogado"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorariosAdvogado, 'input-valor-honorario-patrono')"
                                                            ng-style="vm.getInputStyle()"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
 
                                                 <!-- Valor Total do Acordo -->
                                                 <div class="form-group">
                                                     <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
-                                                        Valor Honorário Instituição
+                                                        Valor Instituição
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
                                                            name="valorHonorarioInstituicao"
                                                            id="input-valor-honorario-instituicao"
                                                            maxlength="14"
-                                                           ng-model="vm.propostaAcordo.proposta.valorHonorarioInstituicao"
-                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorarioInstituicao, 'input-valor-honorario-instituicao')"
+                                                           ng-model="vm.propostaAcordo.proposta.valorHonorariosFebrapo"
+                                                           ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorHonorariosFebrapo, 'input-valor-honorario-instituicao')"
                                                            ng-style="vm.getInputStyle()"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
 
                                                 <!-- Valor Destinado ao Portador -->
                                                 <div class="form-group">
                                                     <label for="input-valor-total-acordo" ng-style="vm.getLabelStyle()">
-                                                        Valor Reembolso Custas Processuais
+                                                        Valor Reembolso
                                                     </label>
                                                     <input type="text"
                                                            class="form-control"
@@ -962,6 +1093,7 @@
                                                            maxlength="14"
                                                            ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorReembolsoCustas, 'input-valor-reembolso-custas')"
                                                            ng-style="vm.getInputStyle()"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
                                             </div>
@@ -978,6 +1110,7 @@
                                                            ng-model="vm.propostaAcordo.proposta.quantidadeParcelas"
                                                            ng-style="vm.getInputStyle()"
                                                            mask="inteiro4"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
 
@@ -994,13 +1127,14 @@
                                                            ng-model="vm.propostaAcordo.proposta.valorParcela"
                                                            ng-keyup="vm.getFormatoMonetario(vm.propostaAcordo.proposta.valorParcela, 'input-valor-parcela')"
                                                            ng-style="vm.getInputStyle()"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
 
                                                 <!-- Data da Primeira Parcela -->
                                                 <div class="form-group">
                                                     <label for="input-data-primeira-parcela" ng-style="vm.getLabelStyle()">
-                                                        Data da Primeira Parcela
+                                                        Primeira Parcela
                                                     </label>
                                                     <input type="date"
                                                            class="form-control"
@@ -1009,6 +1143,7 @@
                                                            mask="data"
                                                            ng-model="vm.propostaAcordo.proposta.dataPrimeiraParcela"
                                                            ng-style="vm.getInputStyle()"
+                                                           ng-required="true"
                                                            autocomplete="off" />
                                                 </div>
                                             </div>
@@ -1026,6 +1161,7 @@
                                                       maxlength="500"
                                                       class="form-control"
                                                       ng-style="vm.getInputStyle()"
+                                                      ng-required="true"
                                                       autocomplete="off">
                                             </textarea>
 
@@ -1042,12 +1178,12 @@
                                         <div ng-if="vm.formPropostaActive === 'negar'">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="select-motivo-recusa" ng-style="vm.getLabelStyle()">Motivo da recusa</label>
                                                             <select id="select-motivo-recusa"
                                                                     class="form-control"
-                                                                    ng-model="vm.propostaAcordo.proposta.motivoRecusaPedido"
+                                                                    ng-model="vm.propostaAcordo.motivoRecusaPedido"
                                                                     ng-style="vm.getInputStyle()"
                                                                     ng-options="t.id as t.descricao for t in vm.listaMotivoRecusa">
 
@@ -1055,7 +1191,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="select-submotivo-recusa" ng-style="vm.getLabelStyle()">Submotivo da recusa</label>
                                                             <select id="select-submotivo-recusa"
@@ -1070,7 +1206,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="textarea-obervacoes-motivo-recusa" ng-style="vm.getLabelStyle()">Observações:</label>
 
@@ -1111,6 +1247,7 @@
                                             </button>
                                             <button class="btn btn-success"
                                                     ng-click="vm.confirmarProposta()"
+                                                    ng-disabled="propostaForm.$invalid"
                                                     ng-style="vm.getButtonStyle()">
                                                 Aprovar <i class="fa fa-check fa-fw"></i>
                                             </button>
@@ -1128,6 +1265,7 @@
                                             </button>
                                             <button class="btn btn-warning"
                                                     ng-click="vm.confirmarProposta()"
+                                                    ng-disabled="propostaForm.$invalid"
                                                     ng-style="vm.getButtonStyle()">
                                                 Aprovar com Ressalvas <i class="fa fa-exclamation-circle fa-fw"></i>
                                             </button>
@@ -1145,6 +1283,7 @@
                                             </button>
                                             <button class="btn btn-danger"
                                                     ng-click="vm.negarProposta()"
+                                                    ng-disabled="propostaForm.$invalid"
                                                     ng-style="vm.getButtonStyle()">
                                                 Negar Proposta <i class="fa fa-times fa-fw"></i>
                                             </button>
@@ -1153,16 +1292,25 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12" ng-if="!vm.pedidoHabilitacao && vm.pedidoSelecionado.statusPedido.descricao !== 'ANALISE_DA_INSTITUICAO'">
+                            <div>
+                                Não é possível realizar acordo pois o pedido selecionado econtra-se no estado {{ vm.pedidoSelecionado.statusPedido.descricao }}.
+                            </div>
+                            <div>
+                                Para relizar a proposta de acordo, o pedido deve estar com o status ANALISE_DA INSTITUIÇÃO
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <div class="form-div" ng-if="vm.activeTab.toLowerCase() === 'pagamentos'">
+
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px;">
-                        <i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar
-                    </button>
+                    <!--<button class="btn btn-primary btn-lg" ng-click="vm.propostaView()" style="margin-right: 25px; margin-top: 25px;">-->
+                        <!--<i class="fa fa-angle-double-left fa-lg fa-fw"></i> Voltar-->
+                    <!--</button>-->
                 </div>
                 <div class="col-md-12" style="margin: 25px 0">
                     <div class="col-md-12" >
@@ -1170,6 +1318,126 @@
                             Pagamentos
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12" ng-if="!vm.pedidoHabilitacao">
+                    <div class="div-acordo-inexistente">
+                        Não existe acordo cadastrado para o pedido.
+                    </div>
+                </div>
+                <div class="col-md-12" ng-if="vm.pedidoHabilitacao">
+
+                    <div ng-if="vm.pedidoHabilitacao.resultadoAnalise.id == 1" style="margin: 0 25px" class="div-acordo-negado">
+                        <div style="margin-bottom: 15px">
+                            <b><i class="fa fa-fw fa-lg fa-ban"></i> Acordo negado</b>
+                        </div>
+                        <div>
+                            Não é possível efetuar pagamentos.
+                        </div>
+                    </div>
+
+                    <div ng-if="vm.pedidoHabilitacao.resultadoAnalise.id == 2" style="margin: 0 25px" class="div-acordo-aprovado">
+                        <div style="margin-bottom: 15px">
+                            <b><i class="fa fa-fw fa-lg fa-check"></i> Acordo aprovado</b>
+                        </div>
+                        <div>
+                            Os pagamentos podem ser realizados através da liberação das parcelas do acordo.
+                        </div>
+                    </div>
+
+                    <div ng-if="vm.pedidoHabilitacao.resultadoAnalise.id == 3" style="margin: 0 25px" class="div-acordo-ressalva">
+                        <div style="margin-bottom: 15px">
+                            <b><i class="fa fa-fw fa-lg fa-exclamation-triangle"></i> Acordo aprovado com ressalvas</b>
+                        </div>
+                        <div>
+                            O pedido de acordo ainda contém pendências. Os pagamentos não podem ser efetuados antes da aprovação do acordo.
+                        </div>
+                    </div>
+
+
+
+                    <div style="padding: 25px;">
+
+                        <div ng-if="vm.parcelas.length > 0" style="margin-bottom: 20px">
+                            <h3>Parcelas do acordo</i></h3>
+                        </div>
+                        <!-- -------- -->
+                        <!-- Parcelas -->
+                        <!-- -------- -->
+                        <table class="table table-default table-condensed table-striped table-hover text-center" ng-if="vm.parcelas.length > 0">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Número da parcela</th>
+                                <th class="text-center">Valor da parcela</th>
+                                <th class="text-center">Data vencimento</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="parcela in vm.parcelas | orderBy: 'numeroOrdemParcela'">
+                                <td>{{parcela.numeroOrdemParcela || '-'}}</td>
+                                <td>{{parcela.vlParcelaProposta | currency: ""}}</td>
+                                <td>{{parcela.dtVencimentoParcela | date: 'dd/MM/yyyy'}}</td>
+                                <td>
+                                    <!--<button class="btn btn-success" ng-click="vm.abrirModalPagamento(pagamento, vm.pedidoSelecionado.cdPedidoHabilitacao)">-->
+                                        <!--<i class="fa fa-fw fa-dollar"></i>-->
+                                    <!--</button>-->
+                                    <button type="button"
+                                            class="btn btn-success btn-sm"
+                                            title="Informar comprovante"
+                                            ng-click="vm.abrirModalPagamento(parcela, vm.pedidoSelecionado.cdPedidoHabilitacao)">
+                                        <i class="fa fa-fw fa-dollar"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <div ng-if="vm.pagamentos.length > 0" style="margin-bottom: 20px">
+                            <h3>Pagamentos efetuados</h3>
+                        </div>
+                        <!-- ---------- -->
+                        <!-- Pagamentos -->
+                        <!-- ---------- -->
+                        <table class="table table-default table-condensed table-striped table-hover text-center" ng-if="vm.pagamentos.length > 0">
+                            <thead>
+                            <tr>
+                                <th class="text-center">Código do comprovante</th>
+                                <th class="text-center">Observações</th>
+                                <th class="text-center">Data</th>
+                                <th class="text-center">Código da conta</th>
+                                <th class="text-center">Código do pagamento</th>
+                                <th class="text-center">Código da parcela</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Valor do pagamento</th>
+                                <th class="text-center">Comprovantes</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="pagamento in vm.pagamentos | orderBy: 'dsObservacaoPagamento'">
+                                <td>{{pagamento[0]}}</td>
+                                <td>{{pagamento[1]}}</td>
+                                <td>{{pagamento[2] | date: 'dd/MM/yyyy' }}</td>
+                                <td>{{pagamento[3]}}</td>
+                                <td>{{pagamento[4]}}</td>
+                                <td>{{pagamento[5]}}</td>
+                                <td>{{pagamento[6] === 1 ? 'Pago' : 'Não pago'}}</td>
+                                <td>{{pagamento[7] | currency : ""}}</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm"
+                                            title="Visualizar comprovante"
+                                            ng-click="vm.getComprovanteUrl(pagamento[8])"
+                                            ng-if="pagamento[6] == 1">
+
+                                        <i class="fa fa-file"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+
                 </div>
             </div>
         </div>

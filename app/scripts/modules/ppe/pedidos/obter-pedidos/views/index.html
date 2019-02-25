@@ -8,8 +8,36 @@
         -o-transition: all .3s;
         transition: all .3s;
     }
-    .big-button:hover {
-        box-shadow: 0 1px 2px 1px #4f8e45;
+    .a-green {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #2e772b !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-muted {
+        color: #3d3d3d;
+    }
+    .a-green:hover {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #5fb25c !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-green:focus {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #31722f !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
+    }
+    .a-green:active {
+        color: white;
+        border: 1px solid #1b4719 !important;
+        background: #31722f !important;
+        border-radius: 0;
+        box-shadow: 0 1px 3px 1px #1b4719;
     }
 </style>
 <div class="conter-wrapper">
@@ -26,11 +54,11 @@
                                 <form>
                                     <div class="col-md-12">
                                         <div class="col-md-12 text-center">
-                                            <button class="btn btn-success big-button"
+                                            <button class="btn big-button a-green"
                                                     style="margin-right:10px" 
                                                     ng-click="vm.obterPedidos()">
 
-                                                CARREGAR <i class="fa fa-download fa-fw"></i>
+                                                Carregar Pedidos <i class="fa fa-download fa-fw"></i>
                                             </button>
                                         </div>
                                     </div>

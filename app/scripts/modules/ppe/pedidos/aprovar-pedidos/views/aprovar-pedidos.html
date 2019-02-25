@@ -1231,17 +1231,11 @@
 														  class="form-control"
 														  ng-readonly="vm.bloquearCamposPagamento"
 														  cols="20"
-														  rows="10"
+														  rows="15"
 														  style="resize: none"
 														  ng-model="vm.resultadoAnalisePedido.observacoesPagamento"
 												 		  ng-required="true"><!-- campo duplicado -->
 												</textarea>
-
-												<div class="text-right">
-													<small ng-show="!formAprovarPagamento.pagamentoObservacoes.$valid" style="color: firebrick">* O campo deve
-														ser informado</small>
-													<small ng-show="formAprovarPagamento.pagamentoObservacoes.$valid" style="color: green"><i class="fa fa-check"></i></small>
-												</div>
 											</div>
 										</div>
 										<!--

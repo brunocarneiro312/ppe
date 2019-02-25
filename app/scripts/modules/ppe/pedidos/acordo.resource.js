@@ -60,7 +60,6 @@ module.exports = function(module) {
         }
 
         function adicionarPagamento() {
-            console.log("informando pagamento...");
             return Restangular.all(getResource() + "/informarPagamento");
         }
 

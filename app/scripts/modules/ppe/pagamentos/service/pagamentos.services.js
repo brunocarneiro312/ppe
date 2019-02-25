@@ -18,7 +18,9 @@ module.exports = function(module) {
             remover:                              remover,
             listar:                               listar,
             buscar:                               buscar,
-            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao
+            listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
+            listarParcelas:                       listarParcelas,
+            informarPagamento:                    informarPagamento
         }
 
         /**
@@ -93,6 +95,28 @@ module.exports = function(module) {
                     console.log(e);
                     console.log("[ERRO] Erro ao listar pagamentos do pedido de habilitação " + pedidoHabilitacao);
                 })
+        }
+
+        function listarParcelas(sqProposta) {
+            PagamentosResources.listarParcelas(sqProposta)
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(e) {
+                    console.log(e);
+                    console.log("[ERRO] Erro ao listar parcelas da proposta " + sqProposta);
+                })
+        }
+
+        function informarPagamento(pagamento) {
+            PagamentosResources.informarPagamento(pagamento)
+                .then(function(response) {
+                    return response.data.plain();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                    return false;
+                });
         }
     }
 }

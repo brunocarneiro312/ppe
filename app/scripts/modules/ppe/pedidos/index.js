@@ -21,5 +21,4 @@ module.exports = function(module) {
     // Controllers
     require('./controller/pedido.controller')(module);
 
-
 }

@@ -60,6 +60,11 @@ module.exports = function(module) {
             return Restangular.one('/analise-pedido-habilitacao/guid', guidPedido).get();
         }
 
+        /**
+         * --------------
+         * buscarProposta
+         * --------------
+         */
         function buscarProposta(sqProposta) {
             return Restangular.one('/proposta-acordo', sqProposta).get();
         }

@@ -16,8 +16,11 @@ module.exports = function(module) {
                               mask,
                               AcordoResource,
                               PedidosResource,
+                              PedidoResource,
                               PedidoService,
-                              NgTableParams) {
+                              PagamentosResources,
+                              NgTableParams,
+                              $uibModal) {
 
         /** Variáveis internas */
         var vm       = this;
@@ -32,6 +35,8 @@ module.exports = function(module) {
         vm.listaSituacao        = [];
         vm.listaMotivoRecusa    = [];
         vm.listaSubmotivoRecusa = [];
+        vm.pagamentos           = [];
+        vm.parcelas             = [];
         vm.activeTab            = undefined;
         vm.isPedidosTab         = undefined;
         vm.isDetalhePedidoTab   = undefined;
@@ -41,31 +46,39 @@ module.exports = function(module) {
         vm.pedidoHabilitacao    = undefined;
 
         /** Funções */
-        vm.consultar           = consultar;
-        vm.consultarPorGuid    = consultarPorGuid;
-        vm.buscarAnalisePedido = buscarAnalisePedido;
-        vm.buscarProposta      = buscarProposta;
-        vm.limpar              = limpar;
-        vm.changeTab           = changeTab;
-        vm.getTabClass         = getTabClass;
-        vm.pedidosView         = pedidosView;
-        vm.detalhesView        = detalhesView;
-        vm.processoView        = processoView;
-        vm.dadosBancariosView  = dadosBancariosView;
-        vm.documentosView      = documentosView;
-        vm.propostaView        = propostaView;
-        vm.pagamentosView      = pagamentosView;
-        vm.downloadArquivo     = downloadArquivo;
-        vm.limparFormProposta  = limparFormProposta;
-        vm.confirmarProposta   = confirmarProposta;
-        vm.negarProposta       = negarProposta;
-        vm.getModalidade       = getModalidade;
-        vm.getModalidadeClass  = getModalidadeClass;
-        vm.getFormatoMonetario = getFormatoMonetario;
-        vm.getFormStyle        = getFormStyle;
-        vm.getInputStyle       = getInputStyle;
-        vm.getButtonStyle      = getButtonStyle;
-        vm.getLabelStyle       = getLabelStyle;
+        vm.consultar                   = consultar;
+        vm.consultarPorGuid            = consultarPorGuid;
+        vm.buscarAnalisePedido         = buscarAnalisePedido;
+        vm.buscarProposta              = buscarProposta;
+        vm.limpar                      = limpar;
+        vm.changeTab                   = changeTab;
+        vm.getTabClass                 = getTabClass;
+        vm.pedidosView                 = pedidosView;
+        vm.detalhesView                = detalhesView;
+        vm.processoView                = processoView;
+        vm.dadosBancariosView          = dadosBancariosView;
+        vm.documentosView              = documentosView;
+        vm.propostaView                = propostaView;
+        vm.pagamentosView              = pagamentosView;
+        vm.downloadArquivo             = downloadArquivo;
+        vm.limparFormProposta          = limparFormProposta;
+        vm.confirmarProposta           = confirmarProposta;
+        vm.negarProposta               = negarProposta;
+        vm.getModalidade               = getModalidade;
+        vm.getModalidadeClass          = getModalidadeClass;
+        vm.getFormatoMonetario         = getFormatoMonetario;
+        vm.getFormStyle                = getFormStyle;
+        vm.getInputStyle               = getInputStyle;
+        vm.getButtonStyle              = getButtonStyle;
+        vm.getLabelStyle               = getLabelStyle;
+        vm.listarPagamentos            = listarPagamentos;
+        vm.listarParcelas              = listarParcelas;
+        vm.adicionarPagamento          = adicionarPagamento;
+        vm.abrirModalPagamento         = abrirModalPagamento;
+        vm.verificarPagamentoDeParcela = verificarPagamentoDeParcela;
+        vm.downloadArquivo             = downloadArquivo;
+        vm.downloadComprovante         = downloadComprovante;
+        vm.getComprovanteUrl           = getComprovanteUrl;
 
         /**
          * ----
@@ -155,7 +168,6 @@ module.exports = function(module) {
             var URL = window.config.paths.server;
 
             _consultarPedidos(10000, vm.pedido);
-
         }
 
         /**
@@ -224,10 +236,24 @@ module.exports = function(module) {
                     // Busca AnalisePedidoHabilitacao para o pedido
                     vm.buscarAnalisePedido(vm.pedidoSelecionado.cdPedidoHabilitacao);
 
-                    // Alteramos a aba de apresentação para "detalhe"
-                    vm.changeTab("detalhes");
-                    vm.activeTab = "Detalhes";
+                    // Buscar pagamentos do pedido
+                    vm.listarPagamentos(vm.pedidoSelecionado.cdPedidoHabilitacao);
 
+                    // Se estiver vindo da aba proposta, vai para pagamentos
+                    if (vm.activeTab === 'proposta') {
+                        vm.changeTab("pagamentos");
+                        vm.activeTab = "pagamentos";
+                    }
+                    // Se vier de pagamentos, atualiza e volta para pagamentos
+                    if (vm.activeTab === 'pagamentos') {
+                        vm.changeTab("pagamentos");
+                        vm.activeTab = "pagamentos";
+                    }
+                    // Caso contrário, vai para detalhe
+                    if (vm.activeTab !== 'proposta' && vm.activeTab !== 'pagamentos') {
+                        vm.changeTab("detalhes");
+                        vm.activeTab = "detalhes";
+                    }
                 })
                 .catch(function(err) {
                     console.log(err);
@@ -247,7 +273,14 @@ module.exports = function(module) {
                     vm.pedidosCadastrados = response.data;
 
                     if (response.status == 200) {
+
                         vm.listaPedidos = response.data;
+
+                        if (vm.listaPedidos.length == 0) {
+                            growl.info('Não existem pedidos cadastrados');
+                            return;
+                        }
+
                         _carregarTabelaPedidos(vm.listaPedidos);
                     }
                     else {
@@ -295,8 +328,10 @@ module.exports = function(module) {
          * ------------
          */
         function detalhesView() {
-            vm.changeTab('detalhes');
-            vm.activeTab = 'detalhes';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('detalhes');
+                vm.activeTab = 'detalhes';
+            }
         }
 
         /**
@@ -305,8 +340,10 @@ module.exports = function(module) {
          * ------------
          */
         function processoView() {
-            vm.changeTab('processo');
-            vm.activeTab = 'processo';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('processo');
+                vm.activeTab = 'processo';
+            }
         }
 
         /**
@@ -315,8 +352,10 @@ module.exports = function(module) {
          * ------------------
          */
         function dadosBancariosView() {
-            vm.changeTab('dadosbancarios');
-            vm.activeTab = 'dadosbancarios';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('dadosbancarios');
+                vm.activeTab = 'dadosbancarios';
+            }
         }
 
         /**
@@ -325,8 +364,10 @@ module.exports = function(module) {
          * --------------
          */
         function documentosView() {
-            vm.changeTab('documentos');
-            vm.activeTab = 'documentos';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('documentos');
+                vm.activeTab = 'documentos';
+            }
         }
 
         /**
@@ -335,8 +376,10 @@ module.exports = function(module) {
          * ------------
          */
         function propostaView() {
-            vm.changeTab('proposta');
-            vm.activeTab = 'proposta';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('proposta');
+                vm.activeTab = 'proposta';
+            }
         }
 
         /**
@@ -345,8 +388,10 @@ module.exports = function(module) {
          * --------------
          */
         function pagamentosView() {
-            vm.changeTab('pagamentos');
-            vm.activeTab = 'pagamentos';
+            if (vm.pedidoSelecionado) {
+                vm.changeTab('pagamentos');
+                vm.activeTab = 'pagamentos';
+            }
         }
 
         /**
@@ -399,17 +444,17 @@ module.exports = function(module) {
                 // Montando proposta de acordo
                 vm.propostaAcordo.guidPedido = vm.pedidoSelecionado.cdPedidoHabilitacao;
 
-                vm.propostaAcordo.resultado = vm.getModalidade() == 'aprovar'
+                vm.propostaAcordo.resultado = vm.getModalidade().toLowerCase() == 'aprovar'
                     ? 'PROPOSTA_DE_ACORDO'
                     : 'PROPOSTA_DE_ACORDO_COM_VALOR_DIVERGENTE_SIMULADO';
 
                 // Parsing dos valores para Double
-                vm.propostaAcordo.proposta.valorTotalAcordo        = Util.stringToDouble(vm.propostaAcordo.proposta.valorTotalAcordoFormatado);
-                vm.propostaAcordo.proposta.valorPoupador           = Util.stringToDouble(vm.propostaAcordo.proposta.valorPoupadorFormatado);
-                vm.propostaAcordo.proposta.valorHonorariosAdvogado = Util.stringToDouble(vm.propostaAcordo.proposta.valorHonorariosAdvogadoFormatado);
-                vm.propostaAcordo.proposta.valorReembolsoCustas    = Util.stringToDouble(vm.propostaAcordo.proposta.valorReembolsoCustasFormatado);
-                vm.propostaAcordo.proposta.valorParcela            = Util.stringToDouble(vm.propostaAcordo.proposta.valorParcelaFormatado);
-                vm.propostaAcordo.proposta.valorHonorariosFebrapo  = Util.stringToDouble(vm.propostaAcordo.proposta.valorHonorariosFebrapoFormatado);
+                vm.propostaAcordo.proposta.valorTotalAcordo        = Util.stringToDouble(vm.propostaAcordo.proposta.valorTotalAcordo);
+                vm.propostaAcordo.proposta.valorPoupador           = Util.stringToDouble(vm.propostaAcordo.proposta.valorPoupador);
+                vm.propostaAcordo.proposta.valorHonorariosAdvogado = Util.stringToDouble(vm.propostaAcordo.proposta.valorHonorariosAdvogado);
+                vm.propostaAcordo.proposta.valorReembolsoCustas    = Util.stringToDouble(vm.propostaAcordo.proposta.valorReembolsoCustas);
+                vm.propostaAcordo.proposta.valorParcela            = Util.stringToDouble(vm.propostaAcordo.proposta.valorParcela);
+                vm.propostaAcordo.proposta.valorHonorariosFebrapo  = Util.stringToDouble(vm.propostaAcordo.proposta.valorHonorariosFebrapo);
 
                 /**
                  * Verificando situação interna do pedido
@@ -436,8 +481,15 @@ module.exports = function(module) {
                             // Limpa formulário de proposta
                             vm.limparFormProposta(true);
 
+                            // Atualiza os pedidos
+                            _consultarPedidos(10000);
+
                             // Realiza novamente a consulta após salvar o acordo
                             consultarPorGuid(vm.pedidoSelecionado.cdPedidoHabilitacao);
+
+                            // Listando parcelas do pedido
+                            listarParcelas(vm.pedidoSelecionado.cdPedidoHabilitacao);
+
                         }
                         else {
                             if (response.data != undefined) {
@@ -472,23 +524,28 @@ module.exports = function(module) {
                 return false;
             }
 
-            if (!vm.propostaAcordo.proposta.valorDestinadoPortador) {
+            if (!vm.propostaAcordo.proposta.valorPoupador) {
                 growl.error("Informe o valor destinado ao portador.");
                 return false;
             }
 
-            if (!vm.propostaAcordo.proposta.valorHonorarioPatrono) {
+            if (!vm.propostaAcordo.proposta.valorHonorariosAdvogado) {
                 growl.error("Informe o valor destinado ao advogado.");
                 return false;
             }
 
-            if (!vm.propostaAcordo.proposta.valorHonorarioInstituicao) {
+            if (!vm.propostaAcordo.proposta.valorHonorariosFebrapo) {
                 growl.error("Informe o valor de honorários da intituição.");
                 return false;
             }
 
             if (!vm.propostaAcordo.proposta.valorReembolsoCustas) {
                 growl.error("Informe o valor de reembolso.");
+                return false;
+            }
+
+            if (!vm.propostaAcordo.proposta.quantidadeParcelas) {
+                growl.error("Informe a quantidade de parcelas.");
                 return false;
             }
 
@@ -532,13 +589,16 @@ module.exports = function(module) {
         function negarProposta() {
             if (confirm('deseja negar o acordo?')) {
 
-                vm.propostaAcordo.guidPedido = vm.pedidoSelecionado.cdPedidoHabilitacao;
-                vm.propostaAcordo.resultado  = 'HABILITACAO_NEGADA'
+                vm.propostaAcordo.guidPedido      = vm.pedidoSelecionado.cdPedidoHabilitacao;
+                vm.propostaAcordo.resultado       = 'HABILITACAO_NEGADA'
                 vm.propostaAcordo.situacaoInterna = 3;
 
                 AcordoResource.negar().post(vm.propostaAcordo)
                     .then(function (response) {
                         if (response.status == 200) {
+
+                            // Atualiza os pedidos
+                            _consultarPedidos(10000);
 
                             // Realiza novamente a consulta após salvar o acordo
                             consultarPorGuid(vm.pedidoSelecionado.cdPedidoHabilitacao);
@@ -583,7 +643,7 @@ module.exports = function(module) {
 
         /**
          * ------------------
-         * getMOdalidadeClass
+         * getModalidadeClass
          * ------------------
          */
         function getModalidadeClass() {
@@ -744,10 +804,8 @@ module.exports = function(module) {
                     vm.pedidoHabilitacao = response.data;
 
                     if (vm.pedidoHabilitacao) {
-
-                        console.log('consultando proposta');
-
                         vm.buscarProposta(vm.pedidoHabilitacao.sqAnalisePedidoHabilitacao);
+                        listarParcelas(vm.pedidoSelecionado.cdPedidoHabilitacao);
                     }
                 })
                 .catch(function(err) {
@@ -850,9 +908,9 @@ module.exports = function(module) {
         }
 
         /**
-         * -----------------
+         * -------------
          * getLabelStyle
-         * -----------------
+         * -------------
          */
         function getLabelStyle() {
             if (vm.formPropostaActive === 'aprovar') {
@@ -871,5 +929,182 @@ module.exports = function(module) {
                 }
             }
         }
+
+        /**
+         * ----------------
+         * listarPagamentos
+         * ----------------
+         */
+        function listarPagamentos(guidPedido) {
+
+            PagamentosResources.listarPagamentosPorPedidoHabilitacao(guidPedido)
+                .then(function(response) {
+                    vm.pagamentos = response.data.plain();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+        }
+
+        /**
+         * ------------------
+         * adicionarPagamento
+         * ------------------
+         */
+        function adicionarPagamento() {
+
+            console.log(vm.propostaAcordo);
+
+            vm.propostaAcordo.guidPedido = vm.pedidoSelecionado.cdPedidoHabilitacao;
+            // vm.propostaAcordo.valorPagamento = Util.formatarMonetario(Util.stringToDouble(vm.propostaAcordo.valorPagamento));
+
+
+            AcordoResource.adicionarPagamento().post(vm.propostaAcordo.pagamento)
+                .then(function(response) {
+                    if (response.status == 200) {
+                        listarPagamentos(vm.propostaAcordo.guidPedido);
+                        growl.success("Pagamento adicionado.");
+                    }
+                    else {
+                        if (response.data != undefined) {
+                            growl.error(response.data.message.message);
+                        }
+                        else
+                        {
+                            growl.error(response.statusText);
+                        }
+                    }
+                })
+                .catch(function (erro)
+                {
+                    growl.error(erro.data.message);
+                });
+        }
+
+        /**
+         * -------------
+         * listaParcelas
+         * -------------
+         */
+        function listarParcelas(guidPedido) {
+            PagamentosResources.listarParcelasPorGuidPedido(guidPedido)
+                .then(function(response) {
+                    vm.parcelas = response.data.plain();
+                })
+                .catch(function(err) {
+                    console.log(err);
+                })
+        }
+
+        /**
+         * -------------------
+         * abrirModalPagamento
+         * -------------------
+         */
+        function abrirModalPagamento(pagamento, guidPedido) {
+
+            guidPedido = guidPedido || vm.pedidoSelecionado.cdPedidoHabilitacao;
+
+            Util.setObjetos('pagamento', pagamento);
+            Util.setObjetos('guidPedido', guidPedido);
+            Util.setObjetos('sqConta', vm.pedidoSelecionado.listaContasContempladas[0].sqConta);
+
+            // var modalInstance = $uibModal.open({
+            //     templateUrl: 'ppe/pedidos/aprovar-pedidos/views/comprovante.html',
+            //     controller: 'PagamentoController as vm',
+            //     size: 'xMd',
+            //     resolve: {
+            //         items: function () {
+            //             var parametros = {
+            //                 "pagamento": pagamento,
+            //                 "situacao": vm.modalidade
+            //             }
+            //             return parametros;
+            //         }
+            //     }
+            // });
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'ppe/pedidos/aprovar-pedidos/views/comprovante.html',
+                controller: 'PagamentoController as vm',
+                resolve: {
+                    items: function () {
+                        var parametros = {
+                            "pagamento": pagamento,
+                            "situacao": vm.modalidade
+                        }
+                        return parametros;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(response) {
+
+            }, function () {
+                vm.consultarPorGuid(vm.pedidoSelecionado.cdPedidoHabilitacao);
+            });
+            // modalInstance.result.then(function (response) {
+            //     console.log(response);
+            // }, function (error) {
+            //     return error;
+            // });
+        }
+
+        /**
+         * ---------------------------
+         * verificarPagamentoDeParcela
+         * ---------------------------
+         */
+        function verificarPagamentoDeParcela(sqParcela) {
+            PagamentosResources.verificarPagamentoDeParcela(sqParcela)
+                .then(function(response) {
+                    console.log(response.data);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                })
+        }
+
+        /**
+         * ---------------
+         * downloadArquivo
+         * ---------------
+         */
+        function downloadArquivo(guidPedido, codigoArquivo) {
+
+            PedidosResource.obterArquivo(guidPedido, codigoArquivo).get()
+                .then(function (response) {
+                    Util.gerarBase64Arquivo(response.data.conteudo, 'application/pdf', response.data.nomeArquivo);
+                })
+                .catch(function (erro) {
+                    growl.error(erro.data.message);
+                });
+        }
+
+        function downloadComprovante(pagamento) {
+
+            var codigoComprovante = pagamento[8];
+
+            PedidosResource.obterComprovante(codigoComprovante).get()
+                .then(function(response) {
+                    Util.gerarBase64Arquivo(response.data.conteudo, 'application/pdf', response.data.nomeArquivo);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
+        }
+
+        /**
+         * --------------------------------------------------------
+         * Redireciona browser para link de download do comprovante
+         * --------------------------------------------------------
+         */
+        function getComprovanteUrl(codigoArquivo) {
+            window.open(window.config.paths.server + "/arquivos/arquivo/" + codigoArquivo);
+        }
+
     }
 }

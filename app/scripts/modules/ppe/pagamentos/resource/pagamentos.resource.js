@@ -21,6 +21,10 @@ module.exports = function(module) {
             listar:                               listar,
             buscar:                               buscar,
             listarPagamentosPorPedidoHabilitacao: listarPagamentosPorPedidoHabilitacao,
+            listarParcelas:                       listarParcelas,
+            listarParcelasPorGuidPedido:          listarParcelasPorGuidPedido,
+            informarPagamento:                    informarPagamento,
+            verificarPagamentoDeParcela:          verificarPagamentoDeParcela
         }
 
         /**
@@ -32,13 +36,16 @@ module.exports = function(module) {
             return Restangular.all("/acordo/informarPagamento").post(pagamento);
         }
 
+        function informarPagamento(pagamento) {
+            return Restangular.all("/pagamentos/informar").post(pagamento);
+        }
+
         /**
          * -------
          * remover
          * -------
          */
         function remover(codigoDoPagamento) {
-            console.log(codigoDoPagamento);
             return Restangular.one(_getResource() + "/pagamento/", codigoDoPagamento).remove();
         }
 
@@ -67,6 +74,33 @@ module.exports = function(module) {
          */
         function listarPagamentosPorPedidoHabilitacao(pedidoHabilitacao) {
             return Restangular.all(_getResource() + "/" + pedidoHabilitacao).getList();
+        }
+
+        /**
+         * --------------
+         * listarParcelas
+         * --------------
+         */
+        function listarParcelas(sqProposta) {
+            return Restangular.all('/parcela/' + sqProposta).getList();
+        }
+
+        /**
+         * ---------------------------
+         * listarParcelasPorGuidPedido
+         * ---------------------------
+         */
+        function listarParcelasPorGuidPedido(guidPedido) {
+            return Restangular.all('/parcela/guid/' + guidPedido).getList();
+        }
+
+        /**
+         * ---------------------------
+         * verificarPagamentoDeParcela
+         * ---------------------------
+         */
+        function verificarPagamentoDeParcela(sqParcela) {
+            return Restangular.one('/pagamentos/parcelas/pagas/' + sqParcela).get();
         }
 
         /**
